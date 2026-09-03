@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Euclidean Analytics — AI &amp; Data Consulting</title>
+<meta name="description" content="Euclidean Analytics helps organizations assess data quality, map AI potential, and build implementation plans that hold up — from LLM agents to computer vision and robotics.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='17' r='12' fill='none' stroke='%2314161B' stroke-width='1.8'/%3E%3Cpath d='M16 5 L6 27 H26 Z' fill='none' stroke='%2314161B' stroke-width='1.8' stroke-linejoin='round'/%3E%3Ccircle cx='16' cy='5' r='2.1' fill='%233730E0'/%3E%3Ccircle cx='6' cy='27' r='2.1' fill='%2314161B'/%3E%3Ccircle cx='26' cy='27' r='2.1' fill='%2314161B'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F2F1EC;
+    --paper-raised:#FBFAF7;
+    --ink:#14161B;
+    --ink-soft:#4B4F58;
+    --line:#D8D5CB;
+    --line-strong:#B9B5A8;
+    --accent:#3730E0;
+    --accent-soft:#E7E5FB;
+    --data:#B5590A;
+    --data-soft:#F5E4D2;
+    --radius:2px;
+    --maxw:1180px;
+    --font-head:'Space Grotesk', system-ui, sans-serif;
+    --font-mono:'IBM Plex Mono', ui-monospace, monospace;
+    --font-body:'Inter', system-ui, sans-serif;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--font-body);
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:inherit;}
+  img,svg{display:block; max-width:100%;}
+
+  :focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:3px;
+  }
+
+  .wrap{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 clamp(20px, 5vw, 56px);
+  }
+
+  .mono{font-family:var(--font-mono);}
+
+  h1,h2,h3{
+    font-family:var(--font-head);
+    font-weight:600;
+    line-height:1.08;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+
+  p{margin:0;}
+
+  /* ---------- spine / index labels ---------- */
+  .spine-label{
+    font-family:var(--font-mono);
+    font-size:12.5px;
+    color:var(--ink-soft);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:20px;
+  }
+  .spine-label .num{
+    color:var(--accent);
+  }
+  .spine-label .rule{
+    flex:0 0 28px;
+    height:1px;
+    background:var(--line-strong);
+  }
+
+  /* ---------- header ---------- */
+  header{
+    position:fixed;
+    top:0; left:0; right:0;
+    z-index:100;
+    background:rgba(242,241,236,0.88);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .header-inner{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 clamp(20px, 5vw, 56px);
+    height:64px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .wordmark{
+    font-family:var(--font-head);
+    font-weight:700;
+    font-size:18px;
+    letter-spacing:-0.01em;
+    text-decoration:none;
+    display:flex;
+    align-items:center;
+    gap:11px;
+  }
+  .wordmark .logomark{
+    width:27px;
+    height:27px;
+    flex:0 0 auto;
+  }
+  .wordmark .wordmark-text{
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+    line-height:1;
+  }
+  .wordmark .tag{
+    font-family:var(--font-mono);
+    font-weight:400;
+    font-size:11px;
+    color:var(--ink-soft);
+    letter-spacing:0.01em;
+  }
+  @media (max-width:520px){
+    .wordmark .tag{display:none;}
+  }
+
+  .burger{
+    width:42px; height:42px;
+    border:1px solid var(--line-strong);
+    background:var(--paper-raised);
+    border-radius:var(--radius);
+    cursor:pointer;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:5px;
+    padding:0;
+  }
+  .burger span{
+    display:block;
+    width:18px;
+    height:1.5px;
+    background:var(--ink);
+    transition:transform .25s ease, opacity .25s ease;
+  }
+  .burger[aria-expanded="true"] span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+  .burger[aria-expanded="true"] span:nth-child(2){opacity:0;}
+  .burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+
+  /* ---------- nav panel ---------- */
+  .nav-overlay{
+    position:fixed; inset:0;
+    background:rgba(20,22,27,0.35);
+    z-index:98;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .3s ease;
+  }
+  .nav-overlay.open{opacity:1; pointer-events:auto;}
+
+  .nav-panel{
+    position:fixed;
+    top:0; right:0;
+    height:100%;
+    width:min(380px, 88vw);
+    background:var(--paper-raised);
+    border-left:1px solid var(--line-strong);
+    z-index:99;
+    transform:translateX(100%);
+    transition:transform .35s cubic-bezier(.16,.9,.28,1);
+    display:flex;
+    flex-direction:column;
+    padding:96px 36px 36px;
+  }
+  .nav-panel.open{transform:translateX(0);}
+  .nav-panel ol{
+    list-style:none;
+    margin:0; padding:0;
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+  }
+  .nav-panel li{
+    border-bottom:1px solid var(--line);
+  }
+  .nav-panel a{
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+    padding:14px 2px;
+    text-decoration:none;
+    font-family:var(--font-head);
+    font-size:20px;
+    font-weight:500;
+    color:var(--ink);
+  }
+  .nav-panel a:hover{color:var(--accent);}
+  .nav-panel a .num{
+    font-family:var(--font-mono);
+    font-size:12.5px;
+    color:var(--accent);
+    min-width:20px;
+  }
+  .nav-panel .nav-foot{
+    margin-top:auto;
+    font-family:var(--font-mono);
+    font-size:12.5px;
+    color:var(--ink-soft);
+    padding-top:24px;
+    border-top:1px solid var(--line);
+  }
+  .nav-panel .nav-foot a{
+    font-family:var(--font-mono);
+    font-size:12.5px;
+    font-weight:400;
+    display:inline;
+    padding:0;
+    border:none;
+    text-decoration:underline;
+    text-underline-offset:3px;
+  }
+
+  /* ---------- buttons ---------- */
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:var(--font-mono);
+    font-size:14px;
+    font-weight:500;
+    padding:13px 22px;
+    border-radius:var(--radius);
+    text-decoration:none;
+    border:1px solid var(--ink);
+    cursor:pointer;
+    background:none;
+  }
+  .btn-primary{
+    background:var(--ink);
+    color:var(--paper);
+  }
+  .btn-primary:hover{background:var(--accent); border-color:var(--accent);}
+  .btn-ghost{
+    border-color:var(--line-strong);
+    color:var(--ink);
+  }
+  .btn-ghost:hover{border-color:var(--ink);}
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding:158px 0 96px;
+    background-image:radial-gradient(circle, var(--line-strong) 1px, transparent 1px);
+    background-size:26px 26px;
+    background-position:-4px -4px;
+    border-bottom:1px solid var(--line);
+  }
+  .hero-inner{
+    display:grid;
+    grid-template-columns:1.15fr 0.85fr;
+    gap:56px;
+    align-items:end;
+  }
+  .hero h1{
+    font-size:clamp(38px, 5.4vw, 64px);
+    max-width:14ch;
+  }
+  .hero .lede{
+    margin-top:24px;
+    font-size:18px;
+    color:var(--ink-soft);
+    max-width:46ch;
+    line-height:1.6;
+  }
+  .hero-ctas{
+    display:flex;
+    gap:14px;
+    margin-top:36px;
+    flex-wrap:wrap;
+  }
+  .hero-figure{
+    background:var(--paper-raised);
+    border:1px solid var(--line-strong);
+    border-radius:var(--radius);
+    padding:22px;
+  }
+  .hero-figure .cap{
+    font-family:var(--font-mono);
+    font-size:12px;
+    color:var(--ink-soft);
+    margin-bottom:14px;
+    display:flex;
+    justify-content:space-between;
+  }
+
+  /* ---------- stat strip ---------- */
+  .stats{
+    border-bottom:1px solid var(--line);
+  }
+  .stats-inner{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+  }
+  .stat{
+    padding:28px clamp(20px,4vw,40px);
+    border-left:1px solid var(--line);
+  }
+  .stat:first-child{border-left:none;}
+  .stat .n{
+    font-family:var(--font-mono);
+    font-size:clamp(22px,3vw,30px);
+    color:var(--data);
+    font-weight:600;
+  }
+  .stat .l{
+    margin-top:6px;
+    font-size:13.5px;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- section base ---------- */
+  section{
+    padding:96px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .section-head{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:40px;
+    margin-bottom:56px;
+    align-items:baseline;
+  }
+  .section-head h2{
+    font-size:clamp(28px,3.4vw,40px);
+  }
+  .section-head .desc{
+    color:var(--ink-soft);
+    font-size:16px;
+    line-height:1.65;
+  }
+
+  /* ---------- founder ---------- */
+  .founder{
+    display:grid;
+    grid-template-columns:220px 1fr;
+    gap:48px;
+    align-items:start;
+  }
+  .monogram{
+    width:120px; height:120px;
+    background:var(--ink);
+    color:var(--paper);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:var(--font-head);
+    font-size:34px;
+    font-weight:600;
+    border-radius:var(--radius);
+  }
+  .founder-meta{
+    margin-top:18px;
+    font-family:var(--font-mono);
+    font-size:13px;
+    color:var(--ink-soft);
+    line-height:1.8;
+  }
+  .founder-body p{
+    margin-bottom:16px;
+    max-width:62ch;
+    font-size:16.5px;
+  }
+  .founder-body p:last-child{margin-bottom:0;}
+  .founder-body .name{
+    font-family:var(--font-head);
+    font-size:24px;
+    font-weight:600;
+    margin-bottom:4px;
+  }
+  .founder-body .role{
+    font-family:var(--font-mono);
+    font-size:13.5px;
+    color:var(--accent);
+    margin-bottom:20px;
+    display:block;
+  }
+
+  /* ---------- services ---------- */
+  .service-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .service{
+    background:var(--paper-raised);
+    padding:32px 28px;
+  }
+  .service .idx{
+    font-family:var(--font-mono);
+    font-size:12px;
+    color:var(--data);
+  }
+  .service h3{
+    font-size:21px;
+    margin-top:14px;
+    margin-bottom:12px;
+  }
+  .service p{
+    color:var(--ink-soft);
+    font-size:15px;
+    margin-bottom:16px;
+  }
+  .service ul{
+    margin:0; padding:0;
+    list-style:none;
+    font-size:13.5px;
+    font-family:var(--font-mono);
+    color:var(--ink);
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .service ul li{
+    padding-left:14px;
+    position:relative;
+  }
+  .service ul li::before{
+    content:"·";
+    position:absolute;
+    left:0;
+    color:var(--accent);
+  }
+
+  /* ---------- capability spectrum ---------- */
+  .spectrum{
+    position:relative;
+  }
+  .spectrum-track{
+    position:relative;
+    height:2px;
+    background:var(--line-strong);
+    margin:0 0 44px;
+  }
+  .spectrum-track .fill{
+    position:absolute; left:0; top:0; bottom:0;
+    background:var(--accent);
+    width:100%;
+  }
+  .cap-grid{
+    display:grid;
+    grid-template-columns:repeat(5, 1fr);
+    gap:24px;
+  }
+  .cap-card{
+    border-top:2px solid var(--ink);
+    padding-top:18px;
+  }
+  .cap-card .cap-icon{
+    width:34px; height:34px;
+    margin-bottom:16px;
+  }
+  .cap-card h3{
+    font-size:16px;
+    margin-bottom:10px;
+    line-height:1.25;
+  }
+  .cap-card p{
+    font-size:13.5px;
+    color:var(--ink-soft);
+    line-height:1.55;
+  }
+
+  /* ---------- methodology ---------- */
+  .method-list{
+    display:flex;
+    flex-direction:column;
+  }
+  .method-row{
+    display:grid;
+    grid-template-columns:80px 1fr 1.3fr;
+    gap:32px;
+    padding:28px 0;
+    border-top:1px solid var(--line);
+    align-items:start;
+  }
+  .method-row:last-child{border-bottom:1px solid var(--line);}
+  .method-row .step-num{
+    font-family:var(--font-mono);
+    font-size:14px;
+    color:var(--data);
+    padding-top:4px;
+  }
+  .method-row h3{
+    font-size:20px;
+  }
+  .method-row p{
+    color:var(--ink-soft);
+    font-size:15px;
+    max-width:52ch;
+  }
+
+  /* ---------- case studies ---------- */
+  .case-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:24px;
+  }
+  .case-card{
+    border:1px solid var(--line-strong);
+    background:var(--paper-raised);
+    padding:26px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    border-radius:var(--radius);
+  }
+  .case-card .case-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-family:var(--font-mono);
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+  .case-card .case-top .tag{
+    background:var(--accent-soft);
+    color:var(--accent);
+    padding:3px 8px;
+    border-radius:2px;
+    font-weight:500;
+  }
+  .case-card h3{
+    font-size:18px;
+    line-height:1.3;
+  }
+  .case-card p{
+    font-size:14.5px;
+    color:var(--ink-soft);
+  }
+  .case-metric{
+    margin-top:auto;
+    padding-top:14px;
+    border-top:1px solid var(--line);
+    font-family:var(--font-mono);
+    font-size:13px;
+  }
+  .case-metric .m{
+    color:var(--data);
+    font-weight:600;
+    font-size:15px;
+  }
+  .case-note{
+    margin-top:32px;
+    font-size:13px;
+    color:var(--ink-soft);
+    font-family:var(--font-mono);
+    max-width:70ch;
+  }
+
+  /* ---------- stack ---------- */
+  .stack-list{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .stack-list span{
+    font-family:var(--font-mono);
+    font-size:13px;
+    padding:8px 14px;
+    border:1px solid var(--line-strong);
+    border-radius:2px;
+    color:var(--ink-soft);
+    background:var(--paper-raised);
+  }
+
+  /* ---------- contact ---------- */
+  .contact-inner{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:56px;
+  }
+  .contact-left h2{
+    font-size:clamp(28px,3.6vw,42px);
+    max-width:14ch;
+  }
+  .contact-left p{
+    margin-top:20px;
+    color:var(--ink-soft);
+    font-size:16px;
+    max-width:44ch;
+  }
+  .contact-card{
+    border:1px solid var(--line-strong);
+    background:var(--paper-raised);
+    padding:32px;
+    border-radius:var(--radius);
+  }
+  .field{
+    margin-bottom:18px;
+  }
+  .field label{
+    display:block;
+    font-family:var(--font-mono);
+    font-size:12.5px;
+    color:var(--ink-soft);
+    margin-bottom:8px;
+  }
+  .field input, .field textarea, .field select{
+    width:100%;
+    font-family:var(--font-body);
+    font-size:15px;
+    padding:11px 12px;
+    border:1px solid var(--line-strong);
+    background:var(--paper);
+    border-radius:var(--radius);
+    color:var(--ink);
+  }
+  .field textarea{resize:vertical; min-height:96px;}
+  .contact-card .btn{width:100%; justify-content:center; margin-top:6px;}
+  .contact-alt{
+    margin-top:18px;
+    font-family:var(--font-mono);
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+  .contact-alt a{text-decoration:underline; text-underline-offset:3px;}
+
+  /* ---------- footer ---------- */
+  footer{
+    padding:40px 0;
+  }
+  .footer-inner{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:16px;
+    font-family:var(--font-mono);
+    font-size:12.5px;
+    color:var(--ink-soft);
+  }
+  .footer-links{
+    display:flex;
+    gap:20px;
+  }
+  .footer-links a{text-decoration:none;}
+  .footer-links a:hover{color:var(--accent);}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:980px){
+    .hero-inner{grid-template-columns:1fr;}
+    .hero-figure{order:-1;}
+    .stats-inner{grid-template-columns:repeat(2,1fr);}
+    .stat:nth-child(3){border-left:none;}
+    .stat:nth-child(2n+1){border-left:none;}
+    .section-head{grid-template-columns:1fr;}
+    .founder{grid-template-columns:1fr;}
+    .service-grid{grid-template-columns:1fr;}
+    .cap-grid{grid-template-columns:repeat(2,1fr);}
+    .method-row{grid-template-columns:1fr; gap:8px;}
+    .case-grid{grid-template-columns:1fr 1fr;}
+    .contact-inner{grid-template-columns:1fr;}
+  }
+  @media (max-width:600px){
+    .cap-grid{grid-template-columns:1fr;}
+    .case-grid{grid-template-columns:1fr;}
+    .stats-inner{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="#top" class="wordmark" aria-label="Euclidean Analytics, home">
+      <svg class="logomark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <circle cx="16" cy="17" r="12" stroke="#14161B" stroke-width="1.6"></circle>
+        <path d="M16 5 L6 27 H26 Z" stroke="#14161B" stroke-width="1.6" stroke-linejoin="round"></path>
+        <circle cx="16" cy="5" r="2" fill="#3730E0"></circle>
+        <circle cx="6" cy="27" r="2" fill="#14161B"></circle>
+        <circle cx="26" cy="27" r="2" fill="#14161B"></circle>
+      </svg>
+      <span class="wordmark-text">
+        <span>Euclidean Analytics</span>
+        <span class="tag">ai &amp; data consulting</span>
+      </span>
+    </a>
+    <button class="burger" id="burgerBtn" aria-label="Open menu" aria-expanded="false" aria-controls="navPanel">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="nav-overlay" id="navOverlay"></div>
+<nav class="nav-panel" id="navPanel" aria-label="Section navigation">
+  <ol>
+    <li><a href="#work"><span class="num">01</span>What we do</a></li>
+    <li><a href="#founder"><span class="num">02</span>Founder</a></li>
+    <li><a href="#capabilities"><span class="num">03</span>Capabilities</a></li>
+    <li><a href="#method"><span class="num">04</span>Method</a></li>
+    <li><a href="#cases"><span class="num">05</span>Reference projects</a></li>
+    <li><a href="#contact"><span class="num">06</span>Contact</a></li>
+  </ol>
+  <div class="nav-foot">
+    Darmstadt, Germany · <a href="mailto:hello@euclideananalytics.example">hello@euclideananalytics.example</a>
+  </div>
+</nav>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero" style="border-bottom:1px solid var(--line); padding-top:158px;">
+    <div class="wrap hero-inner">
+      <div>
+        <div class="spine-label"><span class="num">00</span><span class="rule"></span>ai &amp; data consulting</div>
+        <h1>We turn uncertain data into decisions you can defend.</h1>
+        <p class="lede">Euclidean Analytics is a consultancy for organizations that want to know, precisely, what their data supports and where AI actually pays off — before committing engineering time to it.</p>
+        <div class="hero-ctas">
+          <a href="#contact" class="btn btn-primary">Book an assessment</a>
+          <a href="#cases" class="btn btn-ghost">See reference projects</a>
+        </div>
+      </div>
+      <div class="hero-figure">
+        <div class="cap"><span>fig. 01 — engagement pipeline</span><span>euclidean.pipeline.svg</span></div>
+        <svg viewBox="0 0 420 260" role="img" aria-label="Diagram showing the flow from raw data through a quality gate, model, and into a decision">
+          <defs>
+            <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L6,3 L0,6 Z" fill="#4B4F58"></path>
+            </marker>
+          </defs>
+          <g font-family="IBM Plex Mono" font-size="11" fill="#14161B">
+            <rect x="10" y="20" width="110" height="46" rx="2" fill="#FBFAF7" stroke="#B9B5A8"></rect>
+            <text x="65" y="40" text-anchor="middle">raw</text>
+            <text x="65" y="54" text-anchor="middle">data</text>
+
+            <rect x="10" y="100" width="110" height="46" rx="2" fill="#FBFAF7" stroke="#B9B5A8"></rect>
+            <text x="65" y="120" text-anchor="middle">source</text>
+            <text x="65" y="134" text-anchor="middle">systems</text>
+
+            <rect x="150" y="60" width="120" height="46" rx="2" fill="#E7E5FB" stroke="#3730E0"></rect>
+            <text x="210" y="80" text-anchor="middle" fill="#3730E0">quality</text>
+            <text x="210" y="94" text-anchor="middle" fill="#3730E0">gate</text>
+
+            <rect x="150" y="150" width="120" height="46" rx="2" fill="#FBFAF7" stroke="#B9B5A8"></rect>
+            <text x="210" y="170" text-anchor="middle">potential</text>
+            <text x="210" y="184" text-anchor="middle">map</text>
+
+            <rect x="310" y="105" width="100" height="46" rx="2" fill="#14161B"></rect>
+            <text x="360" y="125" text-anchor="middle" fill="#F2F1EC">decision</text>
+            <text x="360" y="139" text-anchor="middle" fill="#F2F1EC">+ roadmap</text>
+          </g>
+          <g stroke="#4B4F58" stroke-width="1" fill="none" marker-end="url(#arrow)">
+            <path d="M120,43 L150,79"></path>
+            <path d="M120,123 L150,173"></path>
+            <path d="M270,83 L310,120"></path>
+            <path d="M270,173 L310,140"></path>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats" style="padding:0; border-bottom:1px solid var(--line);">
+    <div class="wrap stats-inner" style="padding-left:0; padding-right:0;">
+      <div class="stat wrap" style="padding-left:clamp(20px,5vw,56px);">
+        <div class="n">01</div>
+        <div class="l">founder, quantitative background — mathematics &amp; computer science</div>
+      </div>
+      <div class="stat">
+        <div class="n">5</div>
+        <div class="l">solution domains: LLM/agentic, voice, vision, robotics, applied ML</div>
+      </div>
+      <div class="stat">
+        <div class="n">3</div>
+        <div class="l">deliverables per engagement: audit, potential map, roadmap</div>
+      </div>
+      <div class="stat">
+        <div class="n">1:1</div>
+        <div class="l">direct access to the person doing the analysis, no hand-offs</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT WE DO -->
+  <section id="work">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>What we deliver</h2>
+        <p class="desc">Three concrete outputs, in this order. Each one is useful on its own — you don't need to buy the whole pipeline to get value from the first step.</p>
+      </div>
+      <div class="service-grid">
+        <div class="service">
+          <div class="idx mono">service/01</div>
+          <h3>Data quality analysis</h3>
+          <p>A structured audit of what your data actually contains, versus what your systems assume it contains.</p>
+          <ul>
+            <li>Completeness &amp; consistency scoring</li>
+            <li>Schema and lineage mapping</li>
+            <li>Bias and drift checks</li>
+            <li>Fit-for-purpose report, ranked by risk</li>
+          </ul>
+        </div>
+        <div class="service">
+          <div class="idx mono">service/02</div>
+          <h3>AI potential assessment</h3>
+          <p>Where AI genuinely changes an outcome for you, and where it's a distraction dressed up as innovation.</p>
+          <ul>
+            <li>Use-case shortlist, scored on impact &amp; feasibility</li>
+            <li>Build vs. buy vs. skip recommendation</li>
+            <li>Cost and risk envelope per use case</li>
+            <li>Plain-language technical rationale</li>
+          </ul>
+        </div>
+        <div class="service">
+          <div class="idx mono">service/03</div>
+          <h3>Implementation plans</h3>
+          <p>A sequenced, staffed, and testable path from the assessment to something running in production.</p>
+          <ul>
+            <li>Architecture &amp; system design</li>
+            <li>Milestones with acceptance criteria</li>
+            <li>Evaluation &amp; monitoring plan</li>
+            <li>Handover documentation for your team</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUNDER -->
+  <section id="founder">
+    <div class="wrap">
+      <div class="spine-label"><span class="num">02</span><span class="rule"></span>who's behind this</div>
+      <div class="founder">
+        <div>
+          <div class="monogram">EM</div>
+          <div class="founder-meta">
+            M.Sc. Mathematics<br>
+            M.Sc. Computer Science<br>
+            9 yrs applied ML &amp; systems
+          </div>
+        </div>
+        <div class="founder-body">
+          <span class="name">Founder &amp; principal consultant</span>
+          <span class="role">background: mathematics + computer science</span>
+          <p>Euclidean Analytics is built around a single practitioner's background in mathematics and computer science, not a generic delivery team. That means engagements start from first principles — what the data can actually support, what a model can actually estimate, what error rates a decision can actually tolerate — rather than from a template slide deck.</p>
+          <p>Before founding Euclidean Analytics, this meant building probabilistic models, computer vision pipelines, and applied ML systems where the cost of an overconfident answer was measured in real operational failures, not just a lower accuracy score. That discipline carries directly into how every audit, assessment, and roadmap here is written: specific claims, stated assumptions, and numbers that are defensible under questioning.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPABILITIES -->
+  <section id="capabilities">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Where the work spans</h2>
+        <p class="desc">Solutions ordered roughly by how much of the physical and organizational world they touch — from software-only language systems through to machines that move.</p>
+      </div>
+      <div class="spectrum">
+        <div class="spectrum-track"><div class="fill"></div></div>
+        <div class="cap-grid">
+
+          <div class="cap-card">
+            <svg class="cap-icon" viewBox="0 0 34 34" fill="none" stroke="#14161B" stroke-width="1.3">
+              <circle cx="10" cy="12" r="4"></circle>
+              <circle cx="24" cy="12" r="4"></circle>
+              <circle cx="17" cy="24" r="4"></circle>
+              <path d="M13 13.5 L21 13.5 M12 15 L15.5 21 M22 15 L18.5 21"></path>
+            </svg>
+            <h3>LLM &amp; agentic systems</h3>
+            <p>Retrieval-augmented assistants, tool-using agents, and multi-step workflows built on top of your existing data and APIs.</p>
+          </div>
+
+          <div class="cap-card">
+            <svg class="cap-icon" viewBox="0 0 34 34" fill="none" stroke="#14161B" stroke-width="1.3">
+              <path d="M17 5 v10 M12 9 a5 6 0 0 1 10 0 v6 a5 6 0 0 1-10 0 z"></path>
+              <path d="M9 17 a8 8 0 0 0 16 0 M17 25 v4 M13 29 h8"></path>
+            </svg>
+            <h3>Voice interfaces</h3>
+            <p>Speech-driven intake, scheduling, and support bots, tuned for latency and graceful handling of ambiguity.</p>
+          </div>
+
+          <div class="cap-card">
+            <svg class="cap-icon" viewBox="0 0 34 34" fill="none" stroke="#14161B" stroke-width="1.3">
+              <rect x="4" y="9" width="26" height="17" rx="2"></rect>
+              <circle cx="17" cy="17.5" r="5"></circle>
+              <path d="M12 9 l2-3 h6 l2 3"></path>
+            </svg>
+            <h3>Computer vision</h3>
+            <p>Defect detection, counting, and visual QA systems built on camera feeds you already have on the line.</p>
+          </div>
+
+          <div class="cap-card">
+            <svg class="cap-icon" viewBox="0 0 34 34" fill="none" stroke="#14161B" stroke-width="1.3">
+              <circle cx="17" cy="10" r="4"></circle>
+              <path d="M17 14 v6 M10 30 l4-10 h6 l4 10 M10 20 h14"></path>
+            </svg>
+            <h3>Robotics</h3>
+            <p>Path planning, sensor fusion, and control-layer software for warehouse and field robotics fleets.</p>
+          </div>
+
+          <div class="cap-card">
+            <svg class="cap-icon" viewBox="0 0 34 34" fill="none" stroke="#14161B" stroke-width="1.3">
+              <path d="M4 26 L11 16 L17 21 L24 8 L30 14"></path>
+              <circle cx="11" cy="16" r="1.6" fill="#14161B"></circle>
+              <circle cx="17" cy="21" r="1.6" fill="#14161B"></circle>
+              <circle cx="24" cy="8" r="1.6" fill="#14161B"></circle>
+            </svg>
+            <h3>Applied machine learning</h3>
+            <p>Forecasting, anomaly detection, and optimization models for problems that don't need a language model.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- METHOD -->
+  <section id="method">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>How an engagement runs</h2>
+        <p class="desc">Five stages, always in this order — each one produces something you keep, even if you stop after that stage.</p>
+      </div>
+      <div class="method-list">
+        <div class="method-row">
+          <div class="step-num mono">01</div>
+          <h3>Assess</h3>
+          <p>Audit the data you have: completeness, consistency, lineage, and known failure modes. Output: a written data quality report.</p>
+        </div>
+        <div class="method-row">
+          <div class="step-num mono">02</div>
+          <h3>Prioritize</h3>
+          <p>Map candidate AI use cases against feasibility, expected impact, and the quality gaps found in step one. Output: a ranked shortlist.</p>
+        </div>
+        <div class="method-row">
+          <div class="step-num mono">03</div>
+          <h3>Plan</h3>
+          <p>Turn the top use case(s) into an implementation plan with architecture, milestones, and acceptance criteria. Output: a roadmap document.</p>
+        </div>
+        <div class="method-row">
+          <div class="step-num mono">04</div>
+          <h3>Build &amp; deploy</h3>
+          <p>Implement the system — alone or alongside your engineers — with evaluation baked in from the first commit, not bolted on at the end.</p>
+        </div>
+        <div class="method-row">
+          <div class="step-num mono">05</div>
+          <h3>Operate &amp; iterate</h3>
+          <p>Monitor real-world performance against the plan's acceptance criteria and adjust. Output: a monitoring dashboard and revision log.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASE STUDIES -->
+  <section id="cases">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Reference projects</h2>
+        <p class="desc">Representative engagements across the capability spectrum above. Details are shown at the level typically permitted under client confidentiality.</p>
+      </div>
+      <div class="case-grid">
+
+        <div class="case-card">
+          <div class="case-top"><span>case/041</span><span class="tag">LLM &amp; agentic</span></div>
+          <h3>Support agent for a B2B SaaS platform</h3>
+          <p>Retrieval-augmented agent handling tier-1 support tickets against product docs, changelogs, and account data, with escalation logic for low-confidence answers.</p>
+          <div class="case-metric"><span class="m">38%</span> of tickets resolved without a human touch</div>
+        </div>
+
+        <div class="case-card">
+          <div class="case-top"><span>case/037</span><span class="tag">Voice</span></div>
+          <h3>Scheduling line for a clinic network</h3>
+          <p>Voice bot handling appointment booking, rescheduling, and intake questions over the existing phone line, with fallback to staff for edge cases.</p>
+          <div class="case-metric"><span class="m">-46%</span> average call handling time for routine bookings</div>
+        </div>
+
+        <div class="case-card">
+          <div class="case-top"><span>case/052</span><span class="tag">Computer vision</span></div>
+          <h3>Defect detection on a production line</h3>
+          <p>Camera-based inspection system flagging surface defects in real time, replacing a sampling-based manual QA process.</p>
+          <div class="case-metric"><span class="m">4x</span> inspection coverage at the same headcount</div>
+        </div>
+
+        <div class="case-card">
+          <div class="case-top"><span>case/029</span><span class="tag">Robotics</span></div>
+          <h3>Fleet routing for a warehouse operator</h3>
+          <p>Path-planning and sensor-fusion layer coordinating a multi-robot picking fleet to reduce idle time and collision risk.</p>
+          <div class="case-metric"><span class="m">-21%</span> average pick-to-pack cycle time</div>
+        </div>
+
+        <div class="case-card">
+          <div class="case-top"><span>case/018</span><span class="tag">Applied ML</span></div>
+          <h3>Demand forecasting overhaul for a retailer</h3>
+          <p>Replaced a spreadsheet-based forecast with a model incorporating seasonality, promotions, and supply constraints.</p>
+          <div class="case-metric"><span class="m">-31%</span> forecast error versus prior method</div>
+        </div>
+
+        <div class="case-card">
+          <div class="case-top"><span>case/044</span><span class="tag">Data quality</span></div>
+          <h3>Audit ahead of an AI investment decision</h3>
+          <p>Independent data quality audit for a logistics operator evaluating a large AI vendor contract, surfacing gaps the vendor's demo hadn't shown.</p>
+          <div class="case-metric"><span class="m">3</span> blocking data issues found before signing</div>
+        </div>
+
+      </div>
+      <p class="case-note">Figures are representative of typical engagement outcomes in each category and are illustrative rather than figures from a specific named client. Detailed references available on request under NDA.</p>
+    </div>
+  </section>
+
+  <!-- STACK -->
+  <section style="padding:64px 0;">
+    <div class="wrap">
+      <div class="spine-label"><span class="num">—</span><span class="rule"></span>tools we reach for, not tools we're loyal to</div>
+      <div class="stack-list">
+        <span>Python</span><span>PyTorch</span><span>scikit-learn</span><span>Pandas / Polars</span>
+        <span>PostgreSQL</span><span>dbt</span><span>Airflow</span>
+        <span>LangGraph</span><span>OpenAI / Anthropic APIs</span><span>Whisper</span>
+        <span>OpenCV</span><span>ROS 2</span><span>Docker / Kubernetes</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" style="border-bottom:none;">
+    <div class="wrap contact-inner">
+      <div class="contact-left">
+        <div class="spine-label"><span class="num">06</span><span class="rule"></span>get in touch</div>
+        <h2>Start with the audit, not the demo.</h2>
+        <p>Tell us what you're deciding and what data you already have. We'll reply with whether a data quality analysis or an AI potential assessment is the better starting point for you.</p>
+      </div>
+      <form class="contact-card" onsubmit="event.preventDefault(); this.querySelector('.btn').textContent='Sent — we will reply within 2 business days';">
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" required>
+        </div>
+        <div class="field">
+          <label for="email">Work email</label>
+          <input id="email" name="email" type="email" required>
+        </div>
+        <div class="field">
+          <label for="topic">What are you deciding?</label>
+          <select id="topic" name="topic">
+            <option>Data quality analysis</option>
+            <option>AI potential assessment</option>
+            <option>Implementation plan</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="message">Context</label>
+          <textarea id="message" name="message" placeholder="A sentence or two on the data and decision involved."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Request an assessment</button>
+      </form>
+    </div>
+    <div class="wrap">
+      <p class="contact-alt">Prefer email? Write directly to <a href="mailto:hello@euclideananalytics.example">hello@euclideananalytics.example</a>. This form doesn't send anywhere in this static build — wire it to your provider of choice (Formspree, mailto, a serverless function) before going live.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap footer-inner">
+    <span>© 2026 Euclidean Analytics. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="#work">Services</a>
+      <a href="#cases">Projects</a>
+      <a href="mailto:hello@euclideananalytics.example">Email</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var burger = document.getElementById('burgerBtn');
+    var panel = document.getElementById('navPanel');
+    var overlay = document.getElementById('navOverlay');
+
+    function openNav(){
+      panel.classList.add('open');
+      overlay.classList.add('open');
+      burger.setAttribute('aria-expanded','true');
+      burger.setAttribute('aria-label','Close menu');
+    }
+    function closeNav(){
+      panel.classList.remove('open');
+      overlay.classList.remove('open');
+      burger.setAttribute('aria-expanded','false');
+      burger.setAttribute('aria-label','Open menu');
+    }
+    burger.addEventListener('click', function(){
+      panel.classList.contains('open') ? closeNav() : openNav();
+    });
+    overlay.addEventListener('click', closeNav);
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape') closeNav();
+    });
+    panel.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', closeNav);
+    });
+  })();
+</script>
+
+</body>
+</html>
