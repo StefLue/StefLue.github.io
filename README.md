@@ -1,2 +1,3 @@
 [link](https://StefLue.github.io)
-[link2](https://StefLue.github.io/EuclideanAnalytics)
+
+[link2](https://steflue.github.io/EuclideanAnalytics/index.html)
