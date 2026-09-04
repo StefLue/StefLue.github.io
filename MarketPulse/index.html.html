@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Market Pulse — Sep 3, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B0F1A;
+    --card:#111827;
+    --card-line:#232B3D;
+    --amber:#E3B341;
+    --rust:#D9695F;
+    --teal:#4FB6A8;
+    --text:#ECE9E0;
+    --muted:#7B8496;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:0 0 48px;}
+
+  .tape{
+    background:#0E1424;
+    border-bottom:1px solid var(--card-line);
+    overflow:hidden;
+    white-space:nowrap;
+    padding:9px 0;
+  }
+  .tape-inner{
+    display:inline-block;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;
+    letter-spacing:.02em;
+    animation:scroll 26s linear infinite;
+  }
+  .tape span{margin-right:36px;color:var(--muted);}
+  .tape b{color:var(--text);font-weight:500;}
+  .up{color:var(--teal);}
+  .down{color:var(--rust);}
+  @keyframes scroll{
+    0%{transform:translateX(0);}
+    100%{transform:translateX(-50%);}
+  }
+
+  header{padding:38px 28px 22px;}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    color:var(--amber);
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    margin-bottom:10px;
+  }
+  h1{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:34px;
+    font-weight:700;
+    margin:0 0 6px;
+    letter-spacing:-.01em;
+  }
+  .dateline{color:var(--muted);font-size:13.5px;font-family:'IBM Plex Mono',monospace;}
+
+  section{padding:0 28px;margin-bottom:6px;}
+  .card{
+    background:var(--card);
+    border:1px solid var(--card-line);
+    border-radius:10px;
+    padding:22px 24px 20px;
+    margin-bottom:18px;
+  }
+  .card-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    margin-bottom:14px;
+  }
+  h2{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:18px;
+    font-weight:600;
+    margin:0;
+  }
+  .tag{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    color:var(--muted);
+    border:1px solid var(--card-line);
+    border-radius:20px;
+    padding:3px 9px;
+  }
+  p{font-size:14.5px;line-height:1.6;color:#D3D0C6;margin:0 0 4px;}
+  .stat-row{
+    display:flex;
+    gap:22px;
+    margin-top:14px;
+    padding-top:14px;
+    border-top:1px solid var(--card-line);
+    font-family:'IBM Plex Mono',monospace;
+  }
+  .stat{font-size:12px;color:var(--muted);}
+  .stat b{display:block;font-size:16px;color:var(--text);font-weight:500;margin-bottom:1px;}
+  .stat b.up{color:var(--teal);}
+  .stat b.down{color:var(--rust);}
+
+  svg{display:block;width:100%;height:auto;}
+  .chart-label{font-family:'IBM Plex Mono',monospace;font-size:10.5px;fill:var(--muted);}
+  .chart-value{font-family:'IBM Plex Mono',monospace;font-size:10.5px;fill:var(--text);}
+
+  footer{
+    padding:20px 28px 0;
+    color:var(--muted);
+    font-size:11.5px;
+    font-family:'IBM Plex Mono',monospace;
+    border-top:1px solid var(--card-line);
+    margin:10px 28px 0;
+    line-height:1.7;
+  }
+</style>
+</head>
+<body>
+
+<div class="tape">
+  <div class="tape-inner" id="tapeInner"></div>
+</div>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Market Pulse · Thursday Edition</div>
+    <h1>Rates relief sparks a rip</h1>
+    <div class="dateline">THURSDAY · SEPTEMBER 3 2026</div>
+  </header>
+
+  <section>
+
+    <!-- STOCKS -->
+    <div class="card">
+      <div class="card-head">
+        <h2>Equities — best session in a month</h2>
+        <span class="tag">S&amp;P 500</span>
+      </div>
+      <p>Stocks ripped higher after Fed Governor Christopher Waller said he'd lean toward holding rates steady absent an inflation surprise, easing pressure built up after Chair Warsh's more hawkish tone. The Dow's 624-point gain was its strongest single session since early August, and the 10-year yield eased back toward 4.74% as the dollar index slipped below 99.</p>
+
+      <svg viewBox="0 0 620 190">
+        <line x1="40" y1="40" x2="40" y2="180" stroke="#232B3D" stroke-width="1"/>
+        <line x1="40" y1="180" x2="600" y2="180" stroke="#232B3D" stroke-width="1"/>
+        <line x1="40" y1="110" x2="600" y2="110" stroke="#1A2133" stroke-width="1" stroke-dasharray="3 4"/>
+        <polyline points="40,60 300,180 560,40" fill="none" stroke="#E3B341" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+        <circle cx="40" cy="60" r="3.5" fill="#E3B341"/>
+        <circle cx="300" cy="180" r="3.5" fill="#E3B341"/>
+        <circle cx="560" cy="40" r="3.5" fill="#E3B341"/>
+        <text x="40" y="198" class="chart-label" text-anchor="middle">Aug 27</text>
+        <text x="300" y="198" class="chart-label" text-anchor="middle">Aug 31</text>
+        <text x="560" y="198" class="chart-label" text-anchor="middle">Sep 3</text>
+        <text x="40" y="52" class="chart-value" text-anchor="middle" dy="-10">7,731</text>
+        <text x="300" y="172" class="chart-value" text-anchor="middle" dy="-10">7,631</text>
+        <text x="560" y="32" class="chart-value" text-anchor="middle" dy="-10">7,748</text>
+      </svg>
+
+      <div class="stat-row">
+        <div class="stat">S&amp;P 500<b class="up">7,747.71 ▲1.06%</b></div>
+        <div class="stat">Nasdaq<b class="up">26,584.06 ▲1.4%</b></div>
+        <div class="stat">Dow<b class="up">53,686.11 ▲1.18%</b></div>
+      </div>
+    </div>
+
+    <!-- SINGLE STOCK / SENTIMENT -->
+    <div class="card">
+      <div class="card-head">
+        <h2>Snowflake — blowout quarter, retail piles in</h2>
+        <span class="tag">SNOW</span>
+      </div>
+      <p>Snowflake shares soared over 20% after a blowout Q2 print, one of the sharpest single-day pops of the earnings season, while Broadcom actually slipped despite beating estimates — a reminder that guidance and growth trajectory are mattering more than the headline beat this quarter.</p>
+
+      <svg viewBox="0 0 620 160">
+        <line x1="40" y1="20" x2="40" y2="130" stroke="#232B3D" stroke-width="1"/>
+        <line x1="40" y1="130" x2="600" y2="130" stroke="#232B3D" stroke-width="1"/>
+        <rect x="140" y="124" width="90" height="6" rx="3" fill="#232B3D"/>
+        <text x="185" y="114" class="chart-value" text-anchor="middle">~0%</text>
+        <text x="185" y="148" class="chart-label" text-anchor="middle">Wed close</text>
+        <rect x="390" y="52" width="90" height="78" rx="4" fill="#4FB6A8"/>
+        <text x="435" y="42" class="chart-value" text-anchor="middle">+20%</text>
+        <text x="435" y="148" class="chart-label" text-anchor="middle">Thu AM (post-earnings)</text>
+      </svg>
+
+      <div class="stat-row">
+        <div class="stat">SNOW move<b class="up">▲20%+</b></div>
+        <div class="stat">AVGO (beat, fell)<b class="down">▼</b></div>
+        <div class="stat">Rotation into<b>Growth / AI</b></div>
+      </div>
+    </div>
+
+    <!-- CRYPTO -->
+    <div class="card">
+      <div class="card-head">
+        <h2>Bitcoin — consolidating below resistance</h2>
+        <span class="tag">BTC/USD</span>
+      </div>
+      <p>BTC is holding near $77,900, still above its 20/50/200-day averages but cooling off after late-August's push through $80K. Michael Saylor's Strategy resumed buying, deploying $370M after a two-month pause, while the Fear &amp; Greed Index sits at 65 (Greed) — bullish structure, but momentum has stalled just under the resistance band.</p>
+
+      <svg viewBox="0 0 620 110">
+        <rect x="40" y="45" width="560" height="14" rx="7" fill="#1A2133"/>
+        <rect x="514" y="45" width="86" height="14" rx="7" fill="#3A2E1C"/>
+        <circle cx="425" cy="52" r="8" fill="#E3B341" stroke="#0B0F1A" stroke-width="2"/>
+        <text x="425" y="30" class="chart-value" text-anchor="middle">$77.9K now</text>
+        <text x="557" y="30" class="chart-label" text-anchor="middle">$80–82K resistance</text>
+        <text x="40" y="80" class="chart-label">Recent low ~$69K</text>
+        <text x="600" y="80" class="chart-label" text-anchor="end">Consolidating below zone</text>
+      </svg>
+
+      <div class="stat-row">
+        <div class="stat">BTC price<b>$77,927.99</b></div>
+        <div class="stat">BTC dominance<b>59.58%</b></div>
+        <div class="stat">Fear &amp; Greed<b class="up">65 (Greed)</b></div>
+      </div>
+    </div>
+
+    <div class="card" style="background:transparent;border-style:dashed;">
+      <p style="color:var(--muted);font-size:13.5px;">📌 <b style="color:var(--text);">The thread tying it together:</b> a dovish Fed signal did the heavy lifting today — falling yields lifted stocks broadly, growth names with strong guidance (Snowflake) got rewarded hardest, and crypto stayed range-bound as the same rate story plays out a step behind equities.</p>
+    </div>
+
+  </section>
+
+  <footer>
+    SOURCES: CNBC · Yahoo Finance · Trading Economics · The Motley Fool · Fortune · Cryptonomist.<br>
+    Chart values reflect reported closes/levels at time of writing; short series shown for trend, not full history.<br>
+    Not investment advice.
+  </footer>
+</div>
+
+<script>
+  const items = [
+    ['S&amp;P 500','7,747.71','▲1.06%','up'],
+    ['NASDAQ','26,584.06','▲1.4%','up'],
+    ['DOW','53,686.11','▲1.18%','up'],
+    ['10Y YIELD','4.74%','▼5bps','up'],
+    ['BTC/USD','$77,927.99','','' ],
+    ['SNOW','','▲20%+','up'],
+  ];
+  const row = items.map(([label,val,chg,dir]) =>
+    `<span><b>${label}</b> ${val} <span class="${dir}">${chg}</span></span>`
+  ).join('');
+  document.getElementById('tapeInner').innerHTML = row + row;
+</script>
+
+</body>
+</html>

@@ -65,38 +65,33 @@
       </div>
       <div class="hero-figure">
         <div class="cap"><span>fig. 01 — engagement pipeline</span><span>euclidean.pipeline.svg</span></div>
-        <svg viewBox="0 0 420 260" role="img" aria-label="Diagram showing the flow from raw data through a quality gate, model, and into a decision">
+        <svg viewBox="0 0 620 170" role="img" aria-label="Diagram showing the flow from raw data through a data quality gate and an AI potential map into a final decision and roadmap">
           <defs>
             <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
               <path d="M0,0 L6,3 L0,6 Z" fill="#4B4F58"></path>
             </marker>
           </defs>
-          <g font-family="IBM Plex Mono" font-size="11" fill="#14161B">
-            <rect x="10" y="20" width="110" height="46" rx="2" fill="#FBFAF7" stroke="#B9B5A8"></rect>
-            <text x="65" y="40" text-anchor="middle">raw</text>
-            <text x="65" y="54" text-anchor="middle">data</text>
-
-            <rect x="10" y="100" width="110" height="46" rx="2" fill="#FBFAF7" stroke="#B9B5A8"></rect>
-            <text x="65" y="120" text-anchor="middle">source</text>
-            <text x="65" y="134" text-anchor="middle">systems</text>
-
-            <rect x="150" y="60" width="120" height="46" rx="2" fill="#E7E5FB" stroke="#3730E0"></rect>
-            <text x="210" y="80" text-anchor="middle" fill="#3730E0">quality</text>
-            <text x="210" y="94" text-anchor="middle" fill="#3730E0">gate</text>
-
-            <rect x="150" y="150" width="120" height="46" rx="2" fill="#FBFAF7" stroke="#B9B5A8"></rect>
-            <text x="210" y="170" text-anchor="middle">potential</text>
-            <text x="210" y="184" text-anchor="middle">map</text>
-
-            <rect x="310" y="105" width="100" height="46" rx="2" fill="#14161B"></rect>
-            <text x="360" y="125" text-anchor="middle" fill="#F2F1EC">decision</text>
-            <text x="360" y="139" text-anchor="middle" fill="#F2F1EC">+ roadmap</text>
-          </g>
           <g stroke="#4B4F58" stroke-width="1" fill="none" marker-end="url(#arrow)">
-            <path d="M120,43 L150,79"></path>
-            <path d="M120,123 L150,173"></path>
-            <path d="M270,83 L310,120"></path>
-            <path d="M270,173 L310,140"></path>
+            <path d="M135,85 L165,85"></path>
+            <path d="M285,85 L315,85"></path>
+            <path d="M435,85 L465,85"></path>
+          </g>
+          <g font-family="IBM Plex Mono" font-size="12">
+            <rect x="15" y="55" width="120" height="60" rx="2" fill="#FBFAF7" stroke="#B9B5A8"></rect>
+            <text x="75" y="77" text-anchor="middle" fill="#14161B">raw data</text>
+            <text x="75" y="95" text-anchor="middle" fill="#4B4F58" font-size="11">systems &amp; sources</text>
+
+            <rect x="165" y="55" width="120" height="60" rx="2" fill="#E7E5FB" stroke="#3730E0"></rect>
+            <text x="225" y="77" text-anchor="middle" fill="#3730E0">quality gate</text>
+            <text x="225" y="95" text-anchor="middle" fill="#3730E0" font-size="11">audit &amp; scoring</text>
+
+            <rect x="315" y="55" width="120" height="60" rx="2" fill="#F5E4D2" stroke="#B5590A"></rect>
+            <text x="375" y="77" text-anchor="middle" fill="#B5590A">potential map</text>
+            <text x="375" y="95" text-anchor="middle" fill="#B5590A" font-size="11">ranked AI use cases</text>
+
+            <rect x="465" y="55" width="140" height="60" rx="2" fill="#14161B"></rect>
+            <text x="535" y="77" text-anchor="middle" fill="#F2F1EC">decision</text>
+            <text x="535" y="95" text-anchor="middle" fill="#D8D5CB" font-size="11">roadmap &amp; build plan</text>
           </g>
         </svg>
       </div>
