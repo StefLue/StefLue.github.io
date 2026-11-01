@@ -75,23 +75,50 @@ legend{font-weight:700;padding:0;margin-bottom:8px;font-size:17px}
 .band p{color:#d5deea}
 footer{padding:40px 0 56px;border-top:1px solid var(--line);color:var(--mute);font-size:15px}
 @media (max-width:860px){.grid2,.cols,.fines,.steps{grid-template-columns:1fr}.cols>div{padding:20px 0;border-left:0;border-top:2px solid var(--line)}.cols>div:first-child{border-top:0}section{padding:64px 0}.steps{gap:24px}}
+.tbl{display:block;font-weight:700;font-size:15px;color:var(--mute);margin-bottom:6px}
+.tb{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;border:2px solid var(--accent);border-radius:12px;background:var(--bg);padding:12px 14px;font-size:18px;line-height:1.4}
+.tb i{font-style:normal;background:var(--accent);color:var(--accent-ink);font-weight:700;font-size:15px;border-radius:8px;padding:6px 12px;white-space:nowrap}
+.why{display:flex;gap:10px;align-items:flex-start;margin:14px 0 20px;font-size:16px;color:var(--mute)}
+.why b{color:var(--accent);font-size:20px;line-height:1.2}
+.btn2{background:transparent;color:var(--ink);border:2px solid var(--ink);margin-left:12px}
+.flow{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:32px}
+.scr{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:12px}
+.scr h3{display:flex;gap:10px;align-items:center;margin:0}
+.scr p{margin:0}
+.n{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--accent);color:var(--accent-ink);font-size:16px}
+.note{background:var(--surface);border-left:4px solid #e0a100;border-radius:8px;padding:14px 16px;font-size:17px}
+.imp{list-style:none;margin:0;padding:0;display:grid;gap:12px;font-size:17px}
+.imp li{border-bottom:1px solid var(--line);padding-bottom:10px}
+.res .r{display:grid;grid-template-columns:1fr auto auto;gap:12px;font-size:17px;padding:8px 0;border-bottom:1px solid var(--line)}
+.res .af{visibility:hidden;font-weight:800}
+.res.done .af{visibility:visible}
+.res .nt{display:none;font-size:15px;color:var(--mute);margin-top:8px}
+.res.done .nt{display:block}
+.sm{border:0;font:inherit;font-weight:700;font-size:16px;cursor:pointer;padding:10px 18px;align-self:flex-start}
+.wl{display:grid;gap:14px}
+.wl label{display:grid;gap:6px;font-weight:700;font-size:16px}
+.wl input,.wl select{font:inherit;font-weight:400;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink)}
+.wl button{border:0;font:inherit;font-weight:700;cursor:pointer;justify-self:start}
+@media (max-width:860px){.flow{grid-template-columns:1fr}.btn2{margin:12px 0 0}}
 </style>
 </head>
 <body>
 <header><div class="wrap"><a class="brand" href="#top">ActReady</a>
 <button id="burger" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><span></span><span></span><span></span></button></div></header>
 <nav id="menu" aria-label="Main">
-<a href="#demo">Try the demo</a><a href="#problem">Why now</a><a href="#how">How it works</a><a href="#portfolio">Your portfolio</a><a href="#market">Market</a><a href="#trust">Trust and the ask</a>
+<a href="#demo">Try the demo</a><a href="#problem">Why now</a><a href="#how">How it works</a><a href="#portfolio">Your portfolio</a><a href="#alerts">Law updates</a><a href="#market">Market</a><a href="#trust">Trust and the ask</a><a href="#waitlist">Join the waitlist</a>
 </nav>
 <main id="top">
 <section class="hero" id="demo"><div class="wrap grid2">
 <div>
 <h1>Know where every AI use case stands under the EU AI Act</h1>
 <p class="lead">Describe a use case in plain words. ActReady asks follow-up questions where the answer is vague, scores your compliance and lists exactly what is missing to reach 100%.</p>
-<a class="btn" href="#how">See how it works</a>
+<a class="btn" href="#how">See how it works</a><a class="btn btn2" href="#waitlist">Join the waitlist</a>
 </div>
 <div class="panel" aria-label="Interactive sample assessment">
-<p class="small" style="margin-bottom:12px">Sample use case: an AI tool that ranks job applicants. Change an answer and watch the score.</p>
+<span class="tbl">What the user typed in</span>
+<div class="tb"><span>We use an AI tool that ranks job applicants.</span><i>Assess</i></div>
+<p class="why"><b aria-hidden="true">↓</b><span>One sentence is not enough to score a high-risk system, so ActReady asks follow-up questions. Change an answer and watch the score.</span></p>
 <div class="ring">
 <svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="54" stroke="var(--line)"/><circle id="arc" cx="60" cy="60" r="54"/></svg>
 <div><div class="score" id="score" aria-live="polite">70%</div><span class="tag">High-risk · Annex III (employment)</span></div>
@@ -143,6 +170,23 @@ footer{padding:40px 0 56px;border-top:1px solid var(--line);color:var(--mute);fo
 <p class="small" style="margin-top:12px">Illustrative mock-up with sample data. Each row carries its role, risk class, owner and evidence.</p>
 </div></section>
 
+<section id="alerts" style="background:var(--surface);border-block:1px solid var(--line)"><div class="wrap">
+<h2>When the law changes, you see what it means for you</h2>
+<p class="lead">ActReady watches new bills and amendments, matches them to your portfolio and re-checks only the use cases they affect.</p>
+<div class="flow">
+<div class="scr"><h3><span class="n">1</span>Alert</h3>
+<div class="note"><b>Amendment adopted</b><br>Changes obligations for high-risk systems used in employment and credit.</div>
+<p class="small">Sent to the portfolio owner and the owners of affected use cases.</p></div>
+<div class="scr"><h3><span class="n">2</span>Impact</h3>
+<ul class="imp"><li><b>CV screening</b> (deployer)<br>New logging requirement applies.</li><li><b>Credit scoring</b> (provider)<br>Deadline for documentation changes.</li><li class="small" style="border:0">Support chatbot and demand forecasting: not affected.</li></ul></div>
+<div class="scr"><h3><span class="n">3</span>Re-check</h3>
+<div class="res" id="res"><div class="r"><b>CV screening</b><span>72%</span><span class="af" style="color:var(--bad)">→ 64%</span></div><div class="r"><b>Credit scoring</b><span>58%</span><span class="af">→ 58%</span></div>
+<p class="nt">1 new gap on CV screening: log retention. It is assigned to the use case owner. Credit scoring gets more time to document.</p></div>
+<button class="btn sm" id="recheck" type="button">Re-check affected use cases</button></div>
+</div>
+<p class="small" style="margin-top:16px">Illustrative mock-up with a sample amendment. Real alerts name the legal act and the provision.</p>
+</div></section>
+
 <section id="market" class="band"><div class="wrap">
 <h2>Market: a bottom-up estimate to validate</h2>
 <div class="fines">
@@ -161,7 +205,17 @@ footer{padding:40px 0 56px;border-top:1px solid var(--line);color:var(--mute);fo
 <p>Product: adaptive assessment engine and portfolio.</p>
 <p>Legal content: rule library and law monitoring.</p>
 <p>Go-to-market: pilots with [10] mid-size companies.</p>
-<a class="btn" href="#top">Back to top</a></div>
+<a class="btn" href="#waitlist">Join the waitlist</a></div>
+</div></section>
+<section id="waitlist"><div class="wrap grid2">
+<div><h2>Get early access</h2><p class="lead">Join the waitlist and we will contact you when pilots open. Tell us roughly how many AI use cases you run so we can plan your onboarding.</p></div>
+<div class="panel"><form class="wl" id="wl">
+<label>Work email<input type="email" name="email" required autocomplete="email"></label>
+<label>Company<input type="text" name="company" required autocomplete="organization"></label>
+<label>AI use cases in your company<select name="size"><option>1–5</option><option>6–20</option><option>More than 20</option><option>Not sure yet</option></select></label>
+<button class="btn" type="submit">Join the waitlist</button>
+<p class="small" id="wlmsg" role="status" style="margin:0">We use your details only to contact you about early access.</p>
+</form></div>
 </div></section>
 </main>
 <footer><div class="wrap">ActReady is a working name. Figures in brackets are placeholders. Not legal advice.</div></footer>
@@ -178,6 +232,23 @@ sc.textContent=t+"%";arc.style.strokeDashoffset=339.3*(1-t/100);
 gl.innerHTML=g.length?g.map(function(x){return "<li>"+x+"</li>"}).join(""):"<li>No open gaps for this sample use case.</li>"}
 fs.forEach(function(f){f.addEventListener("click",function(e){var x=e.target.closest("button");if(!x)return;f.querySelectorAll("button").forEach(function(y){y.setAttribute("aria-pressed",y===x)});calc()})});
 calc();
+})();
+</script>
+<script>
+(function(){
+var r=document.getElementById("res"),rb=document.getElementById("recheck");
+rb.addEventListener("click",function(){r.classList.add("done");rb.textContent="Re-checked just now";rb.disabled=true});
+var f=document.getElementById("wl"),m=document.getElementById("wlmsg");
+f.addEventListener("submit",async function(e){
+e.preventDefault();m.textContent="Saving…";
+try{
+var db=await claude.use("db"),u=await claude.use("user"),id=u?await u.id():null;
+if(!db||!id){m.textContent="Sign-ups need a signed-in claude.ai viewer. Please email [your contact address] to join.";return}
+var d=new FormData(f);
+await db.doc("waitlist/"+id).set({email:d.get("email"),company:d.get("company"),size:d.get("size"),at:new Date().toISOString()});
+f.reset();m.textContent="You’re on the list. We will write to you about early access.";
+}catch(x){m.textContent="Could not save your sign-up. Please try again or email [your contact address]."}
+});
 })();
 </script>
 </body>
