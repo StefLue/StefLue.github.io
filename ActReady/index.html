@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ActReady – EU AI Act compliance for every AI use case</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;700;800&display=swap">
+<style>
+:root{--bg:#eceff3;--surface:#ffffff;--ink:#0d2238;--mute:#4d5d70;--line:#cdd5df;--accent:#1f4fd8;--accent-ink:#ffffff;--warn:#9a5b00;--bad:#b3341f;--ok:#0b7a4f;--band:#0d2238;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1624;--surface:#12233a;--ink:#e6edf6;--mute:#9fb0c4;--line:#27405e;--accent:#7a9dff;--accent-ink:#0b1624;--warn:#f0b24a;--bad:#ff8a72;--ok:#4cd39b;--band:#16345f}}
+:root[data-theme="dark"]{--bg:#0b1624;--surface:#12233a;--ink:#e6edf6;--mute:#9fb0c4;--line:#27405e;--accent:#7a9dff;--accent-ink:#0b1624;--warn:#f0b24a;--bad:#ff8a72;--ok:#4cd39b;--band:#16345f}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 84px)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Hanken Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:18px;line-height:1.55}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+header{position:fixed;top:0;left:0;right:0;z-index:30;background:var(--bg);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+.brand{font-weight:800;font-size:22px;text-decoration:none;letter-spacing:-.01em}
+#burger{width:48px;height:48px;border:1px solid var(--line);background:var(--surface);border-radius:12px;cursor:pointer;display:grid;place-items:center;color:var(--ink)}
+#burger span{display:block;width:22px;height:2px;background:currentColor;border-radius:2px;transition:transform .25s,opacity .25s;grid-area:1/1}
+#burger span:nth-child(1){transform:translateY(-7px)}#burger span:nth-child(3){transform:translateY(7px)}
+#burger[aria-expanded="true"] span:nth-child(1){transform:rotate(45deg)}
+#burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+#burger[aria-expanded="true"] span:nth-child(3){transform:rotate(-45deg)}
+#menu{position:fixed;inset:0;z-index:20;background:var(--bg);padding:calc(env(safe-area-inset-top,0px) + 96px) 24px 48px;display:none;flex-direction:column;gap:4px;overflow:auto}
+#menu.open{display:flex}
+#menu a{font-size:clamp(32px,7vw,56px);font-weight:800;line-height:1.2;text-decoration:none;padding:10px 0;border-bottom:1px solid var(--line);max-width:640px}
+#menu a:hover{color:var(--accent)}
+section{padding:96px 0}
+.hero{padding-top:calc(68px + 64px)}
+.grid2{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:start}
+h1{font-size:clamp(38px,6vw,68px);line-height:1.04;letter-spacing:-.025em;margin:0 0 24px;font-weight:800}
+h2{font-size:clamp(30px,4.4vw,46px);line-height:1.1;letter-spacing:-.02em;margin:0 0 20px;font-weight:800;max-width:20ch}
+h3{font-size:22px;margin:0 0 8px;line-height:1.25}
+p{margin:0 0 16px;max-width:62ch}
+.lead{font-size:21px;color:var(--mute)}
+.btn{display:inline-block;background:var(--accent);color:var(--accent-ink);font-weight:700;padding:14px 26px;border-radius:10px;text-decoration:none}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:28px}
+.ring{display:flex;align-items:center;gap:24px;margin-bottom:20px}
+.ring svg{width:132px;height:132px;flex:none;transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:12;stroke-linecap:round}
+#arc{stroke:var(--accent);stroke-dasharray:339.3;stroke-dashoffset:101.8;transition:stroke-dashoffset .5s}
+.score{font-size:56px;font-weight:800;line-height:1}
+.tag{display:inline-block;border:1px solid var(--warn);color:var(--warn);border-radius:99px;padding:2px 12px;font-size:15px;font-weight:700;margin-top:8px}
+fieldset{border:0;padding:0;margin:0 0 18px}
+legend{font-weight:700;padding:0;margin-bottom:8px;font-size:17px}
+.opts{display:flex;gap:8px;flex-wrap:wrap}
+.opts button{font:inherit;font-size:16px;border:1.5px solid var(--line);background:transparent;color:var(--ink);border-radius:99px;padding:8px 16px;cursor:pointer}
+.opts button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:700}
+#gaps{margin:8px 0 0;padding-left:22px;font-size:17px}
+.small{font-size:15px;color:var(--mute)}
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:32px}
+.cols>div{padding:0 28px;border-left:2px solid var(--line)}
+.cols>div:first-child{padding-left:0;border-left:0}
+.fines{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:32px}
+.fines b{display:block;font-size:clamp(30px,4vw,44px);line-height:1.1;letter-spacing:-.02em;margin-bottom:6px}
+.steps{list-style:none;margin:32px 0 0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:20px;counter-reset:s}
+.steps li{counter-increment:s;border-top:3px solid var(--accent);padding-top:14px;font-size:16px;color:var(--mute)}
+.steps li::before{content:counter(s);font-weight:800;color:var(--accent);font-size:20px;display:block}
+.steps b{display:block;color:var(--ink);font-size:20px;margin-bottom:4px}
+.scroll{overflow-x:auto;margin-top:28px}
+.reg{min-width:640px;border:1px solid var(--line);border-radius:14px;background:var(--surface);overflow:hidden}
+.reg div{display:grid;grid-template-columns:4fr 2fr 2fr 2fr 3fr;gap:12px;padding:14px 20px;border-top:1px solid var(--line);font-size:17px}
+.reg .h{border-top:0;color:var(--mute);font-size:15px}
+.reg .al{background:#e0a100;color:#1a1300;font-weight:700;display:flex;justify-content:space-between}
+.reg b.w{color:var(--warn)}.reg b.b{color:var(--bad)}.reg b.o{color:var(--ok)}
+.band{background:var(--band);color:#eaf0f7}
+.band h2{color:#fff}
+.band .fines b{color:#9fbaff}
+.band .small{color:#aebdd3}
+.band p{color:#d5deea}
+footer{padding:40px 0 56px;border-top:1px solid var(--line);color:var(--mute);font-size:15px}
+@media (max-width:860px){.grid2,.cols,.fines,.steps{grid-template-columns:1fr}.cols>div{padding:20px 0;border-left:0;border-top:2px solid var(--line)}.cols>div:first-child{border-top:0}section{padding:64px 0}.steps{gap:24px}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><a class="brand" href="#top">ActReady</a>
+<button id="burger" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><span></span><span></span><span></span></button></div></header>
+<nav id="menu" aria-label="Main">
+<a href="#demo">Try the demo</a><a href="#problem">Why now</a><a href="#how">How it works</a><a href="#portfolio">Your portfolio</a><a href="#market">Market</a><a href="#trust">Trust and the ask</a>
+</nav>
+<main id="top">
+<section class="hero" id="demo"><div class="wrap grid2">
+<div>
+<h1>Know where every AI use case stands under the EU AI Act</h1>
+<p class="lead">Describe a use case in plain words. ActReady asks follow-up questions where the answer is vague, scores your compliance and lists exactly what is missing to reach 100%.</p>
+<a class="btn" href="#how">See how it works</a>
+</div>
+<div class="panel" aria-label="Interactive sample assessment">
+<p class="small" style="margin-bottom:12px">Sample use case: an AI tool that ranks job applicants. Change an answer and watch the score.</p>
+<div class="ring">
+<svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="54" stroke="var(--line)"/><circle id="arc" cx="60" cy="60" r="54"/></svg>
+<div><div class="score" id="score" aria-live="polite">70%</div><span class="tag">High-risk · Annex III (employment)</span></div>
+</div>
+<fieldset data-gap="Human oversight measures (Art. 14)"><legend>Does a person review each ranking before a hiring decision?</legend><div class="opts"><button aria-pressed="false" data-v="20">Always</button><button aria-pressed="true" data-v="10">Sometimes</button><button aria-pressed="false" data-v="0">Never</button></div></fieldset>
+<fieldset data-gap="Technical documentation (Annex IV)"><legend>Are the tool’s purpose, data and accuracy documented?</legend><div class="opts"><button aria-pressed="false" data-v="20">Fully</button><button aria-pressed="true" data-v="10">Partly</button><button aria-pressed="false" data-v="0">Not yet</button></div></fieldset>
+<fieldset data-gap="Risk management system (Art. 9)"><legend>Do you assess and log risks over the tool’s lifetime?</legend><div class="opts"><button aria-pressed="false" data-v="20">Yes</button><button aria-pressed="true" data-v="10">Informally</button><button aria-pressed="false" data-v="0">No</button></div></fieldset>
+<strong>Missing for 100%</strong>
+<ul id="gaps"></ul>
+<p class="small" style="margin:14px 0 0">Illustrative scoring with sample data. The real product asks more questions when a description is incomplete.</p>
+</div></div></section>
+
+<section id="problem"><div class="wrap">
+<h2>The EU AI Act turns every AI use case into a compliance question</h2>
+<div class="fines">
+<div><b style="color:var(--bad)">€35M or 7%</b>Maximum fine for prohibited practices, whichever is higher.</div>
+<div><b style="color:var(--bad)">€15M or 3%</b>Maximum fine for breaching most other obligations, including high-risk systems.</div>
+<div><b style="color:var(--accent)">2025–27</b>Phased obligations, with dates and details still being amended. Last quarter’s status goes stale.</div>
+</div>
+<p class="small" style="margin-top:20px">Source: Regulation (EU) 2024/1689, Art. 99. Verify current timelines before external use.</p>
+</div></section>
+
+<section id="how" style="background:var(--surface);border-block:1px solid var(--line)"><div class="wrap">
+<h2>From a plain description to a compliance roadmap</h2>
+<ol class="steps">
+<li><b>Describe</b>Explain the use case in your own words.</li>
+<li><b>Clarify</b>Targeted follow-up questions appear only where the answer is vague.</li>
+<li><b>Score</b>Risk class plus a compliance percentage per use case.</li>
+<li><b>Close gaps</b>A checklist of what is missing to reach 100%.</li>
+<li><b>Monitor</b>Re-check the whole portfolio when a new law or amendment passes.</li>
+</ol></div></section>
+
+<section id="portfolio"><div class="wrap">
+<h2>A use case portfolio is the foundation of compliance</h2>
+<p class="lead">Without a living portfolio, there is no way to know, or prove, where you stand.</p>
+<div class="cols">
+<div><h3>Obligations depend on role</h3><p>Provider, deployer, importer or distributor: duties differ, and one company often holds several roles across its use cases.</p></div>
+<div><h3>Classification is per use case</h3><p>Risk class follows purpose and context, so it cannot be assessed once for the whole company.</p></div>
+<div><h3>Governance needs an inventory</h3><p>Owners, documentation, oversight and an audit trail attach to each use case. They are the evidence regulators and customers ask for.</p></div>
+</div>
+<div class="scroll"><div class="reg" role="table" aria-label="Sample use case portfolio">
+<div class="al"><span>Regulatory update: an amendment affects 2 use cases</span><span>Re-check now</span></div>
+<div class="h"><span>Use case</span><span>Role</span><span>Risk</span><span>Score</span><span>Status</span></div>
+<div><b>CV screening</b><span>Deployer</span><span>High</span><b class="w">72%</b><span>3 gaps open</span></div>
+<div><b>Credit scoring</b><span>Provider</span><span>High</span><b class="b">58%</b><span>6 gaps open</span></div>
+<div><b>Support chatbot</b><span>Deployer</span><span>Limited</span><b class="w">91%</b><span>1 gap: disclosure</span></div>
+<div><b>Demand forecasting</b><span>Deployer</span><span>Minimal</span><b class="o">100%</b><span>Compliant</span></div>
+</div></div>
+<p class="small" style="margin-top:12px">Illustrative mock-up with sample data. Each row carries its role, risk class, owner and evidence.</p>
+</div></section>
+
+<section id="market" class="band"><div class="wrap">
+<h2>Market: a bottom-up estimate to validate</h2>
+<div class="fines">
+<div><b>~20%</b>of EU enterprises with 10+ staff used AI in 2025 (Eurostat, verify figure).</div>
+<div><b>€600M</b>Serviceable market: [100,000 target companies] × [€6,000 average yearly contract].</div>
+<div><b>€6M</b>Year-3 revenue goal: [1,000 customers] at the same average contract.</div>
+</div>
+<p style="margin-top:28px">Pricing hypothesis: Starter [€250/mo], Business [€900/mo], Enterprise [custom], with law-firm review add-ons.</p>
+<p class="small">Bracketed values are assumptions, not researched data. Replace with validated figures.</p>
+</div></section>
+
+<section id="trust"><div class="wrap grid2">
+<div><h2>Backed by [Law firm name]</h2>
+<p>Question trees and scoring rules are reviewed by its AI practice. The rule library is updated within [X days] of new bills, with an escalation path to qualified counsel for edge cases.</p></div>
+<div class="panel"><h3>Raising [€__] seed</h3>
+<p>Product: adaptive assessment engine and portfolio.</p>
+<p>Legal content: rule library and law monitoring.</p>
+<p>Go-to-market: pilots with [10] mid-size companies.</p>
+<a class="btn" href="#top">Back to top</a></div>
+</div></section>
+</main>
+<footer><div class="wrap">ActReady is a working name. Figures in brackets are placeholders. Not legal advice.</div></footer>
+<script>
+(function(){
+var b=document.getElementById("burger"),m=document.getElementById("menu");
+function set(o){m.classList.toggle("open",o);b.setAttribute("aria-expanded",o);b.setAttribute("aria-label",o?"Close menu":"Open menu");document.body.style.overflow=o?"hidden":""}
+b.addEventListener("click",function(){set(!m.classList.contains("open"))});
+m.addEventListener("click",function(e){if(e.target.tagName==="A")set(false)});
+document.addEventListener("keydown",function(e){if(e.key==="Escape")set(false)});
+var fs=document.querySelectorAll("fieldset[data-gap]"),sc=document.getElementById("score"),arc=document.getElementById("arc"),gl=document.getElementById("gaps");
+function calc(){var t=40,g=[];fs.forEach(function(f){var p=f.querySelector("[aria-pressed=true]"),v=+p.dataset.v;t+=v;if(v<20)g.push(f.dataset.gap)});
+sc.textContent=t+"%";arc.style.strokeDashoffset=339.3*(1-t/100);
+gl.innerHTML=g.length?g.map(function(x){return "<li>"+x+"</li>"}).join(""):"<li>No open gaps for this sample use case.</li>"}
+fs.forEach(function(f){f.addEventListener("click",function(e){var x=e.target.closest("button");if(!x)return;f.querySelectorAll("button").forEach(function(y){y.setAttribute("aria-pressed",y===x)});calc()})});
+calc();
+})();
+</script>
+</body>
+</html>
