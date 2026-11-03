@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ActReady – Compliance workspace</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;700;800&display=swap">
+<style>
+:root{--bg:#eceff3;--sf:#fff;--ink:#0d2238;--mute:#4d5d70;--line:#cdd5df;--ac:#1f4fd8;--aci:#fff;--warn:#9a5b00;--bad:#b3341f;--ok:#0b7a4f;--amb:#e0a100;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1624;--sf:#12233a;--ink:#e6edf6;--mute:#9fb0c4;--line:#27405e;--ac:#7a9dff;--aci:#0b1624;--warn:#f0b24a;--bad:#ff8a72;--ok:#4cd39b}}
+:root[data-theme="dark"]{--bg:#0b1624;--sf:#12233a;--ink:#e6edf6;--mute:#9fb0c4;--line:#27405e;--ac:#7a9dff;--aci:#0b1624;--warn:#f0b24a;--bad:#ff8a72;--ok:#4cd39b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.5 "Hanken Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif}
+:focus-visible{outline:3px solid var(--ac);outline-offset:2px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+header{border-bottom:1px solid var(--line);background:var(--sf)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{font-weight:800;font-size:22px;background:none;border:0;color:inherit;cursor:pointer;font-family:inherit;padding:0}
+main{padding:32px 0 64px}
+h1{font-size:clamp(28px,4vw,40px);line-height:1.1;letter-spacing:-.02em;margin:0 0 8px;font-weight:800}
+h2{font-size:22px;margin:0 0 12px;line-height:1.25}
+p{margin:0 0 12px}.sm{font-size:15px;color:var(--mute)}
+button{font:inherit;cursor:pointer;color:inherit}
+.btn{background:var(--ac);color:var(--aci);border:0;border-radius:10px;padding:11px 20px;font-weight:700}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.b2{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.bad{color:var(--bad);border-color:var(--bad)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:24px 0}
+.stat,.panel{background:var(--sf);border:1px solid var(--line);border-radius:16px;padding:20px}
+.stat b{display:block;font-size:36px;line-height:1.1;font-weight:800}
+.ban{background:var(--amb);color:#1a1300;border-radius:12px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:20px;font-weight:700}
+.ban.info{background:var(--sf);color:var(--ink);border:1px solid var(--amb)}
+.ban .btn{background:#1a1300;color:#fff}
+.tool{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:12px;flex-wrap:wrap}
+.sc{overflow-x:auto}
+.tb{min-width:700px}
+.row{display:grid;grid-template-columns:4fr 2fr 2fr 1.5fr 3fr;gap:12px;width:100%;text-align:left;background:var(--sf);border:1px solid var(--line);border-radius:12px;padding:14px 20px;margin-bottom:8px;align-items:center}
+button.row:hover{border-color:var(--ac)}
+.row.h{background:none;border:0;color:var(--mute);font-size:14px;padding-block:0}
+.w{color:var(--warn);font-weight:700}.b{color:var(--bad);font-weight:700}.o{color:var(--ok);font-weight:700}
+.g2{display:grid;grid-template-columns:1fr 1.2fr;gap:28px;align-items:start}
+label{display:grid;gap:6px;font-weight:700;font-size:15px;margin-bottom:14px}
+input,select,textarea{font:inherit;font-weight:400;padding:11px 13px;border:1.5px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);width:100%}
+textarea{min-height:120px;resize:vertical}
+.ring{display:flex;align-items:center;gap:20px;margin-bottom:16px}
+.ring svg{width:110px;height:110px;flex:none;transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:12;stroke-linecap:round}
+.big{font-size:48px;font-weight:800;line-height:1}
+.tag{display:inline-block;border:1px solid var(--warn);color:var(--warn);border-radius:99px;padding:2px 12px;font-size:14px;font-weight:700;margin-top:6px}
+.tag.p{border-color:var(--bad);color:var(--bad)}.tag.k{border-color:var(--ok);color:var(--ok)}
+fieldset{border:0;padding:0;margin:0 0 16px}
+legend{font-weight:700;font-size:16px;padding:0;margin-bottom:6px}
+.ch{display:flex;gap:8px;flex-wrap:wrap}
+.ch button{border:1.5px solid var(--line);background:transparent;border-radius:99px;padding:7px 15px;font-size:15px}
+.ch button[aria-pressed="true"]{background:var(--ac);border-color:var(--ac);color:var(--aci);font-weight:700}
+.nw{background:var(--amb);color:#1a1300;border-radius:6px;font-size:12px;font-weight:800;padding:1px 7px;margin-left:6px}
+.cl{border-left:4px solid var(--amb);padding:4px 0 4px 16px;margin-bottom:20px}
+ul{margin:6px 0 16px;padding-left:22px}
+details{margin-top:28px}summary{cursor:pointer;font-weight:700}
+@media (max-width:860px){.stats{grid-template-columns:1fr 1fr}.g2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><button class="brand" data-a="back">ActReady</button><span class="sm">Compliance workspace · sample rules</span></div></header>
+<main><div class="wrap" id="app"></div></main>
+<script>
+(function(){
+var K="actready-app-v1",app=document.getElementById("app"),S,V={p:"l"};
+var LIT=["lit","AI literacy (Art. 4)","Do the staff working with it have sufficient AI literacy?"];
+var INC=["inc","Serious incident reporting (Art. 73)","Is there a process to report serious incidents to the authorities?"];
+var R={prov:[["risk","Risk management system (Art. 9)","Do you identify, assess and log risks over the system’s lifetime?"],["data","Data governance (Art. 10)","Are training and test data checked for quality and bias?"],["docs","Technical documentation (Annex IV)","Are the system’s design, data and performance documented?"],["over","Human oversight design (Art. 14)","Can a person understand, override or stop the system’s output?"],["acc","Accuracy and robustness (Art. 15)","Do you test accuracy, robustness and security regularly?"]],
+dep:[["use","Use per instructions (Art. 26)","Do you use the system as the provider’s instructions say?"],["over","Assigned human oversight (Art. 26)","Have you assigned trained people to oversee the system?"],["logs","Log retention (Art. 26)","Do you keep the system’s logs for at least six months?"],["inform","Informing affected people (Art. 26)","Are workers and affected people told the system is in use?"],LIT],
+lim:[["tran","Transparency notice (Art. 50)","Do users know they interact with AI or see AI-generated content?"],LIT],min:[LIT]};
+var CN={high:"High-risk",limited:"Limited risk",minimal:"Minimal risk",prohibited:"Prohibited"};
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function hash(s){var h=0;for(var i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))|0;return h}
+function cls(u){var t=(u.desc||"").toLowerCase();
+if(/social scor|emotion (recogni|detect)/.test(t))return"prohibited";
+if(/\b(cv|resume|recruit|hiring|applicant|candidate|credit|loan|insurance|exam|admission|grading|asylum|border|police|biometric|critical infrastructure|medical)/.test(t))return"high";
+if(/\b(chatbot|assistant|generat|deepfake|synthetic|customer support)/.test(t))return"limited";
+if(/\b(forecast|predict|recommend|analytic|optimi|detect|inventory|maintenance|translat|spam)/.test(t))return"minimal";
+return u.purpose=="unsure"?"high":(u.purpose||null)}
+function reqs(u){var c=cls(u);if(!c||c=="prohibited")return[];
+if(c=="high"){if(!u.role)return[];var a=(u.role=="Provider"?R.prov:R.dep).slice();if(S.v>=2)a.push(INC);return a}
+return R[c=="limited"?"lim":"min"]}
+function ans(u,q){return u.a&&u.a[q[0]]!=null?u.a[q[0]]:null}
+function sc(u){if(cls(u)=="prohibited")return 0;var r=reqs(u);if(!r.length)return null;var t=0;r.forEach(function(q){t+=ans(u,q)||0});return Math.round(100*t/r.length)}
+function gaps(u){return reqs(u).filter(function(q){return(ans(u,q)||0)<1})}
+function unans(u){return reqs(u).filter(function(q){return ans(u,q)==null})}
+function stale(u){return u.ck&&(u.ck.v<S.v||u.ck.h!=hash(u.desc||""))}
+function status(u){if(cls(u)=="prohibited")return["Stop or redesign","b"];if(sc(u)==null)return["Needs details","w"];if(!u.ck)return["Not yet checked","w"];if(stale(u))return["Needs re-check","w"];var g=gaps(u).length;return g?[g+" gap"+(g>1?"s":"")+" open","w"]:["Compliant","o"]}
+function save(){try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}}
+function seed(){function m(n,d,r,o,a){var u={id:n.toLowerCase().replace(/\W/g,""),name:n,desc:d,role:r,owner:o,a:a};u.ck={v:1,h:hash(d),d:"2026-10-20"};return u}
+return{v:1,u:[m("CV screening","We use an AI tool to rank job applicants for our HR team.","Deployer","HR",{use:1,over:.5,logs:.5,inform:.5,lit:1}),
+m("Credit scoring","Our scoring model estimates default risk for loan applications.","Provider","Risk",{risk:.5,data:.5,docs:0,over:.5,acc:1}),
+m("Support chatbot","A chatbot answers customer support questions on our website.","Deployer","Support",{tran:1,lit:.5}),
+m("Demand forecasting","Forecasts product demand to optimise inventory.","Deployer","Operations",{lit:1})]}}
+try{S=JSON.parse(localStorage.getItem(K))}catch(e){}
+if(!S||!S.u)S=seed();
+function ring(s){var v=s==null?0:s;return'<svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="54" stroke="var(--line)"/><circle cx="60" cy="60" r="54" stroke="var(--ac)" stroke-dasharray="339.3" stroke-dashoffset="'+(339.3*(1-v/100))+'"/></svg>'}
+function chips(opts,cur,attr){return'<div class="ch">'+opts.map(function(o){return'<button aria-pressed="'+(cur===o[1])+'" '+attr+' data-v="'+esc(o[1])+'">'+o[0]+"</button>"}).join("")+"</div>"}
+function list(){var us=S.u,as=us.filter(function(u){return sc(u)!=null}),avg=as.length?Math.round(as.reduce(function(a,u){return a+sc(u)},0)/as.length)+"%":"–",
+gp=us.reduce(function(a,u){return a+gaps(u).length},0),st=us.filter(stale).length,h="";
+if(S.v<2)h+='<div class="ban"><span>Law update available: rule library v2 (sample) adds serious incident reporting for high-risk systems.</span><button class="btn" data-a="upd">Apply update</button></div>';
+else if(st)h+='<div class="ban info"><span>Rule library v2 applied: '+st+' use case'+(st>1?"s":"")+' need a re-check. Open one to review.</span></div>';
+h+="<h1>Use case portfolio</h1><p class=\"sm\">Every AI use case with its role, risk class and compliance score.</p>";
+h+='<div class="stats"><div class="stat"><b>'+avg+'</b>Portfolio score</div><div class="stat"><b>'+us.length+'</b>Use cases</div><div class="stat"><b>'+gp+'</b>Open gaps</div><div class="stat"><b>'+st+'</b>Need re-check</div></div>';
+h+='<div class="tool"><h2 style="margin:0">Use cases</h2><button class="btn" data-a="new">Add use case</button></div><div class="sc"><div class="tb"><div class="row h"><span>Use case</span><span>Role</span><span>Risk</span><span>Score</span><span>Status</span></div>';
+us.forEach(function(u){var c=cls(u),s=sc(u),t=status(u);h+='<button class="row" data-a="open" data-id="'+esc(u.id)+'"><b>'+esc(u.name)+"</b><span>"+esc(u.role||"–")+"</span><span>"+(c?CN[c]:"–")+'</span><b>'+(s==null?"–":s+"%")+'</b><span class="'+t[1]+'">'+t[0]+"</span></button>"});
+if(!us.length)h+='<p class="sm">No use cases yet. Add your first one.</p>';
+h+='</div></div><details><summary>Backup and restore</summary><p class="sm">Data is stored in this browser only. Copy the text to back it up, or paste a backup and restore it.</p><textarea id="bk" aria-label="Backup data">'+esc(JSON.stringify(S))+'</textarea><p style="margin-top:8px"><button class="btn b2" data-a="imp">Restore from text</button> <button class="btn b2" data-a="rst">Reset to sample data</button></p><p class="sm" id="bkm"></p></details>';
+return h}
+function detail(u){var c=cls(u),s=sc(u),rq=reqs(u),g=gaps(u),un=unans(u),t=status(u),h="";
+h+='<p><button class="btn b2" data-a="back">← Portfolio</button></p><h1>'+esc(u.name)+'</h1><div class="g2"><div class="panel"><h2>Use case</h2>';
+h+='<label>Name<input id="f-n" value="'+esc(u.name)+'"></label><label>Description<textarea id="f-d">'+esc(u.desc)+'</textarea></label>';
+h+='<label>Your role<select id="f-r"><option value="">Choose…</option><option'+(u.role=="Provider"?" selected":"")+'>Provider</option><option'+(u.role=="Deployer"?" selected":"")+'>Deployer</option></select></label><label>Owner<input id="f-o" value="'+esc(u.owner)+'"></label>';
+if(u.ck&&stale(u))h+='<p class="sm">The description or the rules changed since the last check.</p>';
+h+='<p><button class="btn" data-a="sv">Save and assess</button> <button class="btn b2 bad" data-a="del">'+(V.cd==u.id?"Click again to delete":"Delete")+"</button></p></div>";
+h+='<div class="panel"><h2>Assessment</h2><div class="ring">'+ring(s)+"<div><div class=\"big\">"+(s==null?"–":s+"%")+"</div>"+(c?'<span class="tag'+(c=="prohibited"?" p":c=="minimal"?" k":"")+'">'+CN[c]+"</span>":"")+'<div class="sm" style="margin-top:6px">'+t[0]+" · rules v"+S.v+"</div></div></div>";
+if(c==null||(c=="high"&&!u.role))h+='<div class="cl"><p class="sm">The description is not specific enough, so ActReady asks:</p>';
+if(c==null)h+="<fieldset><legend>What does the system mainly do?</legend>"+chips([["Decides on jobs, education, credit or services","high"],["Talks to people or generates content","limited"],["Analyses or optimises operations","minimal"],["Not sure (treated as high-risk)","unsure"]],u.purpose,'data-a="cl" data-k="purpose"')+"</fieldset>";
+if(c=="high"&&!u.role)h+="<fieldset><legend>Do you build this system or use one you bought?</legend>"+chips([["We build it","Provider"],["We use it","Deployer"]],u.role,'data-a="cl" data-k="role"')+"</fieldset>";
+if(c==null||(c=="high"&&!u.role))h+="</div>";
+if(c=="prohibited")h+='<p>The description matches a practice banned by Art. 5. It cannot be made compliant, so stop it or redesign it, and update the description.</p>';
+rq.forEach(function(q){var a=ans(u,q);h+="<fieldset><legend>"+q[1]+(a==null&&u.ck&&u.ck.v<S.v?'<span class="nw">New</span>':"")+'</legend><p class="sm" style="margin-bottom:6px">'+q[2]+"</p>"+chips([["Yes",1],["Partly",.5],["No",0]].map(function(o){return[o[0],o[1]]}),a,'data-a="an" data-q="'+q[0]+'"')+"</fieldset>"});
+if(rq.length){h+="<strong>Missing for 100%</strong>";h+=g.length?"<ul>"+g.map(function(q){return"<li>"+q[1]+(ans(u,q)==null?" (not answered)":"")+"</li>"}).join("")+"</ul>":"<p class=\"o\">No open gaps.</p>";
+h+='<p><button class="btn" data-a="chk"'+(un.length?" disabled":"")+">Confirm re-check</button> "+(un.length?'<span class="sm">Answer all questions first.</span>':"")+"</p>";
+if(u.ck)h+='<p class="sm">Last checked '+esc(u.ck.d)+" with rules v"+u.ck.v+".</p>"}
+return h+"</div></div>"}
+function render(){var u=S.u.find(function(x){return x.id==V.id});app.innerHTML=V.p=="d"&&u?detail(u):list();window.scrollTo(0,0)}
+function cur(){return S.u.find(function(x){return x.id==V.id})}
+document.body.addEventListener("click",function(e){var b=e.target.closest("[data-a]");if(!b)return;var a=b.dataset.a,u=cur(),v=b.dataset.v;
+if(a=="back"){V={p:"l"};render()}
+else if(a=="new"){var n={id:Date.now().toString(36),name:"New use case",desc:"",role:"",owner:"",a:{},ck:null};S.u.push(n);V={p:"d",id:n.id};save();render()}
+else if(a=="open"){V={p:"d",id:b.dataset.id};render()}
+else if(a=="upd"){S.v=2;save();render()}
+else if(a=="sv"){u.name=document.getElementById("f-n").value||"Untitled";var nd=document.getElementById("f-d").value;if(nd!=u.desc)delete u.purpose;u.desc=nd;u.role=document.getElementById("f-r").value;u.owner=document.getElementById("f-o").value;save();render()}
+else if(a=="del"){if(V.cd==u.id){S.u=S.u.filter(function(x){return x!==u});V={p:"l"};save()}else V.cd=u.id;render()}
+else if(a=="cl"){u[b.dataset.k]=v;save();render()}
+else if(a=="an"){u.a=u.a||{};u.a[b.dataset.q]=parseFloat(v);save();var y=window.scrollY;render();window.scrollTo(0,y)}
+else if(a=="chk"){u.ck={v:S.v,h:hash(u.desc||""),d:new Date().toISOString().slice(0,10)};save();render()}
+else if(a=="imp"){try{var d=JSON.parse(document.getElementById("bk").value);if(!d.u)throw 0;S=d;save();render()}catch(x){document.getElementById("bkm").textContent="That text is not a valid backup."}}
+else if(a=="rst"){S=seed();save();render()}});
+render();
+})();
+</script>
+</body>
+</html>
