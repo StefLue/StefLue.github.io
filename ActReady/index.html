@@ -101,19 +101,6 @@ footer{padding:40px 0 56px;border-top:1px solid var(--line);color:var(--mute);fo
 .wl input,.wl select{font:inherit;font-weight:400;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink)}
 .wl button{border:0;font:inherit;font-weight:700;cursor:pointer;justify-self:start}
 @media (max-width:860px){.flow{grid-template-columns:1fr}.btn2{margin:12px 0 0}}
-:root{--yb:#d7f0e3;--yc:#0b6b45;--nb:#f8dcd6;--nc:#a62f1b;--pb:#fbe9c2;--pc:#7a4a00}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--yb:#12392b;--yc:#4cd39b;--nb:#3f1d17;--nc:#ff8a72;--pb:#3d2d0b;--pc:#f0b24a}}
-:root[data-theme="dark"]{--yb:#12392b;--yc:#4cd39b;--nb:#3f1d17;--nc:#ff8a72;--pb:#3d2d0b;--pc:#f0b24a}
-.cmp{width:100%;min-width:720px;table-layout:fixed;border-collapse:separate;border-spacing:3px;font-size:16px}
-.cmp th{font-size:14px;font-weight:700;padding:8px 4px;text-align:center;vertical-align:bottom}
-.cmp th.l,.cmp td.l{text-align:left;padding:8px 10px 8px 0;font-weight:500;line-height:1.35}
-.cmp th.me{background:var(--accent);color:var(--accent-ink);border-radius:8px}
-.cmp td.c{text-align:center;height:46px;border-radius:8px;font-size:20px;font-weight:700}
-.cmp td.xy{background:var(--yb);color:var(--yc)}.cmp td.xn{background:var(--nb);color:var(--nc)}.cmp td.xp{background:var(--pb);color:var(--pc)}
-.cmp td.xu{border:1px dashed var(--line);color:var(--mute)}
-.cmp td.me{box-shadow:inset 0 0 0 2px var(--accent)}
-.cl{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:16px;font-size:15px;color:var(--mute)}
-.cl i{font-style:normal;display:inline-grid;place-items:center;width:26px;height:26px;border-radius:6px;font-weight:700;margin-right:8px}
 </style>
 </head>
 <body>
@@ -204,13 +191,7 @@ var P=[
 ['No open gaps for this sample use case.','Keine offenen Lücken für diesen Beispielfall.'],['Re-checked just now','Gerade neu geprüft'],['Saving…','Wird gespeichert…'],
 ['Sign-ups need a signed-in claude.ai viewer. Please email [your contact address] to join.','Anmeldungen erfordern einen angemeldeten claude.ai-Nutzer. Bitte schreiben Sie an [Ihre Kontaktadresse].'],
 ['Could not save your sign-up. Please try again or email [your contact address].','Ihre Anmeldung konnte nicht gespeichert werden. Bitte versuchen Sie es erneut oder schreiben Sie an [Ihre Kontaktadresse].'],
-['You’re on the list. We will write to you about early access.','Sie stehen auf der Liste. Wir melden uns zum frühen Zugang.'],
-['ActReady compared with German EU AI Act compliance tools','ActReady im Vergleich mit deutschen Tools für die EU-KI-Verordnung'],
-['Based on public vendor pages. Gray means not found, not necessarily absent.','Auf Basis öffentlicher Anbieterseiten. Grau bedeutet nicht gefunden, nicht zwingend nicht vorhanden.'],
-['Describe a use case in natural language','Anwendungsfall in natürlicher Sprache beschreiben'],['Adaptive follow-up questions','Adaptive Rückfragen'],['Compliance % and gap list','Compliance-Prozentwert und Lückenliste'],['Saved use case portfolio','Gespeichertes Portfolio von Anwendungsfällen'],['Re-check when the law changes','Neuprüfung bei Rechtsänderungen'],['Hosted 100% in Germany','Zu 100 % in Deutschland gehostet'],['Vendor can’t see your data','Anbieter kann Ihre Daten nicht sehen'],['Backed by a law firm','Von einer Kanzlei unterstützt'],['Free entry point or demo','Kostenloser Einstieg oder Demo'],
-['Has it','Vorhanden'],['Doesn’t','Nicht vorhanden'],['Partly or unclear','Teilweise oder unklar'],['Not found','Nicht gefunden'],
-['The ActReady column shows the intended product. Competitor entries are based on public pages and may be incomplete.','Die Spalte ActReady zeigt das geplante Produkt. Die Einträge der Wettbewerber beruhen auf öffentlichen Seiten und können unvollständig sein.'],
-['Comparison with competitors','Vergleich mit Wettbewerbern'],['Feature comparison','Funktionsvergleich']
+['You’re on the list. We will write to you about early access.','Sie stehen auf der Liste. Wir melden uns zum frühen Zugang.']
 ];
 var DE={},EN={};P.forEach(function(p){DE[p[0]]=p[1];EN[p[1]]=p[0]});
 var L='en';try{L=localStorage.getItem('actready-lang')||(/^de/i.test(navigator.language||'')?'de':'en')}catch(e){}
@@ -233,7 +214,7 @@ document.addEventListener('DOMContentLoaded',apply);
 <header><div class="wrap"><a class="brand" href="#top">ActReady</a>
 <div class="rt"><div class="lg" role="group" aria-label="Language"><button type="button" data-l="en" aria-pressed="true">EN</button><button type="button" data-l="de" aria-pressed="false">DE</button></div><button id="burger" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><span></span><span></span><span></span></button></div></div></header>
 <nav id="menu" aria-label="Main">
-<a href="#demo">Try the demo</a><a href="#problem">Why now</a><a href="#how">How it works</a><a href="#portfolio">Your portfolio</a><a href="#alerts">Law updates</a><a href="#security">Privacy</a><a href="#compare">Comparison with competitors</a><a href="#market">Market</a><a href="#trust">Trust and the ask</a><a href="#waitlist">Join the waitlist</a>
+<a href="#demo">Try the demo</a><a href="#problem">Why now</a><a href="#how">How it works</a><a href="#portfolio">Your portfolio</a><a href="#alerts">Law updates</a><a href="#security">Privacy</a><a href="#market">Market</a><a href="#trust">Trust and the ask</a><a href="#waitlist">Join the waitlist</a>
 </nav>
 <main id="top">
 <section class="hero" id="demo"><div class="wrap grid2">
@@ -326,14 +307,6 @@ document.addEventListener('DOMContentLoaded',apply);
 <p class="small" style="margin-top:24px">Because only you hold the key, we cannot recover your data if it is lost. [Key backup and recovery options to be defined.] [Security review and technical details to be confirmed before publication.]</p>
 </div></section>
 
-<section id="compare"><div class="wrap">
-<h2 style="max-width:28ch">ActReady compared with German EU AI Act compliance tools</h2>
-<p class="lead">Based on public vendor pages. Gray means not found, not necessarily absent.</p>
-<div class="scroll"><table class="cmp" id="cmp" aria-label="Feature comparison"></table></div>
-<div class="cl"><span><i style="background:var(--yb);color:var(--yc)" aria-hidden="true">✓</i>Has it</span><span><i style="background:var(--nb);color:var(--nc)" aria-hidden="true">✕</i>Doesn’t</span><span><i style="background:var(--pb);color:var(--pc)" aria-hidden="true">–</i>Partly or unclear</span><span><i style="border:1px dashed var(--line)" aria-hidden="true">?</i>Not found</span></div>
-<p class="small" style="margin-top:16px">The ActReady column shows the intended product. Competitor entries are based on public pages and may be incomplete.</p>
-</div></section>
-
 <section id="market" class="band"><div class="wrap">
 <h2>Market: a bottom-up estimate to validate</h2>
 <div class="fines">
@@ -396,18 +369,6 @@ await db.doc("waitlist/"+id).set({email:d.get("email"),company:d.get("company"),
 f.reset();m.textContent=__t("You’re on the list. We will write to you about early access.");
 }catch(x){m.textContent=__t("Could not save your sign-up. Please try again or email [your contact address].")}
 });
-})();
-</script>
-<script>
-(function(){
-var V=['ActReady','trail','DataGuard','SimpleAct','Kertos','DigitalSauria'];
-var R=[['Describe a use case in natural language','yunnun'],['Adaptive follow-up questions','yuuuun'],['Compliance % and gap list','yuppup'],['Saved use case portfolio','yyuyun'],['Re-check when the law changes','yuuuun'],['Hosted 100% in Germany','yuuypu'],['Vendor can’t see your data','yuuuuy'],['Backed by a law firm','yuuuun'],['Free entry point or demo','yynnuy']];
-var A='<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:block;margin:auto">';
-var S={y:A+'<path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',n:A+'<path d="M4.5 4.5l15 15M19.5 4.5l-15 15"/></svg>',p:A+'<path d="M5 12h14"/></svg>',u:A+'<path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 1-1 1.7"/><circle cx="12" cy="17.5" r="1" fill="currentColor" stroke="none"/></svg>'},T={y:'Has it',n:'Doesn’t',p:'Partly or unclear',u:'Not found'};
-var h='<tr><th class="l"></th>'+V.map(function(v,i){return '<th'+(i?'':' class="me"')+'>'+v+'</th>'}).join('')+'</tr>';
-R.forEach(function(r){h+='<tr><td class="l">'+r[0]+'</td>'+r[1].split('').map(function(c,i){return '<td class="c x'+c+(i?'':' me')+'" role="img" aria-label="'+T[c]+'">'+S[c]+'</td>'}).join('')+'</tr>'});
-document.getElementById('cmp').innerHTML=h;
-document.querySelectorAll('.cl i').forEach(function(e,i){e.innerHTML=S['ynpu'[i]].replace('width="22" height="22"','width="16" height="16"')});
 })();
 </script>
 </body>
