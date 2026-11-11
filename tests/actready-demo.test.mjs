@@ -245,9 +245,21 @@ test("dashboard shows both charts with labelled, colour-plus-icon tiers and esca
   assert.doesNotMatch(els.app.innerHTML, /"><img src=x>/);
 });
 
-test("summary tiles stay visible; only the charts are collapsible, open by default", () => {
+test("summary tiles stay visible; only the charts are collapsible, collapsed at start", () => {
   const out = load().els.app.innerHTML;
-  assert.match(out, /<div class="stats">[\s\S]*<\/div><details class="sx" id="stx" open><summary><h2>Statistics<\/h2><\/summary><div class="dash">/);
+  assert.match(out, /<div class="stats">[\s\S]*<\/div><details class="sx" id="stx"><summary><h2>Statistics<\/h2><\/summary><div class="dash">/);
   assert.doesNotMatch(out.split('<details class="sx"')[1], /class="stats"/);
   assert.match(out, /<\/details><div class="tool">/);
+});
+
+test("use case list is collapsible, open at start, and the add button stays visible", () => {
+  const { els, click } = load();
+  assert.match(els.app.innerHTML, /data-a="tuc" aria-expanded="true"[^>]*>Use cases <span class="sm">\(12\)<\/span>/);
+  assert.match(els.app.innerHTML, /<div class="sc" id="ucl"><div class="tb">/);
+  click("tuc");
+  assert.match(els.app.innerHTML, /aria-expanded="false"/);
+  assert.match(els.app.innerHTML, /<div class="sc" id="ucl" hidden>/);
+  assert.match(els.app.innerHTML, /data-a="new">Add use case \(try your own\)/);
+  click("tuc");
+  assert.match(els.app.innerHTML, /<div class="sc" id="ucl"><div class="tb">/);
 });
