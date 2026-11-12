@@ -4,22 +4,23 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ActReady – EU AI Act compliance for every AI use case</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;700;800&display=swap">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%231f4fd8'/%3E%3Cpath d='M12 54 L32 10 L52 54' fill='none' stroke='%23fff' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M26 43 L31 48 L40 38.5' fill='none' stroke='%23e0a100' stroke-width='4.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <style>
-:root{--bg:#eceff3;--surface:#ffffff;--ink:#0d2238;--mute:#4d5d70;--line:#cdd5df;--accent:#1f4fd8;--accent-ink:#ffffff;--warn:#9a5b00;--bad:#b3341f;--ok:#0b7a4f;--band:#0d2238;
+:root{--bg:#eceff3;--surface:#ffffff;--ink:#0d2238;--mute:#4d5d70;--line:#cdd5df;--accent:#1f4fd8;--accent-ink:#ffffff;--warn:#9a5b00;--bad:#b3341f;--ok:#0b7a4f;--band:#0d2238;--lbg:#1f4fd8;--lfg:#fff;--lr:#1f4fd8;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1624;--surface:#12233a;--ink:#e6edf6;--mute:#9fb0c4;--line:#27405e;--accent:#7a9dff;--accent-ink:#0b1624;--warn:#f0b24a;--bad:#ff8a72;--ok:#4cd39b;--band:#16345f}}
-:root[data-theme="dark"]{--bg:#0b1624;--surface:#12233a;--ink:#e6edf6;--mute:#9fb0c4;--line:#27405e;--accent:#7a9dff;--accent-ink:#0b1624;--warn:#f0b24a;--bad:#ff8a72;--ok:#4cd39b;--band:#16345f}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1624;--surface:#12233a;--ink:#e6edf6;--mute:#9fb0c4;--line:#27405e;--accent:#7a9dff;--accent-ink:#0b1624;--warn:#f0b24a;--bad:#ff8a72;--ok:#4cd39b;--band:#16345f;--lbg:#fff;--lfg:#0d2238;--lr:#9fbaff}}
+:root[data-theme="dark"]{--bg:#0b1624;--surface:#12233a;--ink:#e6edf6;--mute:#9fb0c4;--line:#27405e;--accent:#7a9dff;--accent-ink:#0b1624;--warn:#f0b24a;--bad:#ff8a72;--ok:#4cd39b;--band:#16345f;--lbg:#fff;--lfg:#0d2238;--lr:#9fbaff}
 html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 84px)}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:"Hanken Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:18px;line-height:1.55}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:18px;line-height:1.55}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
 header{position:fixed;top:0;left:0;right:0;z-index:30;background:var(--bg);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
 header .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
-.brand{font-weight:800;font-size:22px;text-decoration:none;letter-spacing:-.01em}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:24px;letter-spacing:-.03em;line-height:1;text-decoration:none}.brand svg{width:36px;height:36px;flex:none}.brand b{color:var(--lr);font-weight:inherit}
+.scorelbl{display:block;font-size:15px;color:var(--mute);margin-top:4px}
 #burger{width:48px;height:48px;border:1px solid var(--line);background:var(--surface);border-radius:12px;cursor:pointer;display:grid;place-items:center;color:var(--ink)}
 #burger span{display:block;width:22px;height:2px;background:currentColor;border-radius:2px;transition:transform .25s,opacity .25s;grid-area:1/1}
 #burger span:nth-child(1){transform:translateY(-7px)}#burger span:nth-child(3){transform:translateY(7px)}
@@ -108,31 +109,31 @@ footer{padding:40px 0 56px;border-top:1px solid var(--line);color:var(--mute);fo
 (function(){
 var P=[
 ['ActReady – EU AI Act compliance for every AI use case','ActReady – EU-KI-Verordnung: Compliance für jeden KI-Anwendungsfall'],
-['Try the demo','Demo ausprobieren'],['Why now','Warum jetzt'],['How it works','Ablauf'],['Your portfolio','Ihr Portfolio'],['Law updates','Rechtsänderungen'],['Privacy','Datenschutz'],['Market','Markt'],['Trust and the ask','Vertrauen und Finanzierung'],['Join the waitlist','Auf die Warteliste'],
+['Try the demo','Demo ausprobieren'],['Why now','Warum jetzt'],['How it works','Ablauf'],['Your portfolio','Ihr Portfolio'],['Law updates','Rechtsänderungen'],['Privacy','Datenschutz'],['Join the waitlist','Auf die Warteliste'],
 ['Know where every AI use case stands under the EU AI Act','Wissen Sie, wo jeder KI-Anwendungsfall unter der EU-KI-Verordnung steht'],
-['Describe a use case in plain words. ActReady asks follow-up questions where the answer is vague, scores your compliance and lists exactly what is missing to reach 100%.','Beschreiben Sie einen Anwendungsfall in einfachen Worten. ActReady stellt Rückfragen, wo die Antwort unklar ist, bewertet Ihre Compliance und zeigt genau, was bis zu 100 % fehlt.'],
-['Your use case descriptions and portfolio are encrypted. Only you can read them, not even us.','Ihre Beschreibungen und Ihr Portfolio sind verschlüsselt. Nur Sie können sie lesen, nicht einmal wir.'],
+['Describe a use case in plain words. ActReady asks follow-up questions where the answer is vague, shows an indicative risk category and a readiness indicator, and lists the open gaps.','Beschreiben Sie einen Anwendungsfall in einfachen Worten. ActReady stellt Rückfragen, wo die Antwort unklar ist, zeigt eine vorläufige Risikokategorie und einen Readiness-Indikator und listet die offenen Lücken auf.'],
+['Planned: end-to-end encryption, so only you can read your use case descriptions and portfolio.','Geplant: Ende-zu-Ende-Verschlüsselung, damit nur Sie Ihre Beschreibungen und Ihr Portfolio lesen können.'],
 ['See how it works','So funktioniert es'],['What the user typed in','Eingabe des Nutzers'],
 ['We use an AI tool that ranks job applicants.','Wir nutzen ein KI-Tool, das Stellenbewerber in eine Rangfolge bringt.'],['Assess','Prüfen'],
-['One sentence is not enough to score a high-risk system, so ActReady asks follow-up questions. Change an answer and watch the score.','Ein Satz reicht nicht, um ein Hochrisiko-System zu bewerten, deshalb stellt ActReady Rückfragen. Ändern Sie eine Antwort und beobachten Sie die Bewertung.'],
-['High-risk · Annex III (employment)','Hochrisiko · Anhang III (Beschäftigung)'],
+['One sentence is not enough for an assessment, so ActReady asks follow-up questions. Change an answer and watch the readiness indicator.','Ein Satz reicht für eine Bewertung nicht aus, deshalb stellt ActReady Rückfragen. Ändern Sie eine Antwort und beobachten Sie den Readiness-Indikator.'],
+['Indicative: high risk · Annex III (employment)','Vorläufig: hohes Risiko · Anhang III (Beschäftigung)'],
 ['Does a person review each ranking before a hiring decision?','Prüft eine Person jede Rangliste, bevor eine Einstellungsentscheidung fällt?'],
 ['Always','Immer'],['Sometimes','Manchmal'],['Never','Nie'],
 ['Are the tool’s purpose, data and accuracy documented?','Sind Zweck, Daten und Genauigkeit des Tools dokumentiert?'],
 ['Fully','Vollständig'],['Partly','Teilweise'],['Not yet','Noch nicht'],
 ['Do you assess and log risks over the tool’s lifetime?','Bewerten und protokollieren Sie die Risiken über die gesamte Lebensdauer des Tools?'],
-['Yes','Ja'],['Informally','Informell'],['No','Nein'],['Missing for 100%','Fehlt bis 100 %'],
-['Illustrative scoring with sample data. The real product asks more questions when a description is incomplete.','Beispielhafte Bewertung mit Beispieldaten. Das echte Produkt stellt mehr Fragen, wenn eine Beschreibung unvollständig ist.'],
+['Yes','Ja'],['Informally','Informell'],['No','Nein'],['Open gaps','Offene Lücken'],
+['Illustrative example with sample data. Advisory only, not a legal determination. The real product asks more questions when a description is incomplete.','Beispielhafte Darstellung mit Beispieldaten. Nur zur Orientierung, keine rechtliche Feststellung. Das echte Produkt stellt mehr Fragen, wenn eine Beschreibung unvollständig ist.'],
 ['The EU AI Act turns every AI use case into a compliance question','Die EU-KI-Verordnung macht jeden KI-Anwendungsfall zu einer Compliance-Frage'],
 ['€35M or 7%','35 Mio. € oder 7 %'],['Maximum fine for prohibited practices, whichever is higher.','Höchstbetrag der Geldbuße für verbotene Praktiken, je nachdem, welcher Wert höher ist.'],
 ['€15M or 3%','15 Mio. € oder 3 %'],['Maximum fine for breaching most other obligations, including high-risk systems.','Höchstbetrag der Geldbuße bei Verstößen gegen die meisten anderen Pflichten, auch bei Hochrisiko-Systemen.'],
 ['Phased obligations, with dates and details still being amended. Last quarter’s status goes stale.','Stufenweise geltende Pflichten, deren Termine und Details noch angepasst werden. Der Stand vom letzten Quartal ist schnell veraltet.'],
-['Source: Regulation (EU) 2024/1689, Art. 99. Verify current timelines before external use.','Quelle: Verordnung (EU) 2024/1689, Art. 99. Aktuelle Fristen vor externer Verwendung prüfen.'],
+['Source: Regulation (EU) 2024/1689, Art. 99.','Quelle: Verordnung (EU) 2024/1689, Art. 99.'],
 ['From a plain description to a compliance roadmap','Von der einfachen Beschreibung zur Compliance-Roadmap'],
 ['Describe','Beschreiben'],['Explain the use case in your own words.','Erklären Sie den Anwendungsfall in Ihren eigenen Worten.'],
 ['Clarify','Klären'],['Targeted follow-up questions appear only where the answer is vague.','Gezielte Rückfragen erscheinen nur dort, wo die Antwort unklar ist.'],
-['Score','Bewerten'],['Risk class plus a compliance percentage per use case.','Risikoklasse plus Compliance-Prozentwert pro Anwendungsfall.'],
-['Close gaps','Lücken schließen'],['A checklist of what is missing to reach 100%.','Eine Checkliste dessen, was bis 100 % fehlt.'],
+['Assess','Bewerten'],['An indicative risk category and a readiness indicator per use case.','Eine vorläufige Risikokategorie und ein Readiness-Indikator pro Anwendungsfall.'],
+['Close gaps','Lücken schließen'],['A checklist of the open gaps.','Eine Checkliste der offenen Lücken.'],
 ['Monitor','Überwachen'],['Re-check the whole portfolio when a new law or amendment passes.','Das gesamte Portfolio erneut prüfen, wenn ein neues Gesetz oder eine Änderung verabschiedet wird.'],
 ['A use case portfolio is the foundation of compliance','Ein Portfolio von Anwendungsfällen ist die Grundlage der Compliance'],
 ['Without a living portfolio, there is no way to know, or prove, where you stand.','Ohne ein lebendiges Portfolio lässt sich nicht wissen, geschweige denn nachweisen, wo Sie stehen.'],
@@ -147,8 +148,8 @@ var P=[
 ['CV screening','CV-Screening'],['Deployer','Betreiber'],['High','Hoch'],['3 gaps open','3 offene Lücken'],
 ['Credit scoring','Kreditscoring'],['Provider','Anbieter'],['6 gaps open','6 offene Lücken'],
 ['Support chatbot','Support-Chatbot'],['Limited','Begrenzt'],['1 gap: disclosure','1 Lücke: Offenlegung'],
-['Demand forecasting','Absatzprognose'],['Minimal','Minimal'],['Compliant','Konform'],
-['Illustrative mock-up with sample data. Each row carries its role, risk class, owner and evidence.','Beispielhafte Darstellung mit Beispieldaten. Jede Zeile enthält Rolle, Risikoklasse, Verantwortliche und Nachweise.'],
+['Demand forecasting','Absatzprognose'],['Minimal','Minimal'],['No open gaps','Keine offenen Lücken'],
+['Illustrative mock-up with sample data. Each row carries its role, indicative risk category, owner and evidence.','Beispielhafte Darstellung mit Beispieldaten. Jede Zeile enthält Rolle, vorläufige Risikokategorie, Verantwortliche und Nachweise.'],
 ['When the law changes, you see what it means for you','Wenn sich das Recht ändert, sehen Sie, was es für Sie bedeutet'],
 ['ActReady watches new bills and amendments, matches them to your portfolio and re-checks only the use cases they affect.','ActReady beobachtet neue Gesetzentwürfe und Änderungen, ordnet sie Ihrem Portfolio zu und prüft nur die betroffenen Anwendungsfälle erneut.'],
 ['Alert','Hinweis'],['Amendment adopted','Änderung verabschiedet'],
@@ -160,38 +161,38 @@ var P=[
 ['1 new gap on CV screening: log retention. It is assigned to the use case owner. Credit scoring gets more time to document.','1 neue Lücke beim CV-Screening: Aufbewahrung von Protokollen. Sie ist der verantwortlichen Person des Anwendungsfalls zugewiesen. Das Kreditscoring erhält mehr Zeit für die Dokumentation.'],
 ['Re-check affected use cases','Betroffene Anwendungsfälle neu prüfen'],
 ['Illustrative mock-up with a sample amendment. Real alerts name the legal act and the provision.','Beispielhafte Darstellung mit einer fiktiven Änderung. Echte Hinweise nennen den Rechtsakt und die Vorschrift.'],
-['Your use cases stay yours, even from us','Ihre Anwendungsfälle bleiben Ihre, auch vor uns'],
-['Use case descriptions often describe your product ideas and strategy. We built ActReady so that this intellectual property is protected by design.','Beschreibungen von Anwendungsfällen enthalten oft Produktideen und Strategie. Wir haben ActReady so gebaut, dass dieses geistige Eigentum von Grund auf geschützt ist.'],
+['Planned: your use cases stay yours, even from us','Geplant: Ihre Anwendungsfälle bleiben Ihre, auch vor uns'],
+['Use case descriptions often describe your product ideas and strategy. We are designing ActReady so that this intellectual property is protected by design.','Beschreibungen von Anwendungsfällen enthalten oft Produktideen und Strategie. Wir entwickeln ActReady so, dass dieses geistige Eigentum von Grund auf geschützt ist.'],
 ['Encrypted, end to end','Ende-zu-Ende-verschlüsselt'],
-['Your use case descriptions and your portfolio are encrypted with a key that only the account owner holds. We store ciphertext only, so our staff, and anyone with access to our systems, cannot read it.','Ihre Beschreibungen und Ihr Portfolio werden mit einem Schlüssel verschlüsselt, den nur der Kontoinhaber besitzt. Wir speichern nur Chiffretext, daher können unsere Mitarbeitenden und jeder mit Zugriff auf unsere Systeme ihn nicht lesen.'],
+['Use case descriptions and the portfolio will be encrypted with a key that only the account owner holds. We will store ciphertext only, so our staff, and anyone with access to our systems, cannot read it.','Beschreibungen und Portfolio werden mit einem Schlüssel verschlüsselt, den nur der Kontoinhaber besitzt. Wir speichern nur Chiffretext, sodass weder unsere Mitarbeitenden noch andere mit Zugriff auf unsere Systeme ihn lesen können.'],
 ['Plain text for the owner only','Klartext nur für den Inhaber'],
-['Only the account owner can reveal the plain text version. Sharing with colleagues or advisors is a deliberate choice you make, never a default.','Nur der Kontoinhaber kann die Klartextversion einsehen. Das Teilen mit Kolleginnen, Kollegen oder Beratern ist eine bewusste Entscheidung, nie eine Voreinstellung.'],
+['Only the account owner will be able to reveal the plain text version. Sharing with colleagues or advisors will be a deliberate choice you make, never a default.','Nur der Kontoinhaber wird die Klartextversion einsehen können. Das Teilen mit Kolleginnen, Kollegen oder Beratern wird eine bewusste Entscheidung sein, nie eine Voreinstellung.'],
 ['A one-way analysis engine','Eine Analyse-Engine als Einbahnstraße'],
-['Our text analysis works in one direction: a description goes in, and only a risk class, a score and a gap list come out. It does not keep, log or return the underlying text, so nothing about your use cases leaks.','Unsere Textanalyse arbeitet nur in eine Richtung: Eine Beschreibung geht hinein, nur Risikoklasse, Bewertung und Lückenliste kommen heraus. Der zugrunde liegende Text wird weder gespeichert noch protokolliert oder zurückgegeben, daher dringt nichts über Ihre Anwendungsfälle nach außen.'],
-['Because only you hold the key, we cannot recover your data if it is lost. [Key backup and recovery options to be defined.] [Security review and technical details to be confirmed before publication.]','Da nur Sie den Schlüssel besitzen, können wir Ihre Daten nicht wiederherstellen, wenn er verloren geht. [Optionen für Schlüsselsicherung und Wiederherstellung noch festzulegen.] [Sicherheitsprüfung und technische Details vor der Veröffentlichung zu bestätigen.]'],
-['Market: a bottom-up estimate to validate','Markt: eine Bottom-up-Schätzung zur Validierung'],
-['~20%','~20 %'],['of EU enterprises with 10+ staff used AI in 2025 (Eurostat, verify figure).','der EU-Unternehmen mit 10+ Beschäftigten nutzten 2025 KI (Eurostat, Zahl prüfen).'],
-['€600M','600 Mio. €'],['Serviceable market: [100,000 target companies] × [€6,000 average yearly contract].','Erreichbarer Markt: [100.000 Zielunternehmen] × [6.000 € durchschnittlicher Jahresvertrag].'],
-['€6M','6 Mio. €'],['Year-3 revenue goal: [1,000 customers] at the same average contract.','Umsatzziel Jahr 3: [1.000 Kunden] bei gleichem durchschnittlichem Vertrag.'],
-['Pricing hypothesis: Starter [€250/mo], Business [€900/mo], Enterprise [custom], with law-firm review add-ons.','Preishypothese: Starter [250 €/Monat], Business [900 €/Monat], Enterprise [individuell], mit Prüfung durch die Kanzlei als Zusatzleistung.'],
-['Bracketed values are assumptions, not researched data. Replace with validated figures.','Werte in Klammern sind Annahmen, keine recherchierten Daten. Durch validierte Zahlen ersetzen.'],
+['The text analysis is designed to work in one direction: a description goes in, and only an indicative risk category, a readiness indicator and a gap list come out. It is designed not to keep, log or return the underlying text.','Die Textanalyse ist darauf ausgelegt, nur in eine Richtung zu arbeiten: Eine Beschreibung geht hinein, nur vorläufige Risikokategorie, Readiness-Indikator und Lückenliste kommen heraus. Der zugrunde liegende Text soll weder gespeichert noch protokolliert oder zurückgegeben werden.'],
+['Technical details will be published after a security review.','Technische Details veröffentlichen wir nach einer Sicherheitsprüfung.'],
+
+
+
+
+
+
 ['Backed by [Law firm name]','Unterstützt von [Name der Kanzlei]'],
 ['Question trees and scoring rules are reviewed by its AI practice. The rule library is updated within [X days] of new bills, with an escalation path to qualified counsel for edge cases.','Fragenbäume und Bewertungsregeln werden von deren KI-Praxis geprüft. Die Regelbibliothek wird innerhalb von [X Tagen] nach neuen Gesetzen aktualisiert, mit Eskalationsweg zu qualifizierten Anwälten für Grenzfälle.'],
-['Raising [€__] seed','Wir suchen [__ €] Seed-Finanzierung'],
-['Product: adaptive assessment engine and portfolio.','Produkt: adaptive Bewertungs-Engine und Portfolio.'],
-['Legal content: rule library and law monitoring.','Rechtliche Inhalte: Regelbibliothek und Rechtsüberwachung.'],
-['Go-to-market: pilots with [10] mid-size companies.','Markteinführung: Pilotprojekte mit [10] mittelständischen Unternehmen.'],
-['Get early access','Früher Zugang'],
-['Join the waitlist and we will contact you when pilots open. Tell us roughly how many AI use cases you run so we can plan your onboarding.','Tragen Sie sich in die Warteliste ein, wir melden uns, wenn die Pilotphase startet. Sagen Sie uns grob, wie viele KI-Anwendungsfälle Sie betreiben, damit wir Ihr Onboarding planen können.'],
-['Work email','Geschäftliche E-Mail'],['Company','Unternehmen'],['AI use cases in your company','KI-Anwendungsfälle in Ihrem Unternehmen'],['More than 20','Mehr als 20'],['Not sure yet','Noch unklar'],
-['We use your details only to contact you about early access.','Wir verwenden Ihre Angaben nur, um Sie zum frühen Zugang zu kontaktieren.'],
-['ActReady is a working name. Figures in brackets are placeholders. Not legal advice.','ActReady ist ein Arbeitstitel. Werte in Klammern sind Platzhalter. Keine Rechtsberatung.'],
-['Open menu','Menü öffnen'],['Close menu','Menü schließen'],['Main','Hauptmenü'],['Language','Sprache'],['Interactive sample assessment','Interaktive Beispielbewertung'],['Sample use case portfolio','Beispiel-Portfolio'],
+
+
+
+
+['Get early access','Früher Zugang'],['See an assessment with synthetic data: stated facts, open questions, an indicative risk category and a readiness indicator.','Sehen Sie eine Bewertung mit synthetischen Daten: genannte Fakten, offene Fragen, eine vorläufige Risikokategorie und einen Readiness-Indikator.'],['Open the demo','Demo öffnen'],
+['Pilots open soon. Until then, try the demo with synthetic data to see how an assessment works.','Die Pilotphase startet bald. Bis dahin können Sie die Demo mit synthetischen Daten ausprobieren und sehen, wie eine Bewertung funktioniert.'],
+['Company','Unternehmen'],['AI use cases in your company','KI-Anwendungsfälle in Ihrem Unternehmen'],['More than 20','Mehr als 20'],['Not sure yet','Noch unklar'],
+
+['ActReady is a working name. Figures in brackets are placeholders. Results are advisory, not a legal determination. Not legal advice.','ActReady ist ein Arbeitstitel. Werte in Klammern sind Platzhalter. Ergebnisse dienen der Orientierung und sind keine rechtliche Feststellung. Keine Rechtsberatung.'],
+['Early access','Früher Zugang'],['Legal review','Rechtliche Prüfung'],['v1 readiness indicator','Readiness-Indikator v1'],['Indicative risk','Vorläufiges Risiko'],['Indicator','Indikator'],['Open menu','Menü öffnen'],['Close menu','Menü schließen'],['Main','Hauptmenü'],['Language','Sprache'],['Interactive sample assessment','Interaktive Beispielbewertung'],['Sample use case portfolio','Beispiel-Portfolio'],
 ['Human oversight measures (Art. 14)','Maßnahmen zur menschlichen Aufsicht (Art. 14)'],['Technical documentation (Annex IV)','Technische Dokumentation (Anhang IV)'],['Risk management system (Art. 9)','Risikomanagementsystem (Art. 9)'],
-['No open gaps for this sample use case.','Keine offenen Lücken für diesen Beispielfall.'],['Re-checked just now','Gerade neu geprüft'],['Saving…','Wird gespeichert…'],
-['Sign-ups need a signed-in claude.ai viewer. Please email [your contact address] to join.','Anmeldungen erfordern einen angemeldeten claude.ai-Nutzer. Bitte schreiben Sie an [Ihre Kontaktadresse].'],
-['Could not save your sign-up. Please try again or email [your contact address].','Ihre Anmeldung konnte nicht gespeichert werden. Bitte versuchen Sie es erneut oder schreiben Sie an [Ihre Kontaktadresse].'],
-['You’re on the list. We will write to you about early access.','Sie stehen auf der Liste. Wir melden uns zum frühen Zugang.']
+['No open gaps for this sample use case.','Keine offenen Lücken für diesen Beispielfall.'],['Re-checked just now','Gerade neu geprüft'],
+
+
+
 ];
 var DE={},EN={};P.forEach(function(p){DE[p[0]]=p[1];EN[p[1]]=p[0]});
 var L='en';try{L=localStorage.getItem('actready-lang')||(/^de/i.test(navigator.language||'')?'de':'en')}catch(e){}
@@ -211,33 +212,33 @@ document.addEventListener('click',function(e){var x=e.target.closest('[data-l]')
 document.addEventListener('DOMContentLoaded',apply);
 })();
 </script>
-<header><div class="wrap"><a class="brand" href="#top">ActReady</a>
+<header><div class="wrap"><a class="brand" href="#top" aria-label="ActReady"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="var(--lbg)"/><path d="M12 54 L32 10 L52 54" fill="none" stroke="var(--lfg)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path d="M26 43 L31 48 L40 38.5" fill="none" stroke="#e0a100" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Act<b>Ready</b></span></a>
 <div class="rt"><div class="lg" role="group" aria-label="Language"><button type="button" data-l="en" aria-pressed="true">EN</button><button type="button" data-l="de" aria-pressed="false">DE</button></div><button id="burger" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><span></span><span></span><span></span></button></div></div></header>
 <nav id="menu" aria-label="Main">
-<a href="#demo">Try the demo</a><a href="#problem">Why now</a><a href="#how">How it works</a><a href="#portfolio">Your portfolio</a><a href="#alerts">Law updates</a><a href="#security">Privacy</a><a href="#market">Market</a><a href="#trust">Trust and the ask</a><a href="#waitlist">Join the waitlist</a>
+<a href="/ActReadyDemo/">Try the demo</a><a href="#problem">Why now</a><a href="#how">How it works</a><a href="#portfolio">Your portfolio</a><a href="#alerts">Law updates</a><a href="#security">Privacy</a><a href="#trust">Legal review</a><a href="#waitlist">Early access</a>
 </nav>
 <main id="top">
 <section class="hero" id="demo"><div class="wrap grid2">
 <div>
 <h1>Know where every AI use case stands under the EU AI Act</h1>
-<p class="lead">Describe a use case in plain words. ActReady asks follow-up questions where the answer is vague, scores your compliance and lists exactly what is missing to reach 100%.</p>
-<p class="small" style="margin-bottom:24px"><b>Your use case descriptions and portfolio are encrypted. Only you can read them, not even us.</b></p>
-<a class="btn" href="#how">See how it works</a><a class="btn btn2" href="#waitlist">Join the waitlist</a>
+<p class="lead">Describe a use case in plain words. ActReady asks follow-up questions where the answer is vague, shows an indicative risk category and a readiness indicator, and lists the open gaps.</p>
+<p class="small" style="margin-bottom:24px"><b>Planned: end-to-end encryption, so only you can read your use case descriptions and portfolio.</b></p>
+<a class="btn" href="/ActReadyDemo/">Try the demo</a><a class="btn btn2" href="#how">See how it works</a>
 </div>
 <div class="panel" aria-label="Interactive sample assessment">
 <span class="tbl">What the user typed in</span>
 <div class="tb"><span>We use an AI tool that ranks job applicants.</span><i>Assess</i></div>
-<p class="why"><b aria-hidden="true">↓</b><span>One sentence is not enough to score a high-risk system, so ActReady asks follow-up questions. Change an answer and watch the score.</span></p>
+<p class="why"><b aria-hidden="true">↓</b><span>One sentence is not enough for an assessment, so ActReady asks follow-up questions. Change an answer and watch the readiness indicator.</span></p>
 <div class="ring">
 <svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="54" stroke="var(--line)"/><circle id="arc" cx="60" cy="60" r="54"/></svg>
-<div><div class="score" id="score" aria-live="polite">70%</div><span class="tag">High-risk · Annex III (employment)</span></div>
+<div><div class="score" id="score" aria-live="polite">70%</div><span class="scorelbl">v1 readiness indicator</span><span class="tag">Indicative: high risk · Annex III (employment)</span></div>
 </div>
 <fieldset data-gap="Human oversight measures (Art. 14)"><legend>Does a person review each ranking before a hiring decision?</legend><div class="opts"><button aria-pressed="false" data-v="20">Always</button><button aria-pressed="true" data-v="10">Sometimes</button><button aria-pressed="false" data-v="0">Never</button></div></fieldset>
 <fieldset data-gap="Technical documentation (Annex IV)"><legend>Are the tool’s purpose, data and accuracy documented?</legend><div class="opts"><button aria-pressed="false" data-v="20">Fully</button><button aria-pressed="true" data-v="10">Partly</button><button aria-pressed="false" data-v="0">Not yet</button></div></fieldset>
 <fieldset data-gap="Risk management system (Art. 9)"><legend>Do you assess and log risks over the tool’s lifetime?</legend><div class="opts"><button aria-pressed="false" data-v="20">Yes</button><button aria-pressed="true" data-v="10">Informally</button><button aria-pressed="false" data-v="0">No</button></div></fieldset>
-<strong>Missing for 100%</strong>
+<strong>Open gaps</strong>
 <ul id="gaps"></ul>
-<p class="small" style="margin:14px 0 0">Illustrative scoring with sample data. The real product asks more questions when a description is incomplete.</p>
+<p class="small" style="margin:14px 0 0">Illustrative example with sample data. Advisory only, not a legal determination. The real product asks more questions when a description is incomplete.</p>
 </div></div></section>
 
 <section id="problem"><div class="wrap">
@@ -247,7 +248,7 @@ document.addEventListener('DOMContentLoaded',apply);
 <div><b style="color:var(--bad)">€15M or 3%</b>Maximum fine for breaching most other obligations, including high-risk systems.</div>
 <div><b style="color:var(--accent)">2025–27</b>Phased obligations, with dates and details still being amended. Last quarter’s status goes stale.</div>
 </div>
-<p class="small" style="margin-top:20px">Source: Regulation (EU) 2024/1689, Art. 99. Verify current timelines before external use.</p>
+<p class="small" style="margin-top:20px">Source: Regulation (EU) 2024/1689, Art. 99.</p>
 </div></section>
 
 <section id="how" style="background:var(--surface);border-block:1px solid var(--line)"><div class="wrap">
@@ -255,8 +256,8 @@ document.addEventListener('DOMContentLoaded',apply);
 <ol class="steps">
 <li><b>Describe</b>Explain the use case in your own words.</li>
 <li><b>Clarify</b>Targeted follow-up questions appear only where the answer is vague.</li>
-<li><b>Score</b>Risk class plus a compliance percentage per use case.</li>
-<li><b>Close gaps</b>A checklist of what is missing to reach 100%.</li>
+<li><b>Assess</b>An indicative risk category and a readiness indicator per use case.</li>
+<li><b>Close gaps</b>A checklist of the open gaps.</li>
 <li><b>Monitor</b>Re-check the whole portfolio when a new law or amendment passes.</li>
 </ol></div></section>
 
@@ -270,13 +271,13 @@ document.addEventListener('DOMContentLoaded',apply);
 </div>
 <div class="scroll"><div class="reg" role="table" aria-label="Sample use case portfolio">
 <div class="al"><span>Regulatory update: an amendment affects 2 use cases</span><span>Re-check now</span></div>
-<div class="h"><span>Use case</span><span>Role</span><span>Risk</span><span>Score</span><span>Status</span></div>
+<div class="h"><span>Use case</span><span>Role</span><span>Indicative risk</span><span>Indicator</span><span>Status</span></div>
 <div><b>CV screening</b><span>Deployer</span><span>High</span><b class="w">72%</b><span>3 gaps open</span></div>
 <div><b>Credit scoring</b><span>Provider</span><span>High</span><b class="b">58%</b><span>6 gaps open</span></div>
 <div><b>Support chatbot</b><span>Deployer</span><span>Limited</span><b class="w">91%</b><span>1 gap: disclosure</span></div>
-<div><b>Demand forecasting</b><span>Deployer</span><span>Minimal</span><b class="o">100%</b><span>Compliant</span></div>
+<div><b>Demand forecasting</b><span>Deployer</span><span>Minimal</span><b class="o">100%</b><span>No open gaps</span></div>
 </div></div>
-<p class="small" style="margin-top:12px">Illustrative mock-up with sample data. Each row carries its role, risk class, owner and evidence.</p>
+<p class="small" style="margin-top:12px">Illustrative mock-up with sample data. Each row carries its role, indicative risk category, owner and evidence.</p>
 </div></section>
 
 <section id="alerts" style="background:var(--surface);border-block:1px solid var(--line)"><div class="wrap">
@@ -297,48 +298,29 @@ document.addEventListener('DOMContentLoaded',apply);
 </div></section>
 
 <section id="security"><div class="wrap">
-<h2>Your use cases stay yours, even from us</h2>
-<p class="lead">Use case descriptions often describe your product ideas and strategy. We built ActReady so that this intellectual property is protected by design.</p>
+<h2>Planned: your use cases stay yours, even from us</h2>
+<p class="lead">Use case descriptions often describe your product ideas and strategy. We are designing ActReady so that this intellectual property is protected by design.</p>
 <div class="cols">
-<div><h3>Encrypted, end to end</h3><p>Your use case descriptions and your portfolio are encrypted with a key that only the account owner holds. We store ciphertext only, so our staff, and anyone with access to our systems, cannot read it.</p></div>
-<div><h3>Plain text for the owner only</h3><p>Only the account owner can reveal the plain text version. Sharing with colleagues or advisors is a deliberate choice you make, never a default.</p></div>
-<div><h3>A one-way analysis engine</h3><p>Our text analysis works in one direction: a description goes in, and only a risk class, a score and a gap list come out. It does not keep, log or return the underlying text, so nothing about your use cases leaks.</p></div>
+<div><h3>Encrypted, end to end</h3><p>Use case descriptions and the portfolio will be encrypted with a key that only the account owner holds. We will store ciphertext only, so our staff, and anyone with access to our systems, cannot read it.</p></div>
+<div><h3>Plain text for the owner only</h3><p>Only the account owner will be able to reveal the plain text version. Sharing with colleagues or advisors will be a deliberate choice you make, never a default.</p></div>
+<div><h3>A one-way analysis engine</h3><p>The text analysis is designed to work in one direction: a description goes in, and only an indicative risk category, a readiness indicator and a gap list come out. It is designed not to keep, log or return the underlying text.</p></div>
 </div>
-<p class="small" style="margin-top:24px">Because only you hold the key, we cannot recover your data if it is lost. [Key backup and recovery options to be defined.] [Security review and technical details to be confirmed before publication.]</p>
+<p class="small" style="margin-top:24px">Technical details will be published after a security review.</p>
 </div></section>
 
-<section id="market" class="band"><div class="wrap">
-<h2>Market: a bottom-up estimate to validate</h2>
-<div class="fines">
-<div><b>~20%</b>of EU enterprises with 10+ staff used AI in 2025 (Eurostat, verify figure).</div>
-<div><b>€600M</b>Serviceable market: [100,000 target companies] × [€6,000 average yearly contract].</div>
-<div><b>€6M</b>Year-3 revenue goal: [1,000 customers] at the same average contract.</div>
-</div>
-<p style="margin-top:28px">Pricing hypothesis: Starter [€250/mo], Business [€900/mo], Enterprise [custom], with law-firm review add-ons.</p>
-<p class="small">Bracketed values are assumptions, not researched data. Replace with validated figures.</p>
-</div></section>
+
 
 <section id="trust"><div class="wrap grid2">
 <div><h2>Backed by [Law firm name]</h2>
 <p>Question trees and scoring rules are reviewed by its AI practice. The rule library is updated within [X days] of new bills, with an escalation path to qualified counsel for edge cases.</p></div>
-<div class="panel"><h3>Raising [€__] seed</h3>
-<p>Product: adaptive assessment engine and portfolio.</p>
-<p>Legal content: rule library and law monitoring.</p>
-<p>Go-to-market: pilots with [10] mid-size companies.</p>
-<a class="btn" href="#waitlist">Join the waitlist</a></div>
+<div class="panel"><h3>Try the demo</h3><p>See an assessment with synthetic data: stated facts, open questions, an indicative risk category and a readiness indicator.</p><a class="btn" href="/ActReadyDemo/">Open the demo</a></div>
 </div></section>
 <section id="waitlist"><div class="wrap grid2">
-<div><h2>Get early access</h2><p class="lead">Join the waitlist and we will contact you when pilots open. Tell us roughly how many AI use cases you run so we can plan your onboarding.</p></div>
-<div class="panel"><form class="wl" id="wl">
-<label>Work email<input type="email" name="email" required autocomplete="email"></label>
-<label>Company<input type="text" name="company" required autocomplete="organization"></label>
-<label>AI use cases in your company<select name="size"><option>1–5</option><option>6–20</option><option>More than 20</option><option>Not sure yet</option></select></label>
-<button class="btn" type="submit">Join the waitlist</button>
-<p class="small" id="wlmsg" role="status" style="margin:0">We use your details only to contact you about early access.</p>
-</form></div>
+<div><h2>Get early access</h2><p class="lead">Pilots open soon. Until then, try the demo with synthetic data to see how an assessment works.</p></div>
+<div class="panel"><a class="btn" href="/ActReadyDemo/">Try the demo</a></div>
 </div></section>
 </main>
-<footer><div class="wrap">ActReady is a working name. Figures in brackets are placeholders. Not legal advice.</div></footer>
+<footer><div class="wrap">ActReady is a working name. Figures in brackets are placeholders. Results are advisory, not a legal determination. Not legal advice.</div></footer>
 <script>
 (function(){
 var b=document.getElementById("burger"),m=document.getElementById("menu");
@@ -358,17 +340,6 @@ calc();
 (function(){
 var r=document.getElementById("res"),rb=document.getElementById("recheck");
 rb.addEventListener("click",function(){r.classList.add("done");rb.textContent=__t("Re-checked just now");rb.disabled=true});
-var f=document.getElementById("wl"),m=document.getElementById("wlmsg");
-f.addEventListener("submit",async function(e){
-e.preventDefault();m.textContent=__t("Saving…");
-try{
-var db=await claude.use("db"),u=await claude.use("user"),id=u?await u.id():null;
-if(!db||!id){m.textContent=__t("Sign-ups need a signed-in claude.ai viewer. Please email [your contact address] to join.");return}
-var d=new FormData(f);
-await db.doc("waitlist/"+id).set({email:d.get("email"),company:d.get("company"),size:d.get("size"),at:new Date().toISOString()});
-f.reset();m.textContent=__t("You’re on the list. We will write to you about early access.");
-}catch(x){m.textContent=__t("Could not save your sign-up. Please try again or email [your contact address].")}
-});
 })();
 </script>
 </body>
