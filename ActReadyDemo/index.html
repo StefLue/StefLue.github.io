@@ -31,6 +31,7 @@ h2{font-size:22px;margin:0 0 12px;line-height:1.25}
 p{margin:0 0 12px}.sm{font-size:15px;color:var(--mute)}
 button{font:inherit;cursor:pointer;color:inherit}
 .btn{background:var(--ac);color:var(--aci);border:0;border-radius:10px;padding:11px 20px;font-weight:700}
+.btn .plus{display:inline-block;font-size:1.35em;line-height:0;margin-right:8px;vertical-align:-.08em;font-weight:600}
 .btn:disabled{opacity:.45;cursor:not-allowed}
 .b2{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
 .bad{color:var(--bad);border-color:var(--bad)}
@@ -290,7 +291,7 @@ else if(st)h+='<div class="ban info"><span>Sample rule library v2 applied: '+st+
 h+="<h1>Use case portfolio</h1><p class=\"sm\">Sample AI use cases with role, indicative risk category and v1 readiness indicator. General-purpose AI model obligations are not covered. "+ADV+"</p>";
 h+='<div class="stats"><div class="stat"><b>'+(av==null?"–":av+"%")+'</b>Average readiness indicator<small>across '+as.length+" of "+us.length+' use cases</small><div class="meter" aria-hidden="true"><b style="width:'+(av||0)+'%">.</b></div></div><div class="stat"><b>'+us.length+'</b>Use cases<small>'+rv+' unacceptable or high risk</small></div><div class="stat"><b>'+gp+'</b>Open gaps<small>checklist items not fulfilled</small></div><div class="stat"><b>'+st+'</b>Need re-check<small>'+(S.v<2?"rules v1":"after the rules update")+"</small></div></div>";
 if(us.length)h+='<details class="sx" id="stx"'+(STATS?" open":"")+'><summary><h2>Statistics</h2></summary>'+dash(us)+"</details>";
-h+='<div class="tool"><h2 style="margin:0"><button class="tg" data-a="tuc" aria-expanded="'+UCS+'" aria-controls="ucl">Use cases <span class="sm">('+us.length+')</span></button></h2><button class="btn" data-a="new">Add use case (try your own)</button></div><div class="sc" id="ucl"'+(UCS?"":" hidden")+'><div class="tb"><div class="row h">'+sh("name")+sh("role")+sh("risk")+sh("ind")+sh("st")+"</div>";
+h+='<div class="tool"><h2 style="margin:0"><button class="tg" data-a="tuc" aria-expanded="'+UCS+'" aria-controls="ucl">Use cases <span class="sm">('+us.length+')</span></button></h2><button class="btn" data-a="new"><span class="plus" aria-hidden="true">+</span>Add use case (try your own)</button></div><div class="sc" id="ucl"'+(UCS?"":" hidden")+'><div class="tb"><div class="row h">'+sh("name")+sh("role")+sh("risk")+sh("ind")+sh("st")+"</div>";
 sorted(us).forEach(function(u){var c=cls(u),s=sc(u),t=status(u);h+='<button class="row" data-a="open" data-id="'+esc(u.id)+'"><b>'+esc(u.name)+"</b><span>"+esc(role(u)||"–")+"</span>"+pill(c)+(s==null?"<b>–</b>":'<span class="mini"><i aria-hidden="true"><b style="width:'+s+'%"></b></i><b>'+s+"%</b></span>")+'<span class="'+t[1]+'">'+t[0]+"</span></button>"});
 if(!us.length)h+='<p class="sm">No use cases. Use “Reset sample data” in the user menu to restore the samples.</p>';
 return h+"</div></div>"}
