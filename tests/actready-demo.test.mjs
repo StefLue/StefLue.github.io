@@ -269,7 +269,7 @@ test("use case list is collapsible, open at start, and the add button stays visi
   click("tuc");
   assert.match(els.app.innerHTML, /aria-expanded="false"/);
   assert.match(els.app.innerHTML, /<div class="sc" id="ucl" hidden>/);
-  assert.match(els.app.innerHTML, /data-a="new">Add use case \(try your own\)/);
+  assert.match(els.app.innerHTML, /data-a="new"><span class="plus" aria-hidden="true">\+<\/span>Add use case \(try your own\)/);
   click("tuc");
   assert.match(els.app.innerHTML, /<div class="sc" id="ucl"><div class="tb">/);
 });
