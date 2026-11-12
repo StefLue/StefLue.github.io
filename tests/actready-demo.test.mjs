@@ -237,12 +237,22 @@ test("dashboard shows both charts with labelled, colour-plus-icon tiers and esca
   assert.match(out, /Use cases by indicative risk category/);
   assert.match(out, /Readiness indicator by use case/);
   assert.match(out, /aria-label="High risk: 4 use cases\. CV screening, Credit scoring, Exam proctoring, Grid load control"/);
-  assert.match(out, /No indicator: Workplace emotion monitoring \(needs expert review\)/);
+  assert.match(out, /No indicator: <button class="lk" data-a="open" data-id="[^"]+">Workplace emotion monitoring<\/button> \(needs expert review\)/);
   click("new");
   Object.assign(values, { "f-n": '"><img src=x>', "f-d": "Forecasts demand.", "f-r": "", "f-o": "" });
   click("sv");
   click("back");
   assert.doesNotMatch(els.app.innerHTML, /"><img src=x>/);
+});
+
+test("readiness chart bars open their use case", () => {
+  const { els, click } = load();
+  const chart = els.app.innerHTML.split("Readiness indicator by use case")[1];
+  const m = chart.match(/<button class="br go" data-a="open" data-id="([^"]+)"[^>]*aria-label="Open CV screening: 70%/);
+  assert.ok(m, "CV screening bar is a button that opens the use case");
+  assert.equal((chart.match(/class="br go"/g) || []).length, 10, "every scored use case is clickable");
+  click("open", { id: m[1] });
+  assert.match(els.app.innerHTML, /<h1[^>]*>CV screening/);
 });
 
 test("summary tiles stay visible; only the charts are collapsible, open at start", () => {
