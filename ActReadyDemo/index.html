@@ -105,6 +105,16 @@ ul{margin:6px 0 16px;padding-left:22px}
 .dash .t-min,.dash .t-lim,.pill .t-min,.pill .t-lim{color:#0d2238}.dash .t-high,.dash .t-un,.pill .t-high,.pill .t-un{color:#fff}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .dash .t-min,:root:not([data-theme="light"]) .dash .t-lim,:root:not([data-theme="light"]) .pill .t-min,:root:not([data-theme="light"]) .pill .t-lim{color:#fff}:root:not([data-theme="light"]) .dash .t-high,:root:not([data-theme="light"]) .dash .t-un,:root:not([data-theme="light"]) .pill .t-high,:root:not([data-theme="light"]) .pill .t-un{color:#0b1624}}
 :root[data-theme="dark"] .dash .t-min,:root[data-theme="dark"] .dash .t-lim,:root[data-theme="dark"] .pill .t-min,:root[data-theme="dark"] .pill .t-lim{color:#fff}:root[data-theme="dark"] .dash .t-high,:root[data-theme="dark"] .dash .t-un,:root[data-theme="dark"] .pill .t-high,:root[data-theme="dark"] .pill .t-un{color:#0b1624}
+.fw{position:relative;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.fbtn{padding:9px 16px}.fbtn.on{border-color:var(--ac);color:var(--ac)}.fbtn .n{display:inline-block;background:var(--ac);color:var(--aci);border-radius:99px;padding:0 8px;margin-left:6px;font-size:13px;line-height:1.6}
+.fm{position:absolute;right:0;top:calc(100% + 8px);z-index:5;background:var(--sf);border:1px solid var(--line);border-radius:12px;padding:10px;min-width:290px;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+.fm p{margin:2px 8px 6px;font-weight:700;font-size:14px;color:var(--mute)}
+.fm button{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:none;border:0;border-radius:8px;padding:8px;font-size:15px}.fm button:hover{background:var(--bg)}
+.fm .cb{width:18px;height:18px;flex:none;border:1.5px solid var(--mute);border-radius:4px;display:inline-grid;place-items:center;font-size:12px;font-weight:800;line-height:1}.fm [aria-pressed="true"] .cb{background:var(--ac);border-color:var(--ac);color:var(--aci)}
+.fm .c{margin-left:auto;color:var(--mute);font-variant-numeric:tabular-nums}.fm .fx{border-top:1px solid var(--line);border-radius:0 0 8px 8px;margin-top:6px;padding-top:10px;color:var(--ac);font-weight:700}
+.fbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;background:var(--sf);background:color-mix(in oklab,var(--ac) 9%,var(--sf));border:1.5px solid var(--ac);border-left-width:6px;border-radius:12px;padding:10px 16px;margin-bottom:12px;font-size:15px}
+.fchip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--ac);background:var(--sf);border-radius:99px;padding:3px 6px 3px 4px;font-size:14px}.fchip:hover{background:var(--bg)}.fchip .x{font-size:13px;opacity:.75}
+.fbar .fclr{margin-left:auto;padding:6px 14px;font-size:15px}
 .rl{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:13px;color:var(--mute)}.rl i{width:120px;height:8px;border-radius:4px;background:var(--rlo);background:linear-gradient(in oklab to right,var(--rlo),var(--rhi))}
 </style>
 </head>
@@ -283,6 +293,15 @@ var STATS=true,UCS=true,SORT={k:null,d:1};
 var SK={name:["Use case",function(u){return u.name.toLowerCase()},"A to Z"],role:["Role",function(u){return(role(u)||"~").toLowerCase()},"A to Z"],risk:["Indicative risk category",function(u){return TIERS.indexOf(tier(cls(u)))},"most severe first"],ind:["Indicator",function(u){var s=sc(u);return s==null?1:-s/100},"highest first"],st:["Status",function(u){var t=status(u)[0],o=["Needs expert review","Needs details","Not yet checked","Needs re-check"].indexOf(t);return o>=0?o:/open$/.test(t)?5-gaps(u).length/100:6},"most urgent first"]};
 function sorted(us){if(!SORT.k)return us;var f=SK[SORT.k][1];return us.map(function(u,i){return[f(u),i,u]}).sort(function(a,b){return a[0]<b[0]?-SORT.d:a[0]>b[0]?SORT.d:a[1]-b[1]}).map(function(x){return x[2]})}
 function sh(k){var on=SORT.k==k,lab=SK[k][0];return'<span><button class="sh'+(on?" on":"")+'" data-a="sort" data-k="'+k+'" aria-label="Sort by '+lab.toLowerCase()+(on?", currently "+(SORT.d>0?SK[k][2]:"reversed"):"")+'">'+lab+'<i aria-hidden="true">'+(on?(SORT.d>0?"▼":"▲"):"⇅")+"</i></button></span>"}
+/* Filter by indicative risk category: FILT holds the selected tier keys (TIERS[i][3]); FM is the open state of the filter menu. */
+var FILT=[],FM=false;
+function fkey(u){return tier(cls(u))[3]}
+function filtered(us){return FILT.length?us.filter(function(u){return FILT.indexOf(fkey(u))>=0}):us}
+function fmenu(us){var h='<div class="fm" role="group" aria-label="Filter use cases by indicative risk category"><p>Indicative risk category</p>';
+TIERS.forEach(function(t){var n=us.filter(function(u){return fkey(u)==t[3]}).length,on=FILT.indexOf(t[3])>=0;if(!t[0]&&!n&&!on)return;
+h+='<button data-a="ft" data-k="'+t[3]+'" aria-pressed="'+on+'"><span class="cb" aria-hidden="true">'+(on?"✓":"")+'</span><span class="pill">'+ic(t)+"<span>"+t[1]+'</span></span><span class="c">'+n+"</span></button>"});
+return h+(FILT.length?'<button class="fx" data-a="fc">Clear filter</button>':"")+"</div>"}
+function fbar(n,tot){return'<div class="fbar" role="status"><strong>Filtered view</strong><span>Showing '+n+" of "+tot+" use cases:</span>"+TIERS.filter(function(t){return FILT.indexOf(t[3])>=0}).map(function(t){return'<button class="fchip" data-a="ft" data-k="'+t[3]+'" aria-label="Remove filter: '+t[1]+'"><span class="pill">'+ic(t)+"<span>"+t[1]+'</span></span><span class="x" aria-hidden="true">✕</span></button>'}).join("")+'<button class="btn b2 fclr" data-a="fc">Clear filter</button></div>'}
 document.addEventListener("toggle",function(e){if(e.target&&e.target.id=="stx")STATS=e.target.open},true);
 function list(){var us=S.u,as=us.filter(function(u){return sc(u)!=null}),av=as.length?Math.round(as.reduce(function(a,u){return a+sc(u)},0)/as.length):null,
 gp=us.reduce(function(a,u){return a+gaps(u).length},0),st=us.filter(stale).length,rv=us.filter(function(u){var c=cls(u);return c=="prohibited"||c=="high"}).length,h=note();
@@ -291,8 +310,10 @@ else if(st)h+='<div class="ban info"><span>Sample rule library v2 applied: '+st+
 h+="<h1>Use case portfolio</h1><p class=\"sm\">Sample AI use cases with role, indicative risk category and v1 readiness indicator. General-purpose AI model obligations are not covered. "+ADV+"</p>";
 h+='<div class="stats"><div class="stat"><b>'+(av==null?"–":av+"%")+'</b>Average readiness indicator<small>across '+as.length+" of "+us.length+' use cases</small><div class="meter" aria-hidden="true"><b style="width:'+(av||0)+'%">.</b></div></div><div class="stat"><b>'+us.length+'</b>Use cases<small>'+rv+' unacceptable or high risk</small></div><div class="stat"><b>'+gp+'</b>Open gaps<small>checklist items not fulfilled</small></div><div class="stat"><b>'+st+'</b>Need re-check<small>'+(S.v<2?"rules v1":"after the rules update")+"</small></div></div>";
 if(us.length)h+='<details class="sx" id="stx"'+(STATS?" open":"")+'><summary><h2>Statistics</h2></summary>'+dash(us)+"</details>";
-h+='<div class="tool"><h2 style="margin:0"><button class="tg" data-a="tuc" aria-expanded="'+UCS+'" aria-controls="ucl">Use cases <span class="sm">('+us.length+')</span></button></h2><button class="btn" data-a="new"><span class="plus" aria-hidden="true">+</span>Add use case (try your own)</button></div><div class="sc" id="ucl"'+(UCS?"":" hidden")+'><div class="tb"><div class="row h">'+sh("name")+sh("role")+sh("risk")+sh("ind")+sh("st")+"</div>";
-sorted(us).forEach(function(u){var c=cls(u),s=sc(u),t=status(u);h+='<button class="row" data-a="open" data-id="'+esc(u.id)+'"><b>'+esc(u.name)+"</b><span>"+esc(role(u)||"–")+"</span>"+pill(c)+(s==null?"<b>–</b>":'<span class="mini"><i aria-hidden="true"><b style="width:'+s+'%"></b></i><b>'+s+"%</b></span>")+'<span class="'+t[1]+'">'+t[0]+"</span></button>"});
+var fu=filtered(us),fo=FILT.length>0;
+h+='<div class="tool"><h2 style="margin:0"><button class="tg" data-a="tuc" aria-expanded="'+UCS+'" aria-controls="ucl">Use cases <span class="sm">('+(fo?fu.length+" of "+us.length:us.length)+')</span></button></h2><div class="fw"><button class="btn b2 fbtn'+(fo?" on":"")+'" data-a="fm" aria-haspopup="true" aria-expanded="'+FM+'"'+(fo?' aria-label="Filter, '+FILT.length+' active"':"")+'>Filter'+(fo?'<span class="n" aria-hidden="true">'+FILT.length+"</span>":"")+' ▾</button>'+(FM?fmenu(us):"")+'<button class="btn" data-a="new"><span class="plus" aria-hidden="true">+</span>Add use case (try your own)</button></div></div>'+(fo?fbar(fu.length,us.length):"")+'<div class="sc" id="ucl"'+(UCS?"":" hidden")+'><div class="tb"><div class="row h">'+sh("name")+sh("role")+sh("risk")+sh("ind")+sh("st")+"</div>";
+if(fo&&!fu.length)h+='<p class="sm">No use cases match this filter. <button class="lk" data-a="fc">Clear filter</button></p>';
+sorted(fu).forEach(function(u){var c=cls(u),s=sc(u),t=status(u);h+='<button class="row" data-a="open" data-id="'+esc(u.id)+'"><b>'+esc(u.name)+"</b><span>"+esc(role(u)||"–")+"</span>"+pill(c)+(s==null?"<b>–</b>":'<span class="mini"><i aria-hidden="true"><b style="width:'+s+'%"></b></i><b>'+s+"%</b></span>")+'<span class="'+t[1]+'">'+t[0]+"</span></button>"});
 if(!us.length)h+='<p class="sm">No use cases. Use “Reset sample data” in the user menu to restore the samples.</p>';
 return h+"</div></div>"}
 function tipAt(e){var el=e.target.closest&&e.target.closest("[data-tip]"),tp=document.getElementById("tip");if(!tp||!tp.style)return;
@@ -322,12 +343,18 @@ if(u.ck)h+='<p class="sm">Last checked '+esc(u.ck.d)+" with sample rules v"+u.ck
 return h+"</div></div>"}
 function render(){var u=S.u.find(function(x){return x.id==V.id});head();app.innerHTML=V.p=="o"?loggedOut():V.p=="d"&&u?detail(u):list();window.scrollTo(0,0)}
 function cur(){return S.u.find(function(x){return x.id==V.id})}
-document.addEventListener("keydown",function(e){if(e.key=="Escape"&&V.m){V.m=false;head()}});
+/* Re-renders the list in place, keeping the scroll position and, where possible, focus on the control that was used. */
+function relist(sel){var y=window.scrollY;render();window.scrollTo(0,y);var el=sel&&document.querySelector&&document.querySelector(sel);if(el&&el.focus)el.focus()}
+document.addEventListener("keydown",function(e){if(e.key=="Escape"){if(V.m){V.m=false;head()}if(FM){FM=false;relist('[data-a="fm"]')}}});
 document.body.addEventListener("click",function(e){var b=e.target.closest("[data-a]");
-if(!b){if(V.m){V.m=false;head()}return}
+if(!b){if(V.m){V.m=false;head()}if(FM&&!(e.target.closest&&e.target.closest(".fm"))){FM=false;relist()}return}
 var a=b.dataset.a,u=cur(),v=b.dataset.v;
 if(a=="menu"){V.m=!V.m;head();return}
 V.m=false;
+if(a=="fm"){FM=!FM;relist('[data-a="fm"]');return}
+if(a=="ft"){var fk=b.dataset.k,fi=FILT.indexOf(fk);if(fi>=0)FILT.splice(fi,1);else FILT.push(fk);var inMenu=b.closest&&b.closest(".fm");if(!inMenu)FM=false;relist(inMenu?'.fm [data-k="'+fk+'"]':FILT.length?".fchip":'[data-a="fm"]');return}
+if(a=="fc"){FILT=[];FM=false;relist('[data-a="fm"]');return}
+FM=false;
 if(a=="back"){V={p:V.p=="o"?"o":"l"};render()}
 else if(a=="new"){var n={id:Date.now().toString(36),name:"New use case",desc:"",role:"",owner:"",a:{},ck:null,own:true};S.u.push(n);V={p:"d",id:n.id};render()}
 else if(a=="open"){V={p:"d",id:b.dataset.id};var tp=document.getElementById("tip");if(tp)tp.hidden=true;render();window.scrollTo(0,0)}
@@ -340,8 +367,8 @@ else if(a=="chk"){u.ck={v:S.v,h:hash(u.desc||""),d:new Date().toISOString().slic
 else if(a=="ex"){var x=EX[+b.dataset.i];u.name=x[0];u.desc=x[1];delete u.purpose;u.role="";u.a={};u.ck=null;u.own=true;render()}
 else if(a=="sort"){var k=b.dataset.k;SORT=SORT.k!=k?{k:k,d:1}:SORT.d>0?{k:k,d:-1}:{k:null,d:1};var y3=window.scrollY;render();window.scrollTo(0,y3)}
 else if(a=="tuc"){UCS=!UCS;var y2=window.scrollY;render();window.scrollTo(0,y2)}
-else if(a=="rst"){S=seed();V={p:"l"};render()}
-else if(a=="out"){S=seed();V={p:"o"};render()}
+else if(a=="rst"){S=seed();FILT=[];V={p:"l"};render()}
+else if(a=="out"){S=seed();FILT=[];V={p:"o"};render()}
 else if(a=="in"){V={p:"l"};render()}});
 render();
 })();
