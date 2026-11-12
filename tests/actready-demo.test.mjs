@@ -263,3 +263,13 @@ test("use case list is collapsible, open at start, and the add button stays visi
   click("tuc");
   assert.match(els.app.innerHTML, /<div class="sc" id="ucl"><div class="tb">/);
 });
+
+test("statistics charts use muted colours while the use case list keeps its colours", () => {
+  assert.match(html, /\.dash\{--bar:#4d5d70;--t-min:#86b6ef;--t-lim:#5598e7;--t-high:#256abf;--t-un:#0d366b\}/);
+  const out = load().els.app.innerHTML;
+  const charts = out.split('<div class="dash">')[1].split("</details>")[0];
+  assert.match(charts, /background:var\(--bar\)/);
+  assert.doesNotMatch(charts, /background:var\(--ac\)/);
+  assert.match(out.split('id="ucl"')[1], /<span class="mini">/);
+  assert.match(html, /\.mini i b\{[^}]*background:var\(--ac\)/);
+});
