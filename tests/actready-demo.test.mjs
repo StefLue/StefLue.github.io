@@ -301,18 +301,18 @@ test("use case list filters by indicative risk category, shows the filtered view
   assert.doesNotMatch(els.app.innerHTML, /class="fbar"|class="fm"/, "unfiltered at start, menu closed");
   click("fm");
   const menu = els.app.innerHTML.split('<div class="fm"')[1].split("</div>")[0];
-  assert.match(menu, /data-a="ft" data-k="high" aria-pressed="false"[\s\S]*High risk<\/span><\/span><span class="c">4</);
+  assert.match(menu, /data-a="ft" data-g="risk" data-k="high" aria-pressed="false"[\s\S]*High risk<\/span><\/span><span class="c">4</);
   assert.doesNotMatch(menu, /Not yet classified/, "empty unclassified tier is hidden");
-  click("ft", { k: "high" });
+  click("ft", { g: "risk", k: "high" });
   assert.deepEqual([...new Set(tiers())], ["High risk"]);
   assert.match(els.app.innerHTML, /Use cases <span class="sm">\(4 of 12\)<\/span>/);
   assert.match(els.app.innerHTML, /<div class="fbar" role="status"><strong>Filtered view<\/strong><span>Showing 4 of 12 use cases:<\/span>/);
   assert.match(els.app.innerHTML, /class="btn b2 fbtn on"[^>]*aria-label="Filter, 1 active"/);
-  click("ft", { k: "un" });
+  click("ft", { g: "risk", k: "un" });
   assert.deepEqual([...new Set(tiers())].sort(), ["High risk", "Unacceptable risk"]);
   assert.match(els.app.innerHTML, /Showing 6 of 12/);
   assert.match(els.app.innerHTML, /<div class="dash">[\s\S]*Workplace emotion monitoring[\s\S]*Support chatbot/, "statistics still cover the whole portfolio");
-  click("ft", { k: "un" });
+  click("ft", { g: "risk", k: "un" });
   assert.match(els.app.innerHTML, /Showing 4 of 12/, "a chip removes its category");
   click("fc");
   assert.equal(tiers().length, 12);
@@ -322,8 +322,32 @@ test("use case list filters by indicative risk category, shows the filtered view
 
 test("filter matching no use case says so and offers to clear", () => {
   const { els, click } = load();
-  click("ft", { k: "none" });
+  click("ft", { g: "risk", k: "none" });
   assert.match(els.app.innerHTML, /Showing 0 of 12[\s\S]*No use cases match this filter\. <button class="lk" data-a="fc">Clear filter/);
+});
+
+test("status filter combines with the risk filter: any option within a group, all groups together", () => {
+  const { els, click } = load();
+  const statuses = () => [...els.app.innerHTML.split('id="ucl"')[1].matchAll(/<button class="row"[\s\S]*?<span class="[wbo]">([^<]+)<\/span><\/button>/g)].map((m) => m[1]);
+  click("fm");
+  const menu = els.app.innerHTML.split('<div class="fm"')[1];
+  assert.match(menu, /<p>Indicative risk category<\/p>[\s\S]*<p>Status<\/p>/);
+  assert.match(menu, /data-g="st" data-k="rev"[\s\S]*Needs expert review<\/span><span class="c">2</);
+  assert.doesNotMatch(menu, /data-k="rck"/, "statuses no use case has are hidden");
+  click("ft", { g: "st", k: "ok" });
+  assert.ok(statuses().length > 0 && statuses().every((s) => s == "No open gaps (sample rules)"));
+  click("ft", { g: "st", k: "gap" });
+  assert.ok(statuses().every((s) => s == "No open gaps (sample rules)" || /gaps? open$/.test(s)));
+  const both = statuses().length;
+  click("ft", { g: "risk", k: "high" });
+  assert.ok(statuses().length < both, "risk and status filters narrow together");
+  assert.match(els.app.innerHTML, /aria-label="Filter, 3 active"/);
+  assert.match(els.app.innerHTML, /aria-label="Remove filter: Status, No open gaps"/);
+  click("upd");
+  click("ft", { g: "st", k: "rck" });
+  assert.match(els.app.innerHTML, /Needs re-check/);
+  click("fc");
+  assert.equal(statuses().length, 12);
 });
 
 test("use case list sorts by indicative risk category, then reverses, then resets", () => {
