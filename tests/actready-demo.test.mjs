@@ -293,3 +293,24 @@ test("use case list tier badges use the same muted tier colours as the statistic
   assert.match(html, /:root\[data-theme="dark"\] \.dash,:root\[data-theme="dark"\] \.pill\{/);
   assert.match(load().els.app.innerHTML.split('id="ucl"')[1], /<span class="pill"><i class="ic t-high"/);
 });
+
+test("use case list sorts by indicative risk category, then reverses, then resets", () => {
+  const { els, click } = load();
+  const names = () => [...els.app.innerHTML.split('id="ucl"')[1].matchAll(/<button class="row"[^>]*><b>([^<]+)<\/b>/g)].map((m) => m[1]);
+  const tiers = () => [...els.app.innerHTML.split('id="ucl"')[1].matchAll(/<button class="row"[\s\S]*?(Unacceptable risk|High risk|Limited risk|Minimal risk|Not yet classified)/g)].map((m) => m[1]);
+  const start = names();
+  assert.match(els.app.innerHTML, /data-a="sort" data-k="risk" aria-label="Sort by indicative risk category"/);
+  click("sort", { k: "risk" });
+  const order = ["Unacceptable risk", "High risk", "Limited risk", "Minimal risk", "Not yet classified"];
+  const t = tiers().map((x) => order.indexOf(x));
+  assert.deepEqual(t, [...t].sort((a, b) => a - b), "most severe first");
+  assert.match(els.app.innerHTML, /aria-label="Sort by indicative risk category, currently most severe first"/);
+  click("sort", { k: "risk" });
+  const r = tiers().map((x) => order.indexOf(x));
+  assert.deepEqual(r, [...r].sort((a, b) => b - a), "reversed");
+  click("sort", { k: "risk" });
+  assert.deepEqual(names(), start, "third click restores the original order");
+  click("sort", { k: "ind" });
+  const pct = [...els.app.innerHTML.split('id="ucl"')[1].matchAll(/<b>(\d+)%<\/b>/g)].map((m) => +m[1]);
+  assert.deepEqual(pct, [...pct].sort((a, b) => b - a), "indicator highest first");
+});
