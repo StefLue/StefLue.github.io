@@ -245,9 +245,41 @@ test("dashboard shows both charts with labelled, colour-plus-icon tiers and esca
   assert.doesNotMatch(els.app.innerHTML, /"><img src=x>/);
 });
 
-test("summary tiles stay visible; only the charts are collapsible, open by default", () => {
+test("summary tiles stay visible; only the charts are collapsible, open at start", () => {
   const out = load().els.app.innerHTML;
   assert.match(out, /<div class="stats">[\s\S]*<\/div><details class="sx" id="stx" open><summary><h2>Statistics<\/h2><\/summary><div class="dash">/);
   assert.doesNotMatch(out.split('<details class="sx"')[1], /class="stats"/);
   assert.match(out, /<\/details><div class="tool">/);
+});
+
+test("use case list is collapsible, open at start, and the add button stays visible", () => {
+  const { els, click } = load();
+  assert.match(els.app.innerHTML, /data-a="tuc" aria-expanded="true"[^>]*>Use cases <span class="sm">\(12\)<\/span>/);
+  assert.match(els.app.innerHTML, /<div class="sc" id="ucl"><div class="tb">/);
+  click("tuc");
+  assert.match(els.app.innerHTML, /aria-expanded="false"/);
+  assert.match(els.app.innerHTML, /<div class="sc" id="ucl" hidden>/);
+  assert.match(els.app.innerHTML, /data-a="new">Add use case \(try your own\)/);
+  click("tuc");
+  assert.match(els.app.innerHTML, /<div class="sc" id="ucl"><div class="tb">/);
+});
+
+test("statistics charts use muted colours; the use case list keeps its own colours apart from tier badges", () => {
+  assert.match(html, /\.dash,\.pill\{--rlo:#26384f;--rhi:#2a78d6;--bar:#4d5d70;--t-min:#86b6ef;--t-lim:#5598e7;--t-high:#256abf;--t-un:#0d366b\}/);
+  const out = load().els.app.innerHTML;
+  const charts = out.split('<div class="dash">')[1].split("</details>")[0];
+  // Readiness bars: the higher the value, the bluer; the lower, the darker.
+  assert.match(charts, /background:color-mix\(in oklab,var\(--rhi\) 100%,var\(--rlo\)\)/);
+  assert.match(charts, /background:color-mix\(in oklab,var\(--rhi\) 50%,var\(--rlo\)\)/);
+  assert.match(charts, /class="rl"/, "gradient legend");
+  assert.doesNotMatch(charts, /background:var\(--ac\)/);
+  assert.match(out.split('id="ucl"')[1], /<span class="mini">/);
+  assert.match(html, /\.mini i b\{[^}]*background:var\(--ac\)/);
+});
+
+test("use case list tier badges use the same muted tier colours as the statistics view", () => {
+  assert.match(html, /(^|\n)\.dash,\.pill\{[^}]*--t-high:#256abf/);
+  assert.match(html, /:root:not\(\[data-theme="light"\]\) \.dash,:root:not\(\[data-theme="light"\]\) \.pill\{/);
+  assert.match(html, /:root\[data-theme="dark"\] \.dash,:root\[data-theme="dark"\] \.pill\{/);
+  assert.match(load().els.app.innerHTML.split('id="ucl"')[1], /<span class="pill"><i class="ic t-high"/);
 });
