@@ -275,7 +275,7 @@ sd.forEach(function(u){var v=sc(u),t=tier(cls(u)),g=gaps(u).length;h+=bar(ic(t)+
 if(!sd.length)h+='<p class="sm">No use case has an indicator yet.</p>';
 h+='</div><div class="rl" aria-hidden="true"><span>Lower</span><i></i><span>Higher</span></div>';if(ns.length)h+='<p class="sm" style="margin:14px 0 0">No indicator: '+ns.map(function(u){return esc(u.name)+" ("+status(u)[0].toLowerCase()+")"}).join(", ")+".</p>";
 return h+"</div></div>"}
-var STATS=false,UCS=true;
+var STATS=true,UCS=true;
 document.addEventListener("toggle",function(e){if(e.target&&e.target.id=="stx")STATS=e.target.open},true);
 function list(){var us=S.u,as=us.filter(function(u){return sc(u)!=null}),av=as.length?Math.round(as.reduce(function(a,u){return a+sc(u)},0)/as.length):null,
 gp=us.reduce(function(a,u){return a+gaps(u).length},0),st=us.filter(stale).length,rv=us.filter(function(u){var c=cls(u);return c=="prohibited"||c=="high"}).length,h=note();
