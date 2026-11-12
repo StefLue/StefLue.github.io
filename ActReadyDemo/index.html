@@ -95,12 +95,13 @@ h3{font-size:18px;margin:0 0 10px}
 ul{margin:6px 0 16px;padding-left:22px}
 @media (max-width:860px){.stats{grid-template-columns:1fr 1fr}.g2{grid-template-columns:1fr}}
 /* Statistics use muted colours: one blue ramp for tiers (darker = more severe, validated as ordinal) and neutral readiness bars */
-.dash{--bar:#4d5d70;--t-min:#86b6ef;--t-lim:#5598e7;--t-high:#256abf;--t-un:#0d366b}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .dash{--bar:#9fb0c4;--t-min:#1c5cab;--t-lim:#3987e5;--t-high:#6da7ec;--t-un:#b7d3f6}}
-:root[data-theme="dark"] .dash{--bar:#9fb0c4;--t-min:#1c5cab;--t-lim:#3987e5;--t-high:#6da7ec;--t-un:#b7d3f6}
+.dash{--rlo:#26384f;--rhi:#2a78d6;--bar:#4d5d70;--t-min:#86b6ef;--t-lim:#5598e7;--t-high:#256abf;--t-un:#0d366b}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .dash{--rlo:#435a7b;--rhi:#7aa5ff;--bar:#9fb0c4;--t-min:#1c5cab;--t-lim:#3987e5;--t-high:#6da7ec;--t-un:#b7d3f6}}
+:root[data-theme="dark"] .dash{--rlo:#435a7b;--rhi:#7aa5ff;--bar:#9fb0c4;--t-min:#1c5cab;--t-lim:#3987e5;--t-high:#6da7ec;--t-un:#b7d3f6}
 .dash .t-min,.dash .t-lim{color:#0d2238}.dash .t-high,.dash .t-un{color:#fff}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .dash .t-min,:root:not([data-theme="light"]) .dash .t-lim{color:#fff}:root:not([data-theme="light"]) .dash .t-high,:root:not([data-theme="light"]) .dash .t-un{color:#0b1624}}
 :root[data-theme="dark"] .dash .t-min,:root[data-theme="dark"] .dash .t-lim{color:#fff}:root[data-theme="dark"] .dash .t-high,:root[data-theme="dark"] .dash .t-un{color:#0b1624}
+.rl{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:13px;color:var(--mute)}.rl i{width:120px;height:8px;border-radius:4px;background:var(--rlo);background:linear-gradient(in oklab to right,var(--rlo),var(--rhi))}
 </style>
 </head>
 <body>
@@ -270,9 +271,9 @@ by=TIERS.map(function(t){return us.filter(function(u){return cls(u)==t[0]})}),mx
 TIERS.forEach(function(t,i){var n=by[i].length;if(!n&&!t[0])return;h+=bar(ic(t)+"<span>"+t[1]+"</span>",100*n/mx,"var(--t-"+t[3]+")",n,t[1]+": "+n+" use case"+(n==1?"":"s")+(n?"\n"+by[i].map(function(u){return u.name}).join(", "):""))});
 var sd=us.filter(function(u){return sc(u)!=null}).sort(function(a,b){return sc(b)-sc(a)}),ns=us.filter(function(u){return sc(u)==null});
 h+='</div><ul class="tiers">'+[[TIERS[0],"matches a pattern linked to a practice banned by Art. 5"],[TIERS[1],"mentions an area listed in Annex III or a product under Annex I"],[TIERS[2],"interacts with people or generates content (Art. 50)"],[TIERS[3],"no specific area matched; general duties such as AI literacy apply"]].map(function(x){return"<li>"+ic(x[0])+"<span><b>"+x[0][1]+":</b> "+x[1]+".</span></li>"}).join("")+'</ul></div><div class="card"><h2>Readiness indicator by use case</h2><p class="sm">v1 readiness indicator, highest first. Advisory, not a legal determination.</p><div class="bars">';
-sd.forEach(function(u){var v=sc(u),t=tier(cls(u)),g=gaps(u).length;h+=bar(ic(t)+"<span>"+esc(u.name)+"</span>",v,"var(--bar)",v+"%",u.name+": "+v+"%\n"+t[1]+" · "+(g?g+" open gap"+(g>1?"s":""):"no open gaps"))});
+sd.forEach(function(u){var v=sc(u),t=tier(cls(u)),g=gaps(u).length;h+=bar(ic(t)+"<span>"+esc(u.name)+"</span>",v,"var(--rlo);background:color-mix(in oklab,var(--rhi) "+v+"%,var(--rlo))",v+"%",u.name+": "+v+"%\n"+t[1]+" · "+(g?g+" open gap"+(g>1?"s":""):"no open gaps"))});
 if(!sd.length)h+='<p class="sm">No use case has an indicator yet.</p>';
-h+="</div>";if(ns.length)h+='<p class="sm" style="margin:14px 0 0">No indicator: '+ns.map(function(u){return esc(u.name)+" ("+status(u)[0].toLowerCase()+")"}).join(", ")+".</p>";
+h+='</div><div class="rl" aria-hidden="true"><span>Lower</span><i></i><span>Higher</span></div>';if(ns.length)h+='<p class="sm" style="margin:14px 0 0">No indicator: '+ns.map(function(u){return esc(u.name)+" ("+status(u)[0].toLowerCase()+")"}).join(", ")+".</p>";
 return h+"</div></div>"}
 var STATS=false,UCS=true;
 document.addEventListener("toggle",function(e){if(e.target&&e.target.id=="stx")STATS=e.target.open},true);
