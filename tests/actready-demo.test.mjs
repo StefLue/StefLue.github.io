@@ -294,6 +294,38 @@ test("use case list tier badges use the same muted tier colours as the statistic
   assert.match(load().els.app.innerHTML.split('id="ucl"')[1], /<span class="pill"><i class="ic t-high"/);
 });
 
+test("use case list filters by indicative risk category, shows the filtered view, and clears", () => {
+  const { els, click } = load();
+  const list = () => els.app.innerHTML.split('id="ucl"')[1];
+  const tiers = () => [...list().matchAll(/<button class="row"[\s\S]*?(Unacceptable risk|High risk|Limited risk|Minimal risk|Not yet classified)/g)].map((m) => m[1]);
+  assert.doesNotMatch(els.app.innerHTML, /class="fbar"|class="fm"/, "unfiltered at start, menu closed");
+  click("fm");
+  const menu = els.app.innerHTML.split('<div class="fm"')[1].split("</div>")[0];
+  assert.match(menu, /data-a="ft" data-k="high" aria-pressed="false"[\s\S]*High risk<\/span><\/span><span class="c">4</);
+  assert.doesNotMatch(menu, /Not yet classified/, "empty unclassified tier is hidden");
+  click("ft", { k: "high" });
+  assert.deepEqual([...new Set(tiers())], ["High risk"]);
+  assert.match(els.app.innerHTML, /Use cases <span class="sm">\(4 of 12\)<\/span>/);
+  assert.match(els.app.innerHTML, /<div class="fbar" role="status"><strong>Filtered view<\/strong><span>Showing 4 of 12 use cases:<\/span>/);
+  assert.match(els.app.innerHTML, /class="btn b2 fbtn on"[^>]*aria-label="Filter, 1 active"/);
+  click("ft", { k: "un" });
+  assert.deepEqual([...new Set(tiers())].sort(), ["High risk", "Unacceptable risk"]);
+  assert.match(els.app.innerHTML, /Showing 6 of 12/);
+  assert.match(els.app.innerHTML, /<div class="dash">[\s\S]*Workplace emotion monitoring[\s\S]*Support chatbot/, "statistics still cover the whole portfolio");
+  click("ft", { k: "un" });
+  assert.match(els.app.innerHTML, /Showing 4 of 12/, "a chip removes its category");
+  click("fc");
+  assert.equal(tiers().length, 12);
+  assert.doesNotMatch(els.app.innerHTML, /class="fbar"/);
+  assert.match(els.app.innerHTML, /Use cases <span class="sm">\(12\)<\/span>/);
+});
+
+test("filter matching no use case says so and offers to clear", () => {
+  const { els, click } = load();
+  click("ft", { k: "none" });
+  assert.match(els.app.innerHTML, /Showing 0 of 12[\s\S]*No use cases match this filter\. <button class="lk" data-a="fc">Clear filter/);
+});
+
 test("use case list sorts by indicative risk category, then reverses, then resets", () => {
   const { els, click } = load();
   const names = () => [...els.app.innerHTML.split('id="ucl"')[1].matchAll(/<button class="row"[^>]*><b>([^<]+)<\/b>/g)].map((m) => m[1]);
