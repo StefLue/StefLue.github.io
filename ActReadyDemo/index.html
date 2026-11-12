@@ -77,6 +77,8 @@ h3{font-size:18px;margin:0 0 10px}
 .bars{display:grid;gap:8px}
 .br{display:grid;grid-template-columns:minmax(120px,190px) 1fr 44px;gap:10px;align-items:center;font-size:15px;border-radius:8px;padding:2px 4px;margin:0 -4px}
 .br:hover,.br:focus-visible{background:var(--bg)}
+.br.go{width:calc(100% + 8px);background:none;border:0;font:inherit;font-size:15px;color:inherit;text-align:left;cursor:pointer}.br.go:hover,.br.go:focus-visible{background:var(--bg)}.br.go:hover .lb span{text-decoration:underline}
+.lk{background:none;border:0;padding:0;font:inherit;color:inherit;text-decoration:underline;cursor:pointer}
 .br .lb{display:flex;align-items:center;gap:8px;min-width:0}.br .lb span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .br .tr{height:14px;border-left:1px solid var(--mute)}
 .br .fl{height:100%;border-radius:0 4px 4px 0;min-width:2px}
@@ -265,15 +267,15 @@ var TIERS=[["prohibited","Unacceptable risk","✕","un"],["high","High risk","!"
 function tier(c){return TIERS.filter(function(t){return t[0]==c})[0]||TIERS[4]}
 function ic(t){return'<i class="ic t-'+t[3]+'" aria-hidden="true">'+t[2]+"</i>"}
 function pill(c){var t=tier(c);return'<span class="pill">'+ic(t)+"<span>"+t[1]+"</span></span>"}
-function bar(lb,pct,color,val,tip){return'<div class="br" role="img" tabindex="0" data-tip="'+esc(tip)+'" aria-label="'+esc(tip.replace(/\n/g,". "))+'"><span class="lb">'+lb+'</span><span class="tr"><span class="fl" style="display:block;width:'+pct+'%;background:'+color+'"></span></span><span class="v">'+val+"</span></div>"}
+function bar(lb,pct,color,val,tip,id){var al=esc(tip.replace(/\n/g,". ")),o=id?'<button class="br go" data-a="open" data-id="'+esc(id)+'" data-tip="'+esc(tip+"\nClick to open")+'" aria-label="Open '+al+'">':'<div class="br" role="img" tabindex="0" data-tip="'+esc(tip)+'" aria-label="'+al+'">';return o+'<span class="lb">'+lb+'</span><span class="tr"><span class="fl" style="display:block;width:'+pct+'%;background:'+color+'"></span></span><span class="v">'+val+"</span>"+(id?"</button>":"</div>")}
 function dash(us){var h='<div class="dash"><div class="card"><h2>Use cases by indicative risk category</h2><p class="sm">Count per EU AI Act tier, from simplified sample rules.</p><div class="bars">',
 by=TIERS.map(function(t){return us.filter(function(u){return cls(u)==t[0]})}),mx=Math.max.apply(null,by.map(function(a){return a.length}).concat([1]));
 TIERS.forEach(function(t,i){var n=by[i].length;if(!n&&!t[0])return;h+=bar(ic(t)+"<span>"+t[1]+"</span>",100*n/mx,"var(--t-"+t[3]+")",n,t[1]+": "+n+" use case"+(n==1?"":"s")+(n?"\n"+by[i].map(function(u){return u.name}).join(", "):""))});
 var sd=us.filter(function(u){return sc(u)!=null}).sort(function(a,b){return sc(b)-sc(a)}),ns=us.filter(function(u){return sc(u)==null});
 h+='</div><ul class="tiers">'+[[TIERS[0],"matches a pattern linked to a practice banned by Art. 5"],[TIERS[1],"mentions an area listed in Annex III or a product under Annex I"],[TIERS[2],"interacts with people or generates content (Art. 50)"],[TIERS[3],"no specific area matched; general duties such as AI literacy apply"]].map(function(x){return"<li>"+ic(x[0])+"<span><b>"+x[0][1]+":</b> "+x[1]+".</span></li>"}).join("")+'</ul></div><div class="card"><h2>Readiness indicator by use case</h2><p class="sm">v1 readiness indicator, highest first. Advisory, not a legal determination.</p><div class="bars">';
-sd.forEach(function(u){var v=sc(u),t=tier(cls(u)),g=gaps(u).length;h+=bar(ic(t)+"<span>"+esc(u.name)+"</span>",v,"var(--rlo);background:color-mix(in oklab,var(--rhi) "+v+"%,var(--rlo))",v+"%",u.name+": "+v+"%\n"+t[1]+" · "+(g?g+" open gap"+(g>1?"s":""):"no open gaps"))});
+sd.forEach(function(u){var v=sc(u),t=tier(cls(u)),g=gaps(u).length;h+=bar(ic(t)+"<span>"+esc(u.name)+"</span>",v,"var(--rlo);background:color-mix(in oklab,var(--rhi) "+v+"%,var(--rlo))",v+"%",u.name+": "+v+"%\n"+t[1]+" · "+(g?g+" open gap"+(g>1?"s":""):"no open gaps"),u.id)});
 if(!sd.length)h+='<p class="sm">No use case has an indicator yet.</p>';
-h+='</div><div class="rl" aria-hidden="true"><span>Lower</span><i></i><span>Higher</span></div>';if(ns.length)h+='<p class="sm" style="margin:14px 0 0">No indicator: '+ns.map(function(u){return esc(u.name)+" ("+status(u)[0].toLowerCase()+")"}).join(", ")+".</p>";
+h+='</div><div class="rl" aria-hidden="true"><span>Lower</span><i></i><span>Higher</span></div>';if(ns.length)h+='<p class="sm" style="margin:14px 0 0">No indicator: '+ns.map(function(u){return'<button class="lk" data-a="open" data-id="'+esc(u.id)+'">'+esc(u.name)+"</button> ("+status(u)[0].toLowerCase()+")"}).join(", ")+".</p>";
 return h+"</div></div>"}
 var STATS=true,UCS=true;
 document.addEventListener("toggle",function(e){if(e.target&&e.target.id=="stx")STATS=e.target.open},true);
@@ -323,7 +325,7 @@ if(a=="menu"){V.m=!V.m;head();return}
 V.m=false;
 if(a=="back"){V={p:V.p=="o"?"o":"l"};render()}
 else if(a=="new"){var n={id:Date.now().toString(36),name:"New use case",desc:"",role:"",owner:"",a:{},ck:null,own:true};S.u.push(n);V={p:"d",id:n.id};render()}
-else if(a=="open"){V={p:"d",id:b.dataset.id};render()}
+else if(a=="open"){V={p:"d",id:b.dataset.id};var tp=document.getElementById("tip");if(tp)tp.hidden=true;render();window.scrollTo(0,0)}
 else if(a=="upd"){S.v=2;render()}
 else if(a=="sv"){u.name=document.getElementById("f-n").value||"Untitled";var nd=document.getElementById("f-d").value;if(nd!=u.desc){delete u.purpose;u.own=true}u.desc=nd;u.role=document.getElementById("f-r").value;u.owner=document.getElementById("f-o").value;render()}
 else if(a=="del"){if(V.cd==u.id){S.u=S.u.filter(function(x){return x!==u});V={p:"l"}}else V.cd=u.id;render()}
