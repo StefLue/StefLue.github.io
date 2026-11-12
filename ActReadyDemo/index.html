@@ -95,12 +95,12 @@ h3{font-size:18px;margin:0 0 10px}
 ul{margin:6px 0 16px;padding-left:22px}
 @media (max-width:860px){.stats{grid-template-columns:1fr 1fr}.g2{grid-template-columns:1fr}}
 /* Statistics use muted colours: one blue ramp for tiers (darker = more severe, validated as ordinal) and neutral readiness bars */
-.dash{--rlo:#26384f;--rhi:#2a78d6;--bar:#4d5d70;--t-min:#86b6ef;--t-lim:#5598e7;--t-high:#256abf;--t-un:#0d366b}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .dash{--rlo:#435a7b;--rhi:#7aa5ff;--bar:#9fb0c4;--t-min:#1c5cab;--t-lim:#3987e5;--t-high:#6da7ec;--t-un:#b7d3f6}}
-:root[data-theme="dark"] .dash{--rlo:#435a7b;--rhi:#7aa5ff;--bar:#9fb0c4;--t-min:#1c5cab;--t-lim:#3987e5;--t-high:#6da7ec;--t-un:#b7d3f6}
-.dash .t-min,.dash .t-lim{color:#0d2238}.dash .t-high,.dash .t-un{color:#fff}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .dash .t-min,:root:not([data-theme="light"]) .dash .t-lim{color:#fff}:root:not([data-theme="light"]) .dash .t-high,:root:not([data-theme="light"]) .dash .t-un{color:#0b1624}}
-:root[data-theme="dark"] .dash .t-min,:root[data-theme="dark"] .dash .t-lim{color:#fff}:root[data-theme="dark"] .dash .t-high,:root[data-theme="dark"] .dash .t-un{color:#0b1624}
+.dash,.pill{--rlo:#26384f;--rhi:#2a78d6;--bar:#4d5d70;--t-min:#86b6ef;--t-lim:#5598e7;--t-high:#256abf;--t-un:#0d366b}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .dash,:root:not([data-theme="light"]) .pill{--rlo:#435a7b;--rhi:#7aa5ff;--bar:#9fb0c4;--t-min:#1c5cab;--t-lim:#3987e5;--t-high:#6da7ec;--t-un:#b7d3f6}}
+:root[data-theme="dark"] .dash,:root[data-theme="dark"] .pill{--rlo:#435a7b;--rhi:#7aa5ff;--bar:#9fb0c4;--t-min:#1c5cab;--t-lim:#3987e5;--t-high:#6da7ec;--t-un:#b7d3f6}
+.dash .t-min,.dash .t-lim,.pill .t-min,.pill .t-lim{color:#0d2238}.dash .t-high,.dash .t-un,.pill .t-high,.pill .t-un{color:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .dash .t-min,:root:not([data-theme="light"]) .dash .t-lim,:root:not([data-theme="light"]) .pill .t-min,:root:not([data-theme="light"]) .pill .t-lim{color:#fff}:root:not([data-theme="light"]) .dash .t-high,:root:not([data-theme="light"]) .dash .t-un,:root:not([data-theme="light"]) .pill .t-high,:root:not([data-theme="light"]) .pill .t-un{color:#0b1624}}
+:root[data-theme="dark"] .dash .t-min,:root[data-theme="dark"] .dash .t-lim,:root[data-theme="dark"] .pill .t-min,:root[data-theme="dark"] .pill .t-lim{color:#fff}:root[data-theme="dark"] .dash .t-high,:root[data-theme="dark"] .dash .t-un,:root[data-theme="dark"] .pill .t-high,:root[data-theme="dark"] .pill .t-un{color:#0b1624}
 .rl{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:13px;color:var(--mute)}.rl i{width:120px;height:8px;border-radius:4px;background:var(--rlo);background:linear-gradient(in oklab to right,var(--rlo),var(--rhi))}
 </style>
 </head>

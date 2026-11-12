@@ -264,8 +264,8 @@ test("use case list is collapsible, open at start, and the add button stays visi
   assert.match(els.app.innerHTML, /<div class="sc" id="ucl"><div class="tb">/);
 });
 
-test("statistics charts use muted colours while the use case list keeps its colours", () => {
-  assert.match(html, /\.dash\{--rlo:#26384f;--rhi:#2a78d6;--bar:#4d5d70;--t-min:#86b6ef;--t-lim:#5598e7;--t-high:#256abf;--t-un:#0d366b\}/);
+test("statistics charts use muted colours; the use case list keeps its own colours apart from tier badges", () => {
+  assert.match(html, /\.dash,\.pill\{--rlo:#26384f;--rhi:#2a78d6;--bar:#4d5d70;--t-min:#86b6ef;--t-lim:#5598e7;--t-high:#256abf;--t-un:#0d366b\}/);
   const out = load().els.app.innerHTML;
   const charts = out.split('<div class="dash">')[1].split("</details>")[0];
   // Readiness bars: the higher the value, the bluer; the lower, the darker.
@@ -275,4 +275,11 @@ test("statistics charts use muted colours while the use case list keeps its colo
   assert.doesNotMatch(charts, /background:var\(--ac\)/);
   assert.match(out.split('id="ucl"')[1], /<span class="mini">/);
   assert.match(html, /\.mini i b\{[^}]*background:var\(--ac\)/);
+});
+
+test("use case list tier badges use the same muted tier colours as the statistics view", () => {
+  assert.match(html, /(^|\n)\.dash,\.pill\{[^}]*--t-high:#256abf/);
+  assert.match(html, /:root:not\(\[data-theme="light"\]\) \.dash,:root:not\(\[data-theme="light"\]\) \.pill\{/);
+  assert.match(html, /:root\[data-theme="dark"\] \.dash,:root\[data-theme="dark"\] \.pill\{/);
+  assert.match(load().els.app.innerHTML.split('id="ucl"')[1], /<span class="pill"><i class="ic t-high"/);
 });
