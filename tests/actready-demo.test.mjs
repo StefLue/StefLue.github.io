@@ -501,3 +501,138 @@ test("confirming a re-check keeps the scroll position", () => {
   assert.equal(win.scrollY, 800);
   assert.match(els.app.innerHTML, new RegExp(`Last checked ${new Date().toISOString().slice(0, 10)} with sample rules v1`));
 });
+
+// System registry (concept preview): systems linked many-to-many to use cases.
+const sysRows = (html) => [...(html.split('id="syl"')[1] || "").matchAll(/<button class="row sy" data-a="osys" data-id="([^"]+)"><b>([^<]+)<\/b>([\s\S]*?)<\/button>/g)].map((m) => ({ id: m[1], name: m[2], cells: m[3] }));
+
+test("systems view lists the fictional registry with links, documentation and the most severe category", () => {
+  const { els, click } = load();
+  assert.match(els.app.innerHTML, /data-a="tab" data-v="u" aria-pressed="true">Use cases<\/button><button data-a="tab" data-v="s" aria-pressed="false">Systems<span class="nw">Concept preview<\/span>/);
+  click("tab", { v: "s" });
+  const out = els.app.innerHTML;
+  assert.match(out, /<h1>System registry<\/h1>/);
+  assert.match(out, /Concept preview\.<\/strong>/);
+  assert.match(out, /General-purpose AI model obligations are not covered/);
+  assert.match(out, /not a legal determination/);
+  const rows = sysRows(out);
+  assert.equal(rows.length, 11);
+  const fk = rows.find((r) => r.name == "ForecastKit");
+  assert.match(fk.cells, /<span>Fictional Supply Analytics<\/span><span>Time-series forecasting model · 2\.3<\/span><span>Not involved<\/span><span>1 of 4<\/span><span>3<\/span><span class="pill">[\s\S]*High risk/);
+  assert.match(rows.find((r) => r.name == "Chatwell Platform").cells, /<span>Built on one<\/span><span>1 of 5<\/span><span>2<\/span>/);
+  click("tab", { v: "u" });
+  assert.match(els.app.innerHTML, /<h1>Use case portfolio<\/h1>/);
+});
+
+test("a use case can combine several systems, and each links to the system's page", () => {
+  const { els, click } = load();
+  click("open", { id: "phonebookingassistant" });
+  const panel = els.app.innerHTML.split("Systems behind this use case")[1];
+  assert.match(panel, /data-a="osys" data-id="chatwell">Chatwell Platform<\/button><span class="sm">Fictional Cloud AG · version 2025\.4/);
+  assert.match(panel, /data-id="voicegate">VoiceGate</);
+  click("osys", { id: "chatwell" });
+  assert.match(els.app.innerHTML, /<h1>Chatwell Platform<\/h1>/);
+  assert.match(els.app.innerHTML, /Linked use cases \(2\)/);
+  click("open", { id: "supportchatbot" });
+  assert.match(els.app.innerHTML, /<h1>Support chatbot<\/h1>/);
+  click("back");
+  assert.match(els.app.innerHTML, /<h1>Use case portfolio<\/h1>/, "back from a use case returns to the use case list");
+});
+
+test("a simulated vendor update makes every checked linked use case need a re-check", () => {
+  const { els, click } = load();
+  click("osys", { id: "forecastkit" });
+  click("vup");
+  assert.match(els.app.innerHTML, /Version changed from 2\.3 to 2\.4\. 3 linked use cases need a re-check\./);
+  assert.match(els.app.innerHTML, /id="y-ver" value="2\.4"/);
+  assert.equal((els.app.innerHTML.split("Linked use cases")[1].match(/Needs re-check/g) || []).length, 3);
+  click("back");
+  assert.match(els.app.innerHTML, /<h1>System registry<\/h1>/);
+  click("tab", { v: "u" });
+  const st = (name) => rows(els.app.innerHTML).find((r) => r.name == name).cells;
+  for (const n of ["Grid load control", "Demand forecasting", "Predictive maintenance"]) assert.match(st(n), /Needs re-check/, n);
+  assert.doesNotMatch(st("Spam filter"), /Needs re-check/);
+  click("open", { id: "demandforecasting" });
+  assert.match(els.app.innerHTML, /a linked system changed since the last check/);
+  click("chk");
+  click("back");
+  assert.doesNotMatch(st("Demand forecasting"), /Needs re-check/, "confirming the re-check records the new version");
+});
+
+test("linking a system from a use case marks it for re-check and shows it after the change", () => {
+  const { els, click } = load();
+  click("open", { id: "spamfilter" });
+  assert.match(els.app.innerHTML, /aria-pressed="true" data-a="lk" data-q="mailguard">MailGuard/);
+  assert.match(els.app.innerHTML, /aria-pressed="false" data-a="lk" data-q="forecastkit">ForecastKit/);
+  click("lk", { q: "forecastkit" });
+  assert.match(els.app.innerHTML, /aria-pressed="true" data-a="lk" data-q="forecastkit"/);
+  assert.match(els.app.innerHTML.split("Systems behind this use case")[1], /ForecastKit/);
+  assert.match(els.app.innerHTML, /Needs re-check/);
+  click("lk", { q: "forecastkit" });
+  assert.doesNotMatch(els.app.innerHTML.split("Systems behind this use case")[1], /ForecastKit/);
+  click("lk", { q: "not-a-system" });
+  assert.doesNotMatch(els.app.innerHTML, /not-a-system/);
+});
+
+test("a high-risk deployer use case notes missing instructions for use until they are on file", () => {
+  const { els, click } = load();
+  click("open", { id: "cvscreening" });
+  assert.match(els.app.innerHTML, /Art\. 26\(1\)\) needs those instructions\. None are on file for: HireSort\./);
+  click("osys", { id: "hiresort" });
+  click("ydoc", { q: "ifu", v: "true" });
+  assert.match(els.app.innerHTML, /aria-pressed="true" data-a="ydoc" data-q="ifu" data-v="true">On file/);
+  click("open", { id: "cvscreening" });
+  assert.doesNotMatch(els.app.innerHTML, /None are on file/);
+  // Limited-risk deployer use cases get no such note.
+  click("open", { id: "productimagegenerator" });
+  assert.doesNotMatch(els.app.innerHTML, /None are on file/);
+});
+
+test("general-purpose AI model setting changes the documentation list and notes", () => {
+  const { els, click, values } = load();
+  click("osys", { id: "mailguard" });
+  assert.doesNotMatch(els.app.innerHTML, /Model documentation from the model provider/);
+  Object.assign(values, { "y-n": "MailGuard", "y-vd": "Fictional Secure Mail", "y-m": "Spam classifier", "y-ver": "11.2", "y-g": "provides" });
+  click("ysv");
+  assert.match(els.app.innerHTML, /Model documentation from the model provider \(Art\. 53\(1\)\(b\)\)/);
+  assert.match(els.app.innerHTML, /Chapter V of the EU AI Act\) are not covered by the demo/);
+  values["y-g"] = "built";
+  click("ysv");
+  assert.match(els.app.innerHTML, /does not by itself make you its provider/);
+  assert.doesNotMatch(els.app.innerHTML, /Chapter V/);
+  values["y-g"] = "bogus";
+  click("ysv");
+  assert.match(els.app.innerHTML, /<option value="no" selected>Not involved/);
+});
+
+test("added systems are escaped everywhere, and deleting a system unlinks it", () => {
+  const { els, click, values } = load();
+  click("tab", { v: "s" });
+  click("ynew");
+  Object.assign(values, { "y-n": '"><img src=x>', "y-vd": "<b>v</b>", "y-m": "", "y-ver": "1.0", "y-g": "no" });
+  click("ysv");
+  click("back");
+  assert.equal(sysRows(els.app.innerHTML).length, 12);
+  assert.doesNotMatch(els.app.innerHTML, /<img src=x>|<b>v<\/b>/);
+  assert.match(els.app.innerHTML, /&lt;b&gt;v&lt;\/b&gt;/);
+  const id = sysRows(els.app.innerHTML).at(-1).id;
+  click("open", { id: "spamfilter" });
+  click("lk", { q: id });
+  assert.doesNotMatch(els.app.innerHTML, /<img src=x>/);
+  click("osys", { id });
+  click("ydel");
+  assert.match(els.app.innerHTML, /Click again to delete/);
+  click("ydel");
+  assert.equal(sysRows(els.app.innerHTML).length, 11);
+  click("open", { id: "spamfilter" });
+  assert.doesNotMatch(els.app.innerHTML, new RegExp(`data-q="${id}"`));
+});
+
+test("reset and simulated logout restore the system registry", () => {
+  const { els, click } = load();
+  click("osys", { id: "forecastkit" });
+  click("vup");
+  click("rst");
+  assert.match(els.app.innerHTML, /<h1>Use case portfolio<\/h1>/);
+  click("tab", { v: "s" });
+  assert.match(sysRows(els.app.innerHTML).find((r) => r.name == "ForecastKit").cells, /· 2\.3</);
+});

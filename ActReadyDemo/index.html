@@ -7,80 +7,80 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%231f4fd8'/%3E%3Cpath d='M12 54 L32 10 L52 54' fill='none' stroke='%23fff' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M26 43 L31 48 L40 38.5' fill='none' stroke='%23e0a100' stroke-width='4.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <title>ActReady demo</title>
 <style>
-:root{--bg:#eceff3;--sf:#fff;--ink:#0d2238;--mute:#4d5d70;--line:#cdd5df;--ac:#1f4fd8;--aci:#fff;--warn:#9a5b00;--bad:#b3341f;--ok:#0b7a4f;--amb:#e0a100;--lbg:#1f4fd8;--lfg:#fff;--lr:#1f4fd8;--t-un:#7b3fb0;--t-high:#d03b3b;--t-lim:#e8a200;--t-min:#199e70;--t-none:#8a97a8;
+:root{--bg:#f3f5f8;--sf:#fff;--ink:#101f30;--mute:#5b6b7e;--line:#dde3ea;--ac:#1f4fd8;--aci:#fff;--warn:#9a5b00;--bad:#b3341f;--ok:#0b7a4f;--amb:#e0a100;--lbg:#1f4fd8;--lfg:#fff;--lr:#1f4fd8;--t-un:#7b3fb0;--t-high:#d03b3b;--t-lim:#e8a200;--t-min:#199e70;--t-none:#8a97a8;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1624;--sf:#12233a;--ink:#e6edf6;--mute:#9fb0c4;--line:#27405e;--ac:#7a9dff;--aci:#0b1624;--warn:#f0b24a;--bad:#ff8a72;--ok:#4cd39b;--lbg:#fff;--lfg:#0d2238;--lr:#9fbaff;--t-un:#a66bd6;--t-high:#d93d3d;--t-lim:#c98500;--t-min:#199e70;--t-none:#6b7f99}}
 :root[data-theme="dark"]{--bg:#0b1624;--sf:#12233a;--ink:#e6edf6;--mute:#9fb0c4;--line:#27405e;--ac:#7a9dff;--aci:#0b1624;--warn:#f0b24a;--bad:#ff8a72;--ok:#4cd39b;--lbg:#fff;--lfg:#0d2238;--lr:#9fbaff;--t-un:#a66bd6;--t-high:#d93d3d;--t-lim:#c98500;--t-min:#199e70;--t-none:#6b7f99}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
 :focus-visible{outline:3px solid var(--ac);outline-offset:2px}
 .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
-header{border-bottom:1px solid var(--line);background:var(--sf)}
+header{border-bottom:1px solid var(--line);background:var(--sf);box-shadow:0 1px 2px rgba(16,31,48,.04)}
 header .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:12px}
-.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:24px;letter-spacing:-.03em;line-height:1;background:none;border:0;color:var(--ink);cursor:pointer;font-family:inherit;padding:0}
-.brand svg{width:36px;height:36px;flex:none}.brand b{color:var(--lr);font-weight:inherit}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:20px;letter-spacing:-.03em;line-height:1;background:none;border:0;color:var(--ink);cursor:pointer;font-family:inherit;padding:0}
+.brand svg{width:30px;height:30px;flex:none}.brand b{color:var(--lr);font-weight:inherit}
 .hr{display:flex;align-items:center;gap:12px;position:relative}
-.badge{border:1px solid var(--amb);border-radius:99px;padding:2px 12px;font-size:14px;font-weight:700;white-space:nowrap}
+.badge{border:1px solid var(--amb);border-radius:99px;padding:3px 11px;font-size:12.5px;font-weight:600;color:var(--warn);white-space:nowrap}
 .menu{position:absolute;right:0;top:calc(100% + 8px);z-index:5;background:var(--sf);border:1px solid var(--line);border-radius:12px;padding:12px;min-width:260px;box-shadow:0 8px 24px rgba(0,0,0,.18)}
 .menu p{margin:0 0 8px}
 .menu button{display:block;width:100%;text-align:left;background:none;border:0;border-radius:8px;padding:9px 10px}
 .menu button:hover{background:var(--bg)}
-main{padding:32px 0 64px}
-h1{font-size:clamp(28px,4vw,40px);line-height:1.1;letter-spacing:-.02em;margin:0 0 8px;font-weight:800}
-h2{font-size:22px;margin:0 0 12px;line-height:1.25}
-p{margin:0 0 12px}.sm{font-size:15px;color:var(--mute)}
+main{padding:28px 0 72px}
+h1{font-size:clamp(24px,3vw,31px);line-height:1.15;letter-spacing:-.02em;margin:0 0 6px;font-weight:700}
+h2{font-size:18px;margin:0 0 10px;line-height:1.3}
+p{margin:0 0 12px}.sm{font-size:13.5px;color:var(--mute)}
 button{font:inherit;cursor:pointer;color:inherit}
-.btn{background:var(--ac);color:var(--aci);border:0;border-radius:10px;padding:11px 20px;font-weight:700}
+.btn{background:var(--ac);color:var(--aci);border:0;border-radius:9px;padding:9px 16px;font-weight:600;box-shadow:0 1px 2px rgba(16,31,48,.12)}
 .btn .plus{display:inline-block;font-size:1.35em;line-height:0;margin-right:8px;vertical-align:-.08em;font-weight:600}
 .btn:disabled{opacity:.45;cursor:not-allowed}
 .b2{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
 .bad{color:var(--bad);border-color:var(--bad)}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:24px 0}
-.stat,.panel{background:var(--sf);border:1px solid var(--line);border-radius:16px;padding:20px}
-.stat b{display:block;font-size:36px;line-height:1.1;font-weight:800}
-.ban{background:var(--amb);color:#1a1300;border-radius:12px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:20px;font-weight:700}
-.ban.info{background:var(--sf);color:var(--ink);border:1px solid var(--amb);font-weight:400}
-.ban .btn{background:#1a1300;color:#fff}
-.note{background:var(--sf);border:1px solid var(--amb);border-left-width:6px;border-radius:12px;padding:12px 16px;margin-bottom:20px;font-size:15px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:20px 0 24px}
+.stat,.panel{background:var(--sf);border:1px solid var(--line);border-radius:14px;padding:18px 20px;box-shadow:0 1px 2px rgba(16,31,48,.05)}
+.stat b{display:block;font-size:28px;line-height:1.1;font-weight:700;letter-spacing:-.01em}
+.ban{background:var(--sf);color:var(--ink);border:1px solid var(--line);border-left:4px solid var(--amb);border-radius:12px;padding:12px 18px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:20px;font-weight:600;box-shadow:0 1px 2px rgba(16,31,48,.05)}
+.ban.info{font-weight:400}
+.ban .btn{background:var(--ac);color:var(--aci)}
+.note{background:var(--sf);border:1px solid var(--line);border-left:4px solid var(--amb);border-radius:12px;padding:11px 16px;margin-bottom:20px;font-size:13.5px;color:var(--mute);box-shadow:0 1px 2px rgba(16,31,48,.05)}
 .tool{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:12px;flex-wrap:wrap}
 .sc{overflow-x:auto}
-.tb{min-width:1080px}
+.tb{min-width:990px;background:var(--sf);border:1px solid var(--line);border-radius:12px;box-shadow:0 1px 2px rgba(16,31,48,.05);overflow:hidden}
 .epg{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:0 0 14px}.epg label{margin:0}.epg input{width:110px}.epg .sm{flex:1 1 320px;margin:0}
-.row{display:grid;grid-template-columns:2.8fr 1.2fr 2.5fr 1.6fr 2.4fr 1.4fr 1.4fr 1.5fr;gap:12px;width:100%;text-align:left;background:var(--sf);border:1px solid var(--line);border-radius:12px;padding:14px 20px;margin-bottom:8px;align-items:center}
-button.row:hover{border-color:var(--ac)}
-.row.h{background:none;border:0;color:var(--mute);font-size:14px;padding-block:0}
+.row{display:grid;grid-template-columns:2.8fr 1.2fr 2.5fr 1.6fr 2.4fr 1.4fr 1.4fr 1.5fr;gap:12px;width:100%;text-align:left;background:none;border:0;border-top:1px solid var(--line);border-radius:0;padding:12px 20px;margin:0;align-items:center}
+button.row:hover{background:color-mix(in oklab,var(--ac) 5%,var(--sf))}
+.row.h{background:none;border:0;color:var(--mute);font-size:12px;text-transform:uppercase;letter-spacing:.05em;font-weight:600;padding-block:12px 8px}
 .sh{background:none;border:0;padding:4px 0;font:inherit;color:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:6px;text-align:left}.sh i{font-style:normal;font-size:11px;opacity:.6}.sh:hover{color:var(--ink);text-decoration:underline}.sh.on{color:var(--ink);font-weight:700}.sh.on i{opacity:1}
 .w{color:var(--warn);font-weight:700}.b{color:var(--bad);font-weight:700}.o{color:var(--ok);font-weight:700}
-.g2{display:grid;grid-template-columns:1fr 1.2fr;gap:28px;align-items:start}
-label{display:grid;gap:6px;font-weight:700;font-size:15px;margin-bottom:14px}
-input,select,textarea{font:inherit;font-weight:400;padding:11px 13px;border:1.5px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);width:100%}
+.g2{display:grid;grid-template-columns:1fr 1.2fr;gap:20px;align-items:start}
+label{display:grid;gap:5px;font-weight:600;font-size:13.5px;margin-bottom:12px}
+input,select,textarea{font:inherit;font-weight:400;padding:9px 12px;border:1.5px solid var(--line);border-radius:9px;background:var(--sf);color:var(--ink);width:100%}
 textarea{min-height:120px;resize:vertical}
 .ring{display:flex;align-items:center;gap:20px;margin-bottom:16px}
-.ring svg{width:110px;height:110px;flex:none;transform:rotate(-90deg)}
+.ring svg{width:96px;height:96px;flex:none;transform:rotate(-90deg)}
 .ring circle{fill:none;stroke-width:12;stroke-linecap:round}
-.big{font-size:48px;font-weight:800;line-height:1}
-.tag{display:inline-block;border:1px solid var(--warn);color:var(--warn);border-radius:99px;padding:2px 12px;font-size:14px;font-weight:700;margin-top:6px}
+.big{font-size:38px;font-weight:700;line-height:1}
+.tag{display:inline-block;border:1px solid var(--warn);color:var(--warn);border-radius:99px;padding:2px 10px;font-size:12.5px;font-weight:600;margin-top:6px}
 .tag.p{border-color:var(--bad);color:var(--bad)}.tag.k{border-color:var(--ok);color:var(--ok)}
-fieldset{border:0;padding:0;margin:0 0 16px}
-legend{font-weight:700;font-size:16px;padding:0;margin-bottom:6px}
+fieldset{border:0;padding:0;margin:0 0 14px}
+legend{font-weight:600;font-size:14px;padding:0;margin-bottom:4px}
 .ch{display:flex;gap:8px;flex-wrap:wrap}
-.ch button{border:1.5px solid var(--line);background:transparent;border-radius:99px;padding:7px 15px;font-size:15px}
-.ch button[aria-pressed="true"]{background:var(--ac);border-color:var(--ac);color:var(--aci);font-weight:700}
+.ch button{border:1.5px solid var(--line);background:transparent;border-radius:99px;padding:6px 13px;font-size:13.5px}
+.ch button[aria-pressed="true"]{background:var(--ac);border-color:var(--ac);color:var(--aci);font-weight:600}
 .nw{background:var(--amb);color:#1a1300;border-radius:6px;font-size:12px;font-weight:800;padding:1px 7px;margin-left:6px}
 .ins{border-top:1px solid var(--line);padding-top:16px;margin-bottom:16px}.ins ul{margin-top:4px}.ins li{margin-bottom:4px}
-h3{font-size:18px;margin:0 0 10px}
+h3{font-size:15px;margin:0 0 8px}
 .sx{margin:0 0 8px}.sx>summary{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;cursor:pointer;list-style:none;padding:6px 0}.sx>summary::-webkit-details-marker{display:none}
-.sx>summary h2{margin:0;font-size:22px}.sx>summary h2::before,.tg::before{content:"";display:inline-block;box-sizing:border-box;width:.45em;height:.45em;border:solid var(--mute);border-width:0 .13em .13em 0;margin:0 .55em .1em .05em;vertical-align:middle;transform:rotate(-45deg);transition:transform .15s}.sx[open]>summary h2::before,.tg[aria-expanded="true"]::before{transform:rotate(45deg)}
+.sx>summary h2{margin:0;font-size:18px}.sx>summary h2::before,.tg::before{content:"";display:inline-block;box-sizing:border-box;width:.45em;height:.45em;border:solid var(--mute);border-width:0 .13em .13em 0;margin:0 .55em .1em .05em;vertical-align:middle;transform:rotate(-45deg);transition:transform .15s}.sx[open]>summary h2::before,.tg[aria-expanded="true"]::before{transform:rotate(45deg)}
 .sx[open]>summary{margin-bottom:12px}
-.tg{background:none;border:0;padding:6px 0;font:inherit;font-size:22px;font-weight:700;color:inherit;cursor:pointer}.tg .sm{font-size:16px;font-weight:400}
+.tg{background:none;border:0;padding:6px 0;font:inherit;font-size:18px;font-weight:700;color:inherit;cursor:pointer}.tg .sm{font-size:13.5px;font-weight:400}
 .dash{display:grid;grid-template-columns:1fr 1.3fr;gap:16px;margin:0 0 28px;align-items:start}
-.tiers{list-style:none;padding:0;margin:20px 0 0;border-top:1px solid var(--line);padding-top:14px;display:grid;gap:10px;font-size:14px;color:var(--mute)}.tiers li{display:flex;gap:10px;align-items:flex-start}.tiers b{color:var(--ink)}
+.tiers{list-style:none;padding:0;margin:20px 0 0;border-top:1px solid var(--line);padding-top:14px;display:grid;gap:9px;font-size:13px;color:var(--mute)}.tiers li{display:flex;gap:10px;align-items:flex-start}.tiers b{color:var(--ink)}
 .card{background:var(--sf);border:1px solid var(--line);border-radius:16px;padding:20px}
-.card h2{font-size:18px;margin:0 0 4px}.card .sm{margin-bottom:14px}
+.card h2{font-size:16px;margin:0 0 4px}.card .sm{margin-bottom:14px}
 .bars{display:grid;gap:8px}
-.br{display:grid;grid-template-columns:minmax(120px,190px) 1fr 44px;gap:10px;align-items:center;font-size:15px;border-radius:8px;padding:2px 4px;margin:0 -4px}
+.br{display:grid;grid-template-columns:minmax(120px,190px) 1fr 44px;gap:10px;align-items:center;font-size:13.5px;border-radius:8px;padding:2px 4px;margin:0 -4px}
 .br:hover,.br:focus-visible{background:var(--bg)}
-.br.go{width:calc(100% + 8px);background:none;border:0;font:inherit;font-size:15px;color:inherit;text-align:left;cursor:pointer}.br.go:hover,.br.go:focus-visible{background:var(--bg)}.br.go:hover .lb span{text-decoration:underline}
+.br.go{width:calc(100% + 8px);background:none;border:0;font:inherit;font-size:13.5px;color:inherit;text-align:left;cursor:pointer}.br.go:hover,.br.go:focus-visible{background:var(--bg)}.br.go:hover .lb span{text-decoration:underline}
 .lk{background:none;border:0;padding:0;font:inherit;color:inherit;text-decoration:underline;cursor:pointer}
 .br .lb{display:flex;align-items:center;gap:8px;min-width:0}.br .lb span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .br .tr{height:14px;border-left:1px solid var(--mute)}
@@ -90,12 +90,12 @@ h3{font-size:18px;margin:0 0 10px}
 .t-un{background:var(--t-un)}.t-high{background:var(--t-high)}.t-lim{background:var(--t-lim);color:#1a1300}.t-min{background:var(--t-min)}.t-none{background:var(--t-none)}
 .pill{display:inline-flex;align-items:center;gap:7px}
 .mini{display:flex;align-items:center;gap:8px}.mini i{display:block;height:8px;width:56px;background:var(--line);border-radius:4px;overflow:hidden}.mini i b{display:block;height:100%;background:var(--ac);border-radius:0 4px 4px 0}
-.stat small{display:block;color:var(--mute);font-size:14px;margin-top:2px}
+.stat small{display:block;color:var(--mute);font-size:12.5px;margin-top:4px}
 .stat .meter{height:6px;background:var(--line);border-radius:3px;margin-top:10px;overflow:hidden}.stat .meter b{display:block;height:100%;background:var(--ac);font-size:0}
 #tip{position:fixed;z-index:20;pointer-events:none;background:var(--ink);color:var(--sf);border-radius:8px;padding:8px 12px;font-size:14px;line-height:1.4;max-width:280px;white-space:pre-line;box-shadow:0 6px 18px rgba(0,0,0,.2)}
 @media (max-width:860px){.dash{grid-template-columns:1fr}}
 @media (max-width:560px){.badge{display:none}.wrap{padding:0 16px}}
-.cl{border-left:4px solid var(--amb);padding:4px 0 4px 16px;margin-bottom:20px}
+.cl{border-left:4px solid var(--amb);background:color-mix(in oklab,var(--amb) 7%,var(--sf));border-radius:0 8px 8px 0;padding:8px 14px;margin-bottom:18px}
 .out{max-width:560px;margin:48px auto;text-align:center}
 ul{margin:6px 0 16px;padding-left:22px}
 @media (max-width:860px){.stats{grid-template-columns:1fr 1fr}.g2{grid-template-columns:1fr}}
@@ -107,7 +107,7 @@ ul{margin:6px 0 16px;padding-left:22px}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .dash .t-min,:root:not([data-theme="light"]) .dash .t-lim,:root:not([data-theme="light"]) .pill .t-min,:root:not([data-theme="light"]) .pill .t-lim{color:#fff}:root:not([data-theme="light"]) .dash .t-high,:root:not([data-theme="light"]) .dash .t-un,:root:not([data-theme="light"]) .pill .t-high,:root:not([data-theme="light"]) .pill .t-un{color:#0b1624}}
 :root[data-theme="dark"] .dash .t-min,:root[data-theme="dark"] .dash .t-lim,:root[data-theme="dark"] .pill .t-min,:root[data-theme="dark"] .pill .t-lim{color:#fff}:root[data-theme="dark"] .dash .t-high,:root[data-theme="dark"] .dash .t-un,:root[data-theme="dark"] .pill .t-high,:root[data-theme="dark"] .pill .t-un{color:#0b1624}
 .fw{position:relative;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.fbtn{padding:9px 16px}.fbtn.on{border-color:var(--ac);color:var(--ac)}.fbtn .n{display:inline-block;background:var(--ac);color:var(--aci);border-radius:99px;padding:0 8px;margin-left:6px;font-size:13px;line-height:1.6}
+.fbtn{padding:8px 14px}.fbtn.on{border-color:var(--ac);color:var(--ac)}.fbtn .n{display:inline-block;background:var(--ac);color:var(--aci);border-radius:99px;padding:0 8px;margin-left:6px;font-size:13px;line-height:1.6}
 .fm{position:absolute;right:0;top:calc(100% + 8px);z-index:5;background:var(--sf);border:1px solid var(--line);border-radius:12px;padding:10px;min-width:290px;box-shadow:0 8px 24px rgba(0,0,0,.18)}
 .fm p{margin:2px 8px 6px;font-weight:700;font-size:14px;color:var(--mute)}
 .fm button{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:none;border:0;border-radius:8px;padding:8px;font-size:15px}.fm button:hover{background:var(--bg)}.fm button+p{border-top:1px solid var(--line);padding-top:10px;margin-top:8px}
@@ -116,7 +116,18 @@ ul{margin:6px 0 16px;padding-left:22px}
 .fbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;background:var(--sf);background:color-mix(in oklab,var(--ac) 9%,var(--sf));border:1.5px solid var(--ac);border-left-width:6px;border-radius:12px;padding:10px 16px;margin-bottom:12px;font-size:15px}
 .fchip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--ac);background:var(--sf);border-radius:99px;padding:3px 6px 3px 4px;font-size:14px}.fchip:hover{background:var(--bg)}.fchip .x{font-size:13px;opacity:.75}
 .fbar .fclr{margin-left:auto;padding:6px 14px;font-size:15px}
+.vt{margin:0 0 20px}
+.row.sy{grid-template-columns:2fr 2fr 2.2fr 1.5fr 1.3fr 1fr 2fr}
+.sys{list-style:none;padding:0;margin:6px 0 16px;display:grid;gap:6px}.sys li{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}
 .rl{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:13px;color:var(--mute)}.rl i{width:120px;height:8px;border-radius:4px;background:var(--rlo);background:linear-gradient(in oklab to right,var(--rlo),var(--rhi))}
+/* Visual polish: hover and focus states, unified table card, section labels */
+.btn:hover:not(:disabled){filter:brightness(1.07)}
+.b2{box-shadow:none}.b2:hover:not(:disabled){background:var(--bg);filter:none}
+input:focus,select:focus,textarea:focus{border-color:var(--ac)}
+.note strong,.ban strong{color:var(--ink)}
+.tb>p{padding:12px 20px;margin:0}
+.ins>strong,.panel>strong{display:block;margin:12px 0 4px;font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--mute)}
+.row b{font-weight:600}
 </style>
 </head>
 <body>
@@ -253,7 +264,17 @@ function ans(u,q){return u.a&&u.a[q[0]]!=null?u.a[q[0]]:null}
 function sc(u){var r=reqs(u);if(!r.length)return null;var t=0;r.forEach(function(q){t+=ans(u,q)||0});return Math.round(100*t/r.length)}
 function gaps(u){return reqs(u).filter(function(q){return(ans(u,q)||0)<1})}
 function unans(u){return reqs(u).filter(function(q){return ans(u,q)==null})}
-function stale(u){return u.ck&&(u.ck.v<S.v||u.ck.h!=hash(u.desc||""))}
+/* System registry (concept preview): systems are linked many-to-many to use cases through u.sys.
+   A check records the linked systems and their versions, so a vendor update makes linked use cases stale. */
+var DOCS=[["ifu","Instructions for use (Art. 13)"],["doc","EU declaration of conformity (Art. 47)"],["ce","CE marking (Art. 48)"],["reg","EU database registration (Art. 49)"],["mdoc","Model documentation from the model provider (Art. 53(1)(b))"]];
+var GP=[["no","Not involved"],["built","Built on one"],["provides","We provide one"]];
+function gpl(g){var x=GP.filter(function(p){return p[0]==g})[0];return x?x[1]:"–"}
+function sig(u,ss){ss=ss||S.s;return(u.sys||[]).map(function(id){var y=ss.find(function(x){return x.id==id});return y?id+"@"+y.ver:""}).sort().join("|")}
+function sysOf(u){return(u.sys||[]).map(function(id){return S.s.find(function(x){return x.id==id})}).filter(Boolean)}
+function linked(y){return S.u.filter(function(u){return(u.sys||[]).indexOf(y.id)>=0})}
+function ydocs(y){return DOCS.filter(function(d){return d[0]!="mdoc"||y.gpai!="no"})}
+function dtxt(y){var a=ydocs(y);return a.filter(function(d){return y.docs[d[0]]}).length+" of "+a.length}
+function stale(u){return u.ck&&(u.ck.v<S.v||u.ck.h!=hash(u.desc||"")||(u.ck.s||"")!=sig(u))}
 function status(u){if(cls(u)=="prohibited")return["Needs expert review","b"];if(sc(u)==null)return["Needs details","w"];if(!u.ck)return["Not yet checked","w"];if(stale(u))return["Needs re-check","w"];var g=gaps(u).length;return g?[g+" gap"+(g>1?"s":"")+" open","w"]:["No open gaps (sample rules)","o"]}
 /* Value, running cost and stage are the user's own figures (FR-021, FR-022); sample figures are fictional.
    Cost efficiency = value / (running cost + open gaps x effort per gap), FR-023. */
@@ -263,20 +284,32 @@ function money(n){return n==null?"–":"€"+String(n).replace(/\B(?=(\d{3})+(?!
 function eff(u){if(u.val==null)return[null,"no value"];if(u.cost==null)return[null,"no running cost"];if(sc(u)==null||!u.ck)return[null,status(u)[0].toLowerCase()];
 var d=u.cost+gaps(u).length*EPG;return d?[u.val/d,""]:[null,"cost and effort are zero"]}
 function effTxt(u){var e=eff(u);return e[0]==null?"–":(Math.round(e[0]*10)/10).toFixed(1)+"×"}
-function seed(){function m(n,d,r,o,a,v,c,s){var u={id:n.toLowerCase().replace(/\W/g,""),name:n,desc:d,role:r,owner:o,a:a,val:v,cost:c,stage:s};u.ck={v:1,h:hash(d),d:"2026-10-20"};return u}
-return{v:1,u:[
-m("Workplace emotion monitoring","Webcam software uses emotion recognition to rate how engaged employees are in video meetings.","Deployer","HR",{},60000,15000,"Pilot"),
-m("Vulnerable-customer nudging","Our app uses subliminal cues to push elderly customers into extra purchases.","Provider","Marketing",{},200000,30000,"Idea"),
-m("CV screening","We use an AI tool to rank job applicants for our HR team.","Deployer","HR",{use:1,over:.5,logs:.5,inform:.5,lit:1},120000,20000,"In production"),
-m("Credit scoring","Our scoring model estimates default risk for loan applications.","Provider","Risk",{risk:.5,data:.5,docs:0,over:.5,acc:1},900000,150000,"In production"),
-m("Exam proctoring","Our proctoring software flags students suspected of cheating in online exams.","Provider","Learning",{risk:1,data:.5,docs:.5,over:1,acc:.5},80000,25000,"Pilot"),
-m("Grid load control","Our model controls load balancing in the regional electricity grid.","Provider","Operations",{risk:1,data:1,docs:.5,over:.5,acc:1},1500000,300000,"In production"),
-m("Support chatbot","A chatbot answers customer support questions on our website.","Deployer","Support",{tran:1,lit:.5},250000,40000,"In production"),
-m("Product image generator","A generative tool creates product images for our online shop.","Deployer","Marketing",{tran:0,lit:1},90000,12000,"Pilot"),
-m("Phone booking assistant","A voice assistant talks to callers to book service appointments.","Deployer","Service",{tran:.5,lit:.5},70000,18000,"Retired"),
-m("Demand forecasting","Forecasts product demand to optimise inventory.","Deployer","Operations",{lit:1},400000,35000,"In production"),
-m("Spam filter","Filters spam emails in staff inboxes.","Deployer","IT",{lit:1},30000,null,"In production"),
-m("Predictive maintenance","Predicts machine failures from sensor data so technicians can plan repairs.","Deployer","Operations",{lit:.5},350000,60000,"Research")]}}
+function seed(){function y(id,n,vd,md,ver,g,dc){return{id:id,name:n,vendor:vd,model:md,ver:ver,gpai:g,docs:dc}}
+var ss=[y("moodlens","MoodLens","Fictional Analytics Inc.","Emotion recognition model","1.4","no",{}),
+y("nudgekit","NudgeKit","In-house","Recommendation engine","0.3","no",{}),
+y("hiresort","HireSort","Fictional HR Software Ltd","Applicant ranking model","3.2","no",{}),
+y("riskscore","RiskScore","In-house","Gradient-boosted scoring model","7.1","no",{ifu:1}),
+y("proctoreye","ProctorEye","In-house","Video anomaly classifier","2.0","no",{ifu:1,doc:1}),
+y("gridpilot","GridPilot","In-house","Load control model","4.6","no",{ifu:1,doc:1,ce:1,reg:1}),
+y("chatwell","Chatwell Platform","Fictional Cloud AG","General-purpose language model (fictional)","2025.4","built",{ifu:1}),
+y("voicegate","VoiceGate","Fictional Speech Co.","Speech recognition model","8.0","no",{ifu:1}),
+y("pixelsmith","Pixelsmith","Fictional Creative Tools","Image generation model (fictional)","5.0","built",{}),
+y("forecastkit","ForecastKit","Fictional Supply Analytics","Time-series forecasting model","2.3","no",{ifu:1}),
+y("mailguard","MailGuard","Fictional Secure Mail","Spam classifier","11.2","no",{ifu:1})];
+function m(n,d,r,o,a,v,c,s,sy){var u={id:n.toLowerCase().replace(/\W/g,""),name:n,desc:d,role:r,owner:o,a:a,val:v,cost:c,stage:s,sys:sy};u.ck={v:1,h:hash(d),d:"2026-10-20",s:sig(u,ss)};return u}
+return{v:1,s:ss,u:[
+m("Workplace emotion monitoring","Webcam software uses emotion recognition to rate how engaged employees are in video meetings.","Deployer","HR",{},60000,15000,"Pilot",["moodlens"]),
+m("Vulnerable-customer nudging","Our app uses subliminal cues to push elderly customers into extra purchases.","Provider","Marketing",{},200000,30000,"Idea",["nudgekit"]),
+m("CV screening","We use an AI tool to rank job applicants for our HR team.","Deployer","HR",{use:1,over:.5,logs:.5,inform:.5,lit:1},120000,20000,"In production",["hiresort"]),
+m("Credit scoring","Our scoring model estimates default risk for loan applications.","Provider","Risk",{risk:.5,data:.5,docs:0,over:.5,acc:1},900000,150000,"In production",["riskscore"]),
+m("Exam proctoring","Our proctoring software flags students suspected of cheating in online exams.","Provider","Learning",{risk:1,data:.5,docs:.5,over:1,acc:.5},80000,25000,"Pilot",["proctoreye"]),
+m("Grid load control","Our model controls load balancing in the regional electricity grid.","Provider","Operations",{risk:1,data:1,docs:.5,over:.5,acc:1},1500000,300000,"In production",["gridpilot","forecastkit"]),
+m("Support chatbot","A chatbot answers customer support questions on our website.","Deployer","Support",{tran:1,lit:.5},250000,40000,"In production",["chatwell"]),
+m("Product image generator","A generative tool creates product images for our online shop.","Deployer","Marketing",{tran:0,lit:1},90000,12000,"Pilot",["pixelsmith"]),
+m("Phone booking assistant","A voice assistant talks to callers to book service appointments.","Deployer","Service",{tran:.5,lit:.5},70000,18000,"Retired",["chatwell","voicegate"]),
+m("Demand forecasting","Forecasts product demand to optimise inventory.","Deployer","Operations",{lit:1},400000,35000,"In production",["forecastkit"]),
+m("Spam filter","Filters spam emails in staff inboxes.","Deployer","IT",{lit:1},30000,null,"In production",["mailguard"]),
+m("Predictive maintenance","Predicts machine failures from sensor data so technicians can plan repairs.","Deployer","Operations",{lit:.5},350000,60000,"Research",["forecastkit"])]}}
 S=seed();
 function ring(s){var v=s==null?0:s;return'<svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="54" stroke="var(--line)"/><circle cx="60" cy="60" r="54" stroke="var(--ac)" stroke-dasharray="339.3" stroke-dashoffset="'+(339.3*(1-v/100))+'"/></svg>'}
 function chips(opts,cur,attr){return'<div class="ch">'+opts.map(function(o){return'<button aria-pressed="'+(cur===o[1])+'" '+attr+' data-v="'+esc(o[1])+'">'+o[0]+"</button>"}).join("")+"</div>"}
@@ -325,8 +358,8 @@ function list(){var us=S.u,as=us.filter(function(u){return sc(u)!=null}),av=as.l
 gp=us.reduce(function(a,u){return a+gaps(u).length},0),st=us.filter(stale).length,rv=us.filter(function(u){var c=cls(u);return c=="prohibited"||c=="high"}).length,h=note();
 if(S.v<2)h+='<div class="ban"><span>Rule library update available (sample): v2 adds serious incident reporting for high-risk systems.</span><button class="btn" data-a="upd">Apply update</button></div>';
 else if(st)h+='<div class="ban info"><span>Sample rule library v2 applied: '+st+' use case'+(st>1?"s":"")+' need a re-check. Open one to review.</span></div>';
-h+="<h1>Use case portfolio</h1><p class=\"sm\">Sample AI use cases with role, indicative risk category, v1 readiness indicator, and fictional value, cost and stage. General-purpose AI model obligations are not covered. "+ADV+"</p>";
-h+='<div class="stats"><div class="stat"><b>'+(av==null?"–":av+"%")+'</b>Average readiness indicator<small>across '+as.length+" of "+us.length+' use cases</small><div class="meter" aria-hidden="true"><b style="width:'+(av||0)+'%">.</b></div></div><div class="stat"><b>'+us.length+'</b>Use cases<small>'+rv+' unacceptable or high risk</small></div><div class="stat"><b>'+gp+'</b>Open gaps<small>checklist items not fulfilled</small></div><div class="stat"><b>'+st+'</b>Need re-check<small>'+(S.v<2?"rules v1":"after the rules update")+"</small></div></div>";
+h+=tabs()+"<h1>Use case portfolio</h1><p class=\"sm\">Sample AI use cases with role, indicative risk category, v1 readiness indicator, and fictional value, cost and stage. General-purpose AI model obligations are not covered. "+ADV+"</p>";
+h+='<div class="stats"><div class="stat"><b>'+(av==null?"–":av+"%")+'</b>Average readiness indicator<small>across '+as.length+" of "+us.length+' use cases</small><div class="meter" aria-hidden="true"><b style="width:'+(av||0)+'%">.</b></div></div><div class="stat"><b>'+us.length+'</b>Use cases<small>'+rv+' unacceptable or high risk</small></div><div class="stat"><b>'+gp+'</b>Open gaps<small>checklist items not fulfilled</small></div><div class="stat"><b>'+st+'</b>Need re-check<small>'+(st?"description, rules or a system changed":S.v<2?"rules v1":"after the rules update")+"</small></div></div>";
 if(us.length)h+='<details class="sx" id="stx"'+(STATS?" open":"")+'><summary><h2>Statistics</h2></summary>'+dash(us)+"</details>";
 var fu=filtered(us),fo=fcount()>0;
 h+='<div class="tool"><h2 style="margin:0"><button class="tg" data-a="tuc" aria-expanded="'+UCS+'" aria-controls="ucl">Use cases <span class="sm">('+(fo?fu.length+" of "+us.length:us.length)+')</span></button></h2><div class="fw"><button class="btn b2 fbtn'+(fo?" on":"")+'" data-a="fm" aria-haspopup="true" aria-expanded="'+FM+'"'+(fo?' aria-label="Filter, '+fcount()+' active"':"")+'>Filter'+(fo?'<span class="n" aria-hidden="true">'+fcount()+"</span>":"")+' ▾</button>'+(FM?fmenu(us):"")+'<button class="btn" data-a="new"><span class="plus" aria-hidden="true">+</span>Add use case (try your own)</button></div></div>'+(fo?fbar(fu.length,us.length):"")+'<div class="sc" id="ucl"'+(UCS?"":" hidden")+'><div class="epg"><label for="f-epg">Effort per open gap (€)</label><input id="f-epg" inputmode="numeric" value="'+EPG+'" aria-describedby="f-epgd'+(EPGE?" f-epge":"")+'"'+(EPGE?' aria-invalid="true"':"")+'><span class="sm" id="f-epgd">Your assumption, not an ActReady estimate. Cost efficiency = value ÷ (running cost + open gaps × effort per gap). Value and cost are your own estimates; sample figures are fictional.</span>'+(EPGE?'<span class="b" id="f-epge" role="alert">'+EPGE+"</span>":"")+'</div><div class="tb"><div class="row h">'+sh("name")+sh("role")+sh("risk")+sh("ind")+sh("st")+sh("val")+sh("stage")+sh("eff")+"</div>";
@@ -334,6 +367,37 @@ if(fo&&!fu.length)h+='<p class="sm">No use cases match this filter. <button clas
 sorted(fu).forEach(function(u){var c=cls(u),s=sc(u),t=status(u);h+='<button class="row" data-a="open" data-id="'+esc(u.id)+'"><b>'+esc(u.name)+"</b><span>"+esc(role(u)||"–")+"</span>"+pill(c)+(s==null?"<b>–</b>":'<span class="mini"><i aria-hidden="true"><b style="width:'+s+'%"></b></i><b>'+s+"%</b></span>")+'<span class="'+t[1]+'">'+t[0]+"</span><span>"+money(u.val)+"</span><span>"+esc(u.stage||"–")+"</span>"+(function(e){return e[0]==null?'<span>–<small class="sm"> '+e[1]+"</small></span>":"<b>"+effTxt(u)+"</b>"})(eff(u))+"</button>"});
 if(!us.length)h+='<p class="sm">No use cases. Use “Reset sample data” in the user menu to restore the samples.</p>';
 return h+"</div></div>"}
+var TAB="u";
+function tabs(){return'<div class="ch vt" role="group" aria-label="Portfolio view"><button data-a="tab" data-v="u" aria-pressed="'+(TAB=="u")+'">Use cases</button><button data-a="tab" data-v="s" aria-pressed="'+(TAB=="s")+'">Systems<span class="nw">Concept preview</span></button></div>'}
+function worst(y){var us=linked(y);return us.length?TIERS[Math.min.apply(null,us.map(function(u){return TIERS.indexOf(tier(cls(u)))}))][0]:undefined}
+function slist(){var h=note()+tabs()+'<h1>System registry</h1><p class="sm"><strong>Concept preview.</strong> The tools and models behind your use cases, and the documentation on file for each. One system can serve several use cases, and a use case can combine several systems. The assessment itself is still made per use case. General-purpose AI model obligations are not covered. '+ADV+"</p>";
+h+='<div class="tool"><h2 style="margin:0">Systems <span class="sm">('+S.s.length+')</span></h2><button class="btn" data-a="ynew"><span class="plus" aria-hidden="true">+</span>Add system</button></div><div class="sc" id="syl"><div class="tb"><div class="row sy h"><span>System</span><span>Vendor</span><span>Model · version</span><span>General-purpose AI model</span><span>Documentation on file</span><span>Use cases</span><span>Most severe indicative category</span></div>';
+S.s.forEach(function(y){var w=worst(y);h+='<button class="row sy" data-a="osys" data-id="'+esc(y.id)+'"><b>'+esc(y.name)+"</b><span>"+esc(y.vendor||"–")+"</span><span>"+esc(y.model||"–")+" · "+esc(y.ver||"–")+"</span><span>"+gpl(y.gpai)+"</span><span>"+dtxt(y)+"</span><span>"+linked(y).length+"</span>"+(w===undefined?'<span class="sm">No linked use cases</span>':pill(w))+"</button>"});
+if(!S.s.length)h+='<p class="sm">No systems. Use “Reset sample data” in the user menu to restore the samples.</p>';
+return h+"</div></div>"}
+function sdetail(y){var us=linked(y),h=note();
+h+='<p><button class="btn b2" data-a="back">← System registry</button></p><h1>'+esc(y.name)+'</h1><div class="g2"><div class="panel"><h2>System <span class="nw">Concept preview</span></h2>';
+h+='<label>Name<input id="y-n" value="'+esc(y.name)+'"></label><label>Vendor<input id="y-vd" value="'+esc(y.vendor)+'"></label><label>Underlying model<input id="y-m" value="'+esc(y.model)+'"></label><label>Version<input id="y-ver" value="'+esc(y.ver)+'"></label>';
+h+='<label>General-purpose AI model<select id="y-g">'+GP.map(function(p){return'<option value="'+p[0]+'"'+(y.gpai==p[0]?" selected":"")+">"+p[1]+"</option>"}).join("")+"</select></label>";
+h+='<p class="sm">For demo purposes only. Do not enter confidential information. Changes stay in your browser and are lost on reload.</p>';
+if(V.err)h+='<p class="b" role="alert">'+V.err+"</p>";
+h+='<p><button class="btn" data-a="ysv">Save</button> <button class="btn b2 bad" data-a="ydel">'+(V.cd==y.id?"Click again to delete":"Delete")+"</button></p></div>";
+h+='<div class="panel"><h2>Documentation on file</h2><p class="sm">For a bought system, what the vendor supplied; for an in-house system, what you produced. Which documents are required depends on the risk category and your role: instructions for use, the declaration of conformity, CE marking and registration apply to most high-risk systems. '+ADV+"</p>";
+ydocs(y).forEach(function(d){var on=!!y.docs[d[0]];h+='<fieldset><legend>'+d[1]+"</legend>"+chips([["On file",true],["Not on file",false]],on,'data-a="ydoc" data-q="'+d[0]+'"')+"</fieldset>"});
+if(y.gpai=="built")h+='<p class="sm">The model provider must give model documentation to whoever integrates the model into a system (Art. 53(1)(b)). If your vendor did the integration, the vendor receives it, not you. Building on a general-purpose AI model does not by itself make you its provider.</p>';
+if(y.gpai=="provides")h+='<div class="cl"><p class="sm">Obligations of providers of general-purpose AI models (Chapter V of the EU AI Act) are not covered by the demo. A real assessment would need expert review.</p></div>';
+h+="<h2>Linked use cases ("+us.length+")</h2>";
+h+=us.length?'<ul class="sys">'+us.map(function(u){var t=status(u);return'<li><button class="lk" data-a="open" data-id="'+esc(u.id)+'">'+esc(u.name)+"</button>"+pill(cls(u))+'<span class="'+t[1]+'">'+t[0]+"</span></li>"}).join("")+"</ul>":'<p class="sm">No use case uses this system yet. Link it from a use case.</p>';
+if(V.msg)h+='<p class="o" role="status">'+V.msg+"</p>";
+h+='<p><button class="btn b2" data-a="vup">Simulate vendor update</button></p><p class="sm">Raises the version number. Every linked use case that was checked against the old version then needs a re-check.</p>';
+return h+"</div></div>"}
+function sysPick(u){if(!S.s.length)return'<p class="sm">No systems in the registry.</p>';var on=u.sys||[];
+return'<fieldset><legend>Systems used <span class="nw">Concept preview</span></legend><p class="sm" style="margin-bottom:6px">Pick the tools or models behind this use case.</p><div class="ch">'+S.s.map(function(y){return'<button aria-pressed="'+(on.indexOf(y.id)>=0)+'" data-a="lk" data-q="'+esc(y.id)+'">'+esc(y.name)+"</button>"}).join("")+"</div></fieldset>"}
+function sysPanel(u){var ys=sysOf(u);if(!ys.length)return"";
+var h='<div class="ins"><h3>Systems behind this use case</h3><ul class="sys">'+ys.map(function(y){return'<li><button class="lk" data-a="osys" data-id="'+esc(y.id)+'">'+esc(y.name)+'</button><span class="sm">'+esc(y.vendor||"–")+" · version "+esc(y.ver||"–")+" · documentation on file: "+dtxt(y)+"</span></li>"}).join("")+"</ul>";
+var noi=ys.filter(function(y){return!y.docs.ifu});
+if(cls(u)=="high"&&role(u)=="Deployer"&&noi.length)h+='<p class="sm">Using the system as its provider’s instructions say (Art. 26(1)) needs those instructions. None are on file for: '+noi.map(function(y){return esc(y.name)}).join(", ")+".</p>";
+return h+"</div>"}
 function tipAt(e){var el=e.target.closest&&e.target.closest("[data-tip]"),tp=document.getElementById("tip");if(!tp||!tp.style)return;
 if(!el){tp.hidden=true;return}tp.textContent=el.getAttribute("data-tip");tp.hidden=false;
 var r=e.clientX!=null?{x:e.clientX,y:e.clientY}:(function(b){return{x:b.left+b.width/2,y:b.top}})(el.getBoundingClientRect());
@@ -343,14 +407,14 @@ tp.style.left=Math.min(r.x+14,window.innerWidth-tp.offsetWidth-8)+"px";tp.style.
 function detail(u){var c=cls(u),s=sc(u),rq=reqs(u),g=gaps(u),un=unans(u),t=status(u),h=note();
 h+='<p><button class="btn b2" data-a="back">← Portfolio</button></p><h1>'+esc(u.name)+'</h1><div class="g2"><div class="panel"><h2>Use case</h2>';
 h+='<label>Name<input id="f-n" value="'+esc(u.name)+'"></label><label>Description<textarea id="f-d" aria-describedby="f-w">'+esc(u.desc)+'</textarea></label><p class="sm" id="f-w">For demo purposes only. Do not enter confidential or personal information. The text stays in your browser and is lost on reload. Please write in English: the demo reads English only. The full version will support English and German.</p>';
-h+='<label>Your role<select id="f-r"><option value="">Not set (read from description)</option><option'+(u.role=="Provider"?" selected":"")+'>Provider</option><option'+(u.role=="Deployer"?" selected":"")+'>Deployer</option></select></label><label>Owner<input id="f-o" value="'+esc(u.owner)+'"></label>';
+h+='<label>Your role<select id="f-r"><option value="">Not set (read from description)</option><option'+(u.role=="Provider"?" selected":"")+'>Provider</option><option'+(u.role=="Deployer"?" selected":"")+'>Deployer</option></select></label><label>Owner<input id="f-o" value="'+esc(u.owner)+'"></label>'+sysPick(u);
 h+='<label>Value per year (€, your estimate)<input id="f-v" inputmode="numeric" value="'+(u.val==null?"":u.val)+'"></label><label>Running cost per year (€, your estimate)<input id="f-c" inputmode="numeric" value="'+(u.cost==null?"":u.cost)+'"></label><label>Stage<select id="f-s"><option value="">Not set</option>'+STAGES.map(function(s){return"<option"+(u.stage==s?" selected":"")+">"+s+"</option>"}).join("")+'</select></label><p class="sm">Value, cost and stage are for your portfolio overview only. They do not change the indicative risk category or the readiness indicator.</p>';
 if(V.err)h+='<p class="b" role="alert">'+V.err+"</p>";
-if(u.ck&&stale(u))h+='<p class="sm">The description or the rules changed since the last check.</p>';
+if(u.ck&&stale(u))h+='<p class="sm">The description, the rules or a linked system changed since the last check.</p>';
 h+='<p><button class="btn" data-a="sv">Save and assess</button> <button class="btn b2 bad" data-a="del">'+(V.cd==u.id?"Click again to delete":"Delete")+"</button></p>"+(u.own?'<p class="sm" style="margin-top:16px">Or load a synthetic example:</p><div class="ch">'+EX.map(function(e,i){return'<button data-a="ex" data-i="'+i+'">'+esc(e[0])+"</button>"}).join("")+"</div>":"")+"</div>";
 h+='<div class="panel"><h2>Illustrative assessment</h2><p class="sm">'+(u.own?"Rough illustration from simplified sample rules. This is not the real assessment. ":"Illustrative sample result. ")+ADV+'</p><div class="ring">'+ring(s)+"<div><div class=\"big\">"+(s==null?"–":s+"%")+'</div><div class="sm">v1 readiness indicator</div>'+(c?'<span class="tag'+(c=="prohibited"?" p":c=="minimal"?" k":"")+'">Indicative: '+CN[c]+"</span>":"")+'<div class="sm" style="margin-top:6px">'+t[0]+" · sample rules v"+S.v+"</div></div></div>";
 if(c)h+='<p class="sm">The indicative risk category comes from simplified sample rules and uses the EU AI Act’s four tiers: unacceptable, high, limited and minimal risk. A real classification needs expert review.'+(c=="high"?" Under Art. 6(3), a system in a listed area may fall outside high risk, for example when it only performs a narrow procedural task.":"")+(c=="minimal"?" Obligations such as AI literacy (Art. 4) still apply.":"")+"</p>";
-h+=insight(an(u.desc));
+h+=insight(an(u.desc))+sysPanel(u);
 if(c==null||(c=="high"&&!role(u)))h+='<div class="cl"><p class="sm">The description is not specific enough for the sample rules, so the demo asks:</p>';
 if(c==null)h+="<fieldset><legend>What does the system mainly do?</legend>"+chips([["Decides on jobs, education, credit or services","high"],["Talks to people or generates content","limited"],["Analyses or optimises operations","minimal"],["Not sure (treated as high-risk)","unsure"]],u.purpose,'data-a="cl" data-k="purpose"')+"</fieldset>";
 if(c=="high"&&!role(u))h+="<fieldset><legend>Do you build this system or use one you bought?</legend>"+chips([["We build it","Provider"],["We use it","Deployer"]],u.role,'data-a="cl" data-k="role"')+"</fieldset>";
@@ -361,7 +425,12 @@ if(rq.length){h+="<strong>Missing for a 100% indicator</strong>";h+=g.length?"<u
 h+='<p><button class="btn" data-a="chk"'+(un.length?" disabled":"")+">Confirm re-check</button> "+(un.length?'<span class="sm">Answer all questions first.</span>':"")+"</p>";
 if(u.ck)h+='<p class="sm">Last checked '+esc(u.ck.d)+" with sample rules v"+u.ck.v+".</p>"}
 return h+"</div></div>"}
-function render(){var u=S.u.find(function(x){return x.id==V.id});head();app.innerHTML=V.p=="o"?loggedOut():V.p=="d"&&u?detail(u):list();window.scrollTo(0,0)}
+function render(){var u=S.u.find(function(x){return x.id==V.id}),ys=S.s.find(function(x){return x.id==V.id});head();app.innerHTML=V.p=="o"?loggedOut():V.p=="d"&&u?detail(u):V.p=="y"&&ys?sdetail(ys):TAB=="s"?slist():list();window.scrollTo(0,0)}
+function cury(){return S.s.find(function(x){return x.id==V.id})}
+/* Re-renders without losing what was typed but not yet saved in the given fields. */
+function keep(ids,fn){var vals={};ids.forEach(function(i){var e=document.getElementById(i);if(e)vals[i]=e.value});fn();ids.forEach(function(i){var e=document.getElementById(i);if(e&&vals[i]!=null)try{e.value=vals[i]}catch(x){}})}
+function bump(v){var m=String(v||"").match(/^(.*?)(\d+)(\D*)$/);return m?m[1]+(+m[2]+1)+m[3]:(v?v+".1":"1")}
+var UF=["f-n","f-d","f-r","f-o","f-v","f-c","f-s"],YF=["y-n","y-vd","y-m","y-ver","y-g"];
 function cur(){return S.u.find(function(x){return x.id==V.id})}
 /* Re-renders the list in place, keeping the scroll position and, where possible, focus on the control that was used. */
 function relist(sel){var y=window.scrollY;render();window.scrollTo(0,y);var el=sel&&document.querySelector&&document.querySelector(sel);if(el&&el.focus)el.focus()}
@@ -377,9 +446,18 @@ if(a=="fm"){FM=!FM;relist('[data-a="fm"]');return}
 if(a=="ft"){var fg=FILT[b.dataset.g],fk=b.dataset.k;if(!fg)return;var fi=fg.indexOf(fk);if(fi>=0)fg.splice(fi,1);else fg.push(fk);var inMenu=b.closest&&b.closest(".fm");if(!inMenu)FM=false;relist(inMenu?'.fm [data-g="'+b.dataset.g+'"][data-k="'+fk+'"]':fcount()?".fchip":'[data-a="fm"]');return}
 if(a=="fc"){FILT={risk:[],st:[]};FM=false;relist('[data-a="fm"]');return}
 FM=false;
+var ys=cury();
+if(a=="tab"){TAB=v=="s"?"s":"u";V={p:"l"};render();return}
+if(a=="osys"){TAB="s";V={p:"y",id:b.dataset.id};render();return}
+if(a=="ynew"){var ny={id:"y"+Date.now().toString(36),name:"New system",vendor:"",model:"",ver:"1.0",gpai:"no",docs:{}};S.s.push(ny);TAB="s";V={p:"y",id:ny.id};render();return}
+if(a=="ysv"&&ys){ys.name=document.getElementById("y-n").value.trim()||"Untitled";ys.vendor=document.getElementById("y-vd").value.trim();ys.model=document.getElementById("y-m").value.trim();ys.ver=document.getElementById("y-ver").value.trim();var gv=document.getElementById("y-g").value;ys.gpai=GP.some(function(p){return p[0]==gv})?gv:"no";V.msg="";render();return}
+if(a=="ydoc"&&ys){var dq=b.dataset.q;if(DOCS.some(function(d){return d[0]==dq}))ys.docs[dq]=v=="true";keep(YF,function(){relist('[data-a="ydoc"][data-q="'+dq+'"][data-v="'+v+'"]')});return}
+if(a=="vup"&&ys){var was=ys.ver;ys.ver=bump(was);var nr=linked(ys).filter(function(x){return x.ck&&stale(x)}).length;V.msg="Version changed from "+esc(was||"–")+" to "+esc(ys.ver)+". "+(nr?nr+" linked use case"+(nr>1?"s need":" needs")+" a re-check.":"No checked use case is affected.");keep(["y-n","y-vd","y-m","y-g"],function(){relist('[data-a="vup"]')});return}
+if(a=="ydel"&&ys){if(V.cd==ys.id){S.s=S.s.filter(function(x){return x!==ys});S.u.forEach(function(x){if(x.sys)x.sys=x.sys.filter(function(id){return id!=ys.id})});V={p:"l"};render()}else{V.cd=ys.id;relist('[data-a="ydel"]')}return}
+if(a=="lk"&&u){var lq=b.dataset.q;if(S.s.some(function(x){return x.id==lq})){u.sys=u.sys||[];var li=u.sys.indexOf(lq);if(li>=0)u.sys.splice(li,1);else u.sys.push(lq)}keep(UF,function(){relist('[data-a="lk"][data-q="'+lq+'"]')});return}
 if(a=="back"){V={p:V.p=="o"?"o":"l"};render()}
-else if(a=="new"){var n={id:Date.now().toString(36),name:"New use case",desc:"",role:"",owner:"",a:{},ck:null,own:true,val:null,cost:null,stage:""};S.u.push(n);V={p:"d",id:n.id};render()}
-else if(a=="open"){V={p:"d",id:b.dataset.id};var tp=document.getElementById("tip");if(tp)tp.hidden=true;render();window.scrollTo(0,0)}
+else if(a=="new"){var n={id:Date.now().toString(36),name:"New use case",desc:"",role:"",owner:"",a:{},ck:null,own:true,val:null,cost:null,stage:"",sys:[]};S.u.push(n);V={p:"d",id:n.id};render()}
+else if(a=="open"){TAB="u";V={p:"d",id:b.dataset.id};var tp=document.getElementById("tip");if(tp)tp.hidden=true;render();window.scrollTo(0,0)}
 else if(a=="upd"){S.v=2;render()}
 else if(a=="sv"){var nv=eur(document.getElementById("f-v").value),nc=eur(document.getElementById("f-c").value);
 if(nv!==nv||nc!==nc){V.err="Value and running cost must be whole euro amounts of 0 or more, for example 120000 or 120,000. Nothing was saved.";render();return}
@@ -387,12 +465,12 @@ V.err="";u.val=nv;u.cost=nc;u.stage=STAGES.indexOf(document.getElementById("f-s"
 else if(a=="del"){if(V.cd==u.id){S.u=S.u.filter(function(x){return x!==u});V={p:"l"};render()}else{V.cd=u.id;relist('[data-a="del"]')}}
 else if(a=="cl"){u[b.dataset.k]=v;relist('[data-a="cl"][data-k="'+b.dataset.k+'"][data-v="'+v+'"]')}
 else if(a=="an"){u.a=u.a||{};u.a[b.dataset.q]=parseFloat(v);var y=window.scrollY;render();window.scrollTo(0,y)}
-else if(a=="chk"){u.ck={v:S.v,h:hash(u.desc||""),d:new Date().toISOString().slice(0,10)};relist('[data-a="chk"]')}
+else if(a=="chk"){u.ck={v:S.v,h:hash(u.desc||""),d:new Date().toISOString().slice(0,10),s:sig(u)};relist('[data-a="chk"]')}
 else if(a=="ex"){var x=EX[+b.dataset.i];u.name=x[0];u.desc=x[1];delete u.purpose;u.role="";u.a={};u.ck=null;u.own=true;render()}
 else if(a=="sort"){var k=b.dataset.k;SORT=SORT.k!=k?{k:k,d:1}:SORT.d>0?{k:k,d:-1}:{k:null,d:1};var y3=window.scrollY;render();window.scrollTo(0,y3)}
 else if(a=="tuc"){UCS=!UCS;var y2=window.scrollY;render();window.scrollTo(0,y2)}
-else if(a=="rst"){S=seed();FILT={risk:[],st:[]};V={p:"l"};render()}
-else if(a=="out"){S=seed();FILT={risk:[],st:[]};V={p:"o"};render()}
+else if(a=="rst"){S=seed();TAB="u";FILT={risk:[],st:[]};V={p:"l"};render()}
+else if(a=="out"){S=seed();TAB="u";FILT={risk:[],st:[]};V={p:"o"};render()}
 else if(a=="in"){V={p:"l"};render()}});
 render();
 })();
