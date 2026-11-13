@@ -492,3 +492,12 @@ test("answering a clarifying question keeps the scroll position", () => {
   assert.equal(win.scrollY, 500);
   assert.match(els.app.innerHTML, /Risk management system \(Art\. 9\)/);
 });
+
+test("confirming a re-check keeps the scroll position", () => {
+  const { els, click, win } = load();
+  click("open", { id: "cvscreening" });
+  win.scrollY = 800;
+  click("chk");
+  assert.equal(win.scrollY, 800);
+  assert.match(els.app.innerHTML, new RegExp(`Last checked ${new Date().toISOString().slice(0, 10)} with sample rules v1`));
+});

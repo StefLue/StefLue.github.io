@@ -387,7 +387,7 @@ V.err="";u.val=nv;u.cost=nc;u.stage=STAGES.indexOf(document.getElementById("f-s"
 else if(a=="del"){if(V.cd==u.id){S.u=S.u.filter(function(x){return x!==u});V={p:"l"};render()}else{V.cd=u.id;relist('[data-a="del"]')}}
 else if(a=="cl"){u[b.dataset.k]=v;relist('[data-a="cl"][data-k="'+b.dataset.k+'"][data-v="'+v+'"]')}
 else if(a=="an"){u.a=u.a||{};u.a[b.dataset.q]=parseFloat(v);var y=window.scrollY;render();window.scrollTo(0,y)}
-else if(a=="chk"){u.ck={v:S.v,h:hash(u.desc||""),d:new Date().toISOString().slice(0,10)};render()}
+else if(a=="chk"){u.ck={v:S.v,h:hash(u.desc||""),d:new Date().toISOString().slice(0,10)};relist('[data-a="chk"]')}
 else if(a=="ex"){var x=EX[+b.dataset.i];u.name=x[0];u.desc=x[1];delete u.purpose;u.role="";u.a={};u.ck=null;u.own=true;render()}
 else if(a=="sort"){var k=b.dataset.k;SORT=SORT.k!=k?{k:k,d:1}:SORT.d>0?{k:k,d:-1}:{k:null,d:1};var y3=window.scrollY;render();window.scrollTo(0,y3)}
 else if(a=="tuc"){UCS=!UCS;var y2=window.scrollY;render();window.scrollTo(0,y2)}
