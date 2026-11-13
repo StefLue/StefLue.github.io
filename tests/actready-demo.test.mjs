@@ -27,7 +27,8 @@ function load() {
     const b = { dataset: { a, ...data } };
     listeners["body:click"].forEach((f) => f({ target: { closest: () => b } }));
   };
-  return { els, click, values };
+  const change = (id, value) => (listeners["doc:change"] || []).forEach((f) => f({ target: { id, value } }));
+  return { els, click, values, change };
 }
 
 // Creates a use case from the given description and returns the rendered detail view.
@@ -265,13 +266,13 @@ test("summary tiles stay visible; only the charts are collapsible, open at start
 test("use case list is collapsible, open at start, and the add button stays visible", () => {
   const { els, click } = load();
   assert.match(els.app.innerHTML, /data-a="tuc" aria-expanded="true"[^>]*>Use cases <span class="sm">\(12\)<\/span>/);
-  assert.match(els.app.innerHTML, /<div class="sc" id="ucl"><div class="tb">/);
+  assert.match(els.app.innerHTML, /<div class="sc" id="ucl"><div class="epg">/);
   click("tuc");
   assert.match(els.app.innerHTML, /aria-expanded="false"/);
-  assert.match(els.app.innerHTML, /<div class="sc" id="ucl" hidden>/);
+  assert.match(els.app.innerHTML, /<div class="sc" id="ucl" hidden><div class="epg">/);
   assert.match(els.app.innerHTML, /data-a="new"><span class="plus" aria-hidden="true">\+<\/span>Add use case \(try your own\)/);
   click("tuc");
-  assert.match(els.app.innerHTML, /<div class="sc" id="ucl"><div class="tb">/);
+  assert.match(els.app.innerHTML, /<div class="sc" id="ucl"><div class="epg">/);
 });
 
 test("statistics charts use muted colours; the use case list keeps its own colours apart from tier badges", () => {
@@ -328,7 +329,7 @@ test("filter matching no use case says so and offers to clear", () => {
 
 test("status filter combines with the risk filter: any option within a group, all groups together", () => {
   const { els, click } = load();
-  const statuses = () => [...els.app.innerHTML.split('id="ucl"')[1].matchAll(/<button class="row"[\s\S]*?<span class="[wbo]">([^<]+)<\/span><\/button>/g)].map((m) => m[1]);
+  const statuses = () => [...els.app.innerHTML.split('id="ucl"')[1].matchAll(/<button class="row"[\s\S]*?<span class="[wbo]">([^<]+)<\/span><span>/g)].map((m) => m[1]);
   click("fm");
   const menu = els.app.innerHTML.split('<div class="fm"')[1];
   assert.match(menu, /<p>Indicative risk category<\/p>[\s\S]*<p>Status<\/p>/);
@@ -369,4 +370,97 @@ test("use case list sorts by indicative risk category, then reverses, then reset
   click("sort", { k: "ind" });
   const pct = [...els.app.innerHTML.split('id="ucl"')[1].matchAll(/<b>(\d+)%<\/b>/g)].map((m) => +m[1]);
   assert.deepEqual(pct, [...pct].sort((a, b) => b - a), "indicator highest first");
+});
+
+// FR-021 to FR-024 in ActReady's specs/002-use-case-portfolio.md: value, running cost, stage, cost efficiency.
+const rows = (html) => [...html.split('id="ucl"')[1].matchAll(/<button class="row"[^>]*><b>([^<]+)<\/b>([\s\S]*?)<\/button>/g)].map((m) => ({ name: m[1], cells: m[2] }));
+const effOf = (r) => (r.cells.match(/<b>(\d+\.\d)×<\/b>$/) || [])[1] || (/<span>–<small class="sm"> ([^<]+)<\/small><\/span>$/.exec(r.cells) || [])[1];
+
+test("portfolio shows fictional value, stage and cost efficiency with the effort-per-gap assumption", () => {
+  const out = load().els.app.innerHTML;
+  assert.match(out, /data-k="val" aria-label="Sort by value \/ year"/);
+  assert.match(out, /data-k="stage" aria-label="Sort by stage"/);
+  assert.match(out, /data-k="eff" aria-label="Sort by cost efficiency"/);
+  assert.match(out, /<input id="f-epg" inputmode="numeric" value="5000"/);
+  assert.match(out, /Your assumption, not an ActReady estimate/);
+  const grid = rows(out).find((r) => r.name == "Grid load control");
+  assert.match(grid.cells, /<span>€1,500,000<\/span><span>In production<\/span>/);
+  // CV screening: 120,000 / (20,000 + 3 open gaps x 5,000) = 3.4
+  assert.equal(effOf(rows(out).find((r) => r.name == "CV screening")), "3.4");
+});
+
+test("AC-013: cost efficiency follows the formula and the user's effort per gap", () => {
+  const { els, click, values, change } = load();
+  click("new");
+  Object.assign(values, { "f-n": "Mortgage check", "f-d": "An AI tool decides on mortgage applications.", "f-r": "Deployer", "f-o": "", "f-v": "120,000", "f-c": "20000", "f-s": "Pilot" });
+  click("sv");
+  for (const [q, v] of [["use", "1"], ["over", "1"], ["logs", "1"], ["inform", "0"], ["lit", "0"]]) click("an", { q, v });
+  click("chk");
+  click("back");
+  const mine = () => rows(els.app.innerHTML).find((r) => r.name == "Mortgage check");
+  assert.equal(effOf(mine()), "4.0");
+  assert.match(mine().cells, /<span>€120,000<\/span><span>Pilot<\/span>/);
+  change("f-epg", "10000");
+  assert.equal(effOf(mine()), "3.0");
+  assert.match(els.app.innerHTML, /id="f-epg" inputmode="numeric" value="10000"/);
+  change("f-epg", "-5");
+  assert.match(els.app.innerHTML, /role="alert">Enter a whole euro amount of 0 or more\. Effort per gap stays at €10,000\./);
+  assert.equal(effOf(mine()), "3.0");
+});
+
+test("AC-014: missing figures or no assessment show a dash with the reason and sort last", () => {
+  const { els, click, values } = load();
+  click("new");
+  Object.assign(values, { "f-n": "Unchecked", "f-d": "Forecasts demand.", "f-r": "", "f-o": "", "f-v": "50000", "f-c": "1000" });
+  click("sv");
+  click("back");
+  const byName = () => Object.fromEntries(rows(els.app.innerHTML).map((r) => [r.name, effOf(r)]));
+  assert.equal(byName()["Spam filter"], "no running cost");
+  assert.equal(byName()["Unchecked"], "not yet checked");
+  assert.equal(byName()["Workplace emotion monitoring"], "needs expert review");
+  for (let i = 0; i < 2; i++) {
+    click("sort", { k: "eff" });
+    const e = rows(els.app.innerHTML).map(effOf);
+    const n = e.findIndex((x) => !/^\d/.test(x));
+    assert.ok(n > 0 && e.slice(n).every((x) => !/^\d/.test(x)), "dashes after all values");
+    const nums = e.slice(0, n).map(Number);
+    assert.deepEqual(nums, [...nums].sort((a, b) => (i ? a - b : b - a)), i ? "reversed" : "highest first");
+  }
+});
+
+test("AC-015: stage sorts in lifecycle order and does not change the assessment", () => {
+  const { els, click, values } = load();
+  const order = ["Idea", "Research", "Pilot", "In production", "Retired"];
+  const stages = () => rows(els.app.innerHTML).map((r) => r.cells.match(/<span>(Idea|Research|Pilot|In production|Retired|–)<\/span>/)[1]);
+  click("sort", { k: "stage" });
+  const s = stages().map((x) => order.indexOf(x));
+  assert.deepEqual(s, [...s].sort((a, b) => a - b));
+  assert.equal(stages()[0], "Idea");
+  click("sort", { k: "stage" });
+  assert.equal(stages()[0], "Retired");
+  const cv = rows(els.app.innerHTML).find((r) => r.name == "CV screening");
+  click("open", { id: "cvscreening" });
+  Object.assign(values, { "f-n": "CV screening", "f-d": "We use an AI tool to rank job applicants for our HR team.", "f-r": "Deployer", "f-o": "HR", "f-v": "120000", "f-c": "20000", "f-s": "Research" });
+  click("sv");
+  assert.match(els.app.innerHTML, /<div class="big">70%<\/div>/);
+  assert.match(els.app.innerHTML, /Indicative: High risk/);
+  click("back");
+  const after = rows(els.app.innerHTML).find((r) => r.name == "CV screening");
+  assert.match(after.cells, /<span>Research<\/span>/);
+  assert.equal(after.cells.replace("Research", "In production"), cv.cells, "only the stage changed");
+});
+
+test("invalid value or cost is rejected without saving, and fields are escaped", () => {
+  const { els, click, values } = load();
+  click("open", { id: "cvscreening" });
+  Object.assign(values, { "f-n": "Renamed", "f-d": "We use an AI tool to rank job applicants for our HR team.", "f-r": "Deployer", "f-o": "HR", "f-v": "12.5", "f-c": "20000", "f-s": '"><img src=x>' });
+  click("sv");
+  assert.match(els.app.innerHTML, /role="alert">Value and running cost must be whole euro amounts/);
+  assert.match(els.app.innerHTML, /<h1>CV screening/);
+  values["f-v"] = "";
+  click("sv");
+  click("back");
+  const r = rows(els.app.innerHTML).find((x) => x.name == "Renamed");
+  assert.match(r.cells, /<span>–<\/span><span>–<\/span><span>–<small class="sm"> no value<\/small><\/span>$/, "empty value, unknown stage ignored");
+  assert.doesNotMatch(els.app.innerHTML, /<img src=x>/);
 });
