@@ -636,3 +636,17 @@ test("reset and simulated logout restore the system registry", () => {
   click("tab", { v: "s" });
   assert.match(sysRows(els.app.innerHTML).find((r) => r.name == "ForecastKit").cells, /· 2\.3</);
 });
+
+test("legal footer links to the shared Impressum and privacy notice without external URLs", () => {
+  const foot = html.split('<footer class="lg">')[1].split("</footer>")[0];
+  assert.match(foot, /href="\.\.\/ActReady\/impressum\.html">Impressum \/ Legal notice</);
+  assert.match(foot, /href="\.\.\/ActReady\/datenschutz\.html">Datenschutz \/ Privacy</);
+  assert.match(foot, /href="\.\.\/ActReady\/">About ActReady</);
+  assert.match(foot, /advisory only, not a legal determination/);
+  assert.doesNotMatch(foot, /https?:\/\/|target="_blank"/);
+  // The footer is static chrome, so it survives every view change.
+  const { els, click } = load();
+  assert.equal(els.app.innerHTML.includes("impressum.html"), false, "footer lives outside the app container");
+  click("open", { id: "cvscreening" });
+  assert.equal(els.app.innerHTML.includes("impressum.html"), false);
+});
