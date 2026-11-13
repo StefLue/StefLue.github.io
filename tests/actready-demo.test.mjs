@@ -478,3 +478,17 @@ test("first delete click keeps the scroll position; the second deletes and retur
   assert.doesNotMatch(els.app.innerHTML.split('id="ucl"')[1], /CV screening/);
   assert.equal(win.scrollY, 0);
 });
+
+test("answering a clarifying question keeps the scroll position", () => {
+  const { els, click, values, win } = load();
+  click("new");
+  Object.assign(values, { "f-n": "Vague", "f-d": "We use AI to help.", "f-r": "", "f-o": "" });
+  click("sv");
+  win.scrollY = 500;
+  click("cl", { k: "purpose", v: "high" });
+  assert.equal(win.scrollY, 500);
+  assert.match(els.app.innerHTML, /Do you build this system or use one you bought\?/);
+  click("cl", { k: "role", v: "Provider" });
+  assert.equal(win.scrollY, 500);
+  assert.match(els.app.innerHTML, /Risk management system \(Art\. 9\)/);
+});
