@@ -21,14 +21,15 @@ function load() {
     addEventListener: (t, f) => ((listeners[`doc:${t}`] ||= []).push(f)),
     body: { addEventListener: (t, f) => ((listeners[`body:${t}`] ||= []).push(f)) },
   };
-  const sandbox = { document: doc, window: { scrollTo() {}, scrollY: 0 }, Date, JSON, Math, parseFloat, String, RegExp, console };
+  const win = { scrollY: 0, scrollTo(x, y) { win.scrollY = y; } };
+  const sandbox = { document: doc, window: win, Date, JSON, Math, parseFloat, String, RegExp, console };
   vm.runInNewContext(script, sandbox);
   const click = (a, data = {}) => {
     const b = { dataset: { a, ...data } };
     listeners["body:click"].forEach((f) => f({ target: { closest: () => b } }));
   };
   const change = (id, value) => (listeners["doc:change"] || []).forEach((f) => f({ target: { id, value } }));
-  return { els, click, values, change };
+  return { els, click, values, change, win };
 }
 
 // Creates a use case from the given description and returns the rendered detail view.
@@ -463,4 +464,17 @@ test("invalid value or cost is rejected without saving, and fields are escaped",
   const r = rows(els.app.innerHTML).find((x) => x.name == "Renamed");
   assert.match(r.cells, /<span>–<\/span><span>–<\/span><span>–<small class="sm"> no value<\/small><\/span>$/, "empty value, unknown stage ignored");
   assert.doesNotMatch(els.app.innerHTML, /<img src=x>/);
+});
+
+test("first delete click keeps the scroll position; the second deletes and returns to the portfolio", () => {
+  const { els, click, win } = load();
+  click("open", { id: "cvscreening" });
+  win.scrollY = 640;
+  click("del");
+  assert.equal(win.scrollY, 640, "page stays where it was");
+  assert.match(els.app.innerHTML, /data-a="del">Click again to delete</);
+  click("del");
+  assert.match(els.app.innerHTML, /<h1>Use case portfolio<\/h1>/);
+  assert.doesNotMatch(els.app.innerHTML.split('id="ucl"')[1], /CV screening/);
+  assert.equal(win.scrollY, 0);
 });

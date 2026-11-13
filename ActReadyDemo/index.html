@@ -384,7 +384,7 @@ else if(a=="upd"){S.v=2;render()}
 else if(a=="sv"){var nv=eur(document.getElementById("f-v").value),nc=eur(document.getElementById("f-c").value);
 if(nv!==nv||nc!==nc){V.err="Value and running cost must be whole euro amounts of 0 or more, for example 120000 or 120,000. Nothing was saved.";render();return}
 V.err="";u.val=nv;u.cost=nc;u.stage=STAGES.indexOf(document.getElementById("f-s").value)>=0?document.getElementById("f-s").value:"";u.name=document.getElementById("f-n").value||"Untitled";var nd=document.getElementById("f-d").value;if(nd!=u.desc){delete u.purpose;u.own=true}u.desc=nd;u.role=document.getElementById("f-r").value;u.owner=document.getElementById("f-o").value;render()}
-else if(a=="del"){if(V.cd==u.id){S.u=S.u.filter(function(x){return x!==u});V={p:"l"}}else V.cd=u.id;render()}
+else if(a=="del"){if(V.cd==u.id){S.u=S.u.filter(function(x){return x!==u});V={p:"l"};render()}else{V.cd=u.id;relist('[data-a="del"]')}}
 else if(a=="cl"){u[b.dataset.k]=v;render()}
 else if(a=="an"){u.a=u.a||{};u.a[b.dataset.q]=parseFloat(v);var y=window.scrollY;render();window.scrollTo(0,y)}
 else if(a=="chk"){u.ck={v:S.v,h:hash(u.desc||""),d:new Date().toISOString().slice(0,10)};render()}
