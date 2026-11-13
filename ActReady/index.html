@@ -145,6 +145,10 @@ header{box-shadow:0 1px 2px rgba(16,31,48,.05)}
 .btn:hover{filter:brightness(1.07)}
 .btn2{box-shadow:none}.btn2:hover{filter:none;background:var(--surface)}
 .band .panel{box-shadow:0 10px 30px -12px rgba(0,0,0,.4)}
+.vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.ext{font-size:.8em;margin-left:.35em;opacity:.85}
+footer .wrap{display:flex;gap:8px 20px;flex-wrap:wrap;align-items:baseline}
+footer a{color:inherit}
 </style>
 </head>
 <body>
@@ -244,6 +248,9 @@ var P=[
 ['Know where every AI use case stands under the','So steht jeder KI-Anwendungsfall unter der'],
 ['EU AI Act','EU-KI-Verordnung'],
 ['The problem','Das Problem'],
+['(opens in a new tab)','(öffnet in einem neuen Tab)'],
+['Legal notice','Impressum'],
+['Privacy notice','Datenschutzerklärung'],
 
 
 
@@ -269,7 +276,7 @@ document.addEventListener('DOMContentLoaded',apply);
 <header><div class="wrap"><a class="brand" href="#top" aria-label="ActReady"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="var(--lbg)"/><path d="M12 54 L32 10 L52 54" fill="none" stroke="var(--lfg)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path d="M26 43 L31 48 L40 38.5" fill="none" stroke="#e0a100" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Act<b>Ready</b></span></a>
 <div class="rt"><div class="lg" role="group" aria-label="Language"><button type="button" data-l="en" aria-pressed="true">EN</button><button type="button" data-l="de" aria-pressed="false">DE</button></div><button id="burger" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><span></span><span></span><span></span></button></div></div></header>
 <nav id="menu" aria-label="Main">
-<a href="/ActReadyDemo/">Try the demo</a><a href="#problem">Why now</a><a href="#how">How it works</a><a href="#portfolio">Your portfolio</a><a href="#alerts">Law updates</a><a href="#security">Privacy</a><a href="#trust">Legal review</a><a href="#waitlist">Early access</a>
+<a href="/ActReadyDemo/" target="_blank" rel="noopener">Try the demo<span class="vh"> (opens in a new tab)</span></a><a href="#problem">Why now</a><a href="#how">How it works</a><a href="#portfolio">Your portfolio</a><a href="#alerts">Law updates</a><a href="#security">Privacy</a><a href="#trust">Legal review</a><a href="#waitlist">Early access</a>
 </nav>
 <main id="top">
 <section class="hero" id="demo"><div class="wrap grid2">
@@ -277,11 +284,11 @@ document.addEventListener('DOMContentLoaded',apply);
 <h1>Know where every AI use case stands under the <span class="hl">EU AI Act</span></h1>
 <p class="lead">Describe a use case in plain words. ActReady asks follow-up questions where the answer is vague, shows an indicative risk category and a readiness indicator, and lists the open gaps.</p>
 <p class="small" style="margin-bottom:24px"><b>Planned: end-to-end encryption, so only you can read your use case descriptions and portfolio.</b></p>
-<a class="btn" href="/ActReadyDemo/">Try the demo</a><a class="btn btn2" href="#how">See how it works</a>
+<a class="btn" href="/ActReadyDemo/" target="_blank" rel="noopener">Try the demo<span class="ext" aria-hidden="true">↗</span><span class="vh"> (opens in a new tab)</span></a><a class="btn btn2" href="#how">See how it works</a>
 </div>
 <div><div class="shot">
 <span class="blob" aria-hidden="true"></span>
-<a class="frame" href="/ActReadyDemo/" aria-label="Open the interactive demo">
+<a class="frame" href="/ActReadyDemo/" target="_blank" rel="noopener" aria-label="Open the interactive demo">
 <span class="cap" aria-hidden="true"><i></i><i></i><i></i><b>steflue.github.io/ActReadyDemo</b></span>
 <span class="app" aria-hidden="true">
 <span class="mh"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="var(--lbg)"/><path d="M12 54 L32 10 L52 54" fill="none" stroke="var(--lfg)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path d="M26 43 L31 48 L40 38.5" fill="none" stroke="#e0a100" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Act<b>Ready</b></span><i>Demo</i></span>
@@ -397,14 +404,14 @@ document.addEventListener('DOMContentLoaded',apply);
 <section id="trust"><div class="wrap grid2">
 <div><p class="kick">Legal review</p><h2>Backed by [Law firm name]</h2>
 <p>Question trees and scoring rules are reviewed by its AI practice. The rule library is updated within [X days] of new bills, with an escalation path to qualified counsel for edge cases.</p></div>
-<div class="panel"><h3>Try the demo</h3><p>See an assessment with synthetic data: stated facts, open questions, an indicative risk category and a readiness indicator.</p><a class="btn" href="/ActReadyDemo/">Open the demo</a></div>
+<div class="panel"><h3>Try the demo</h3><p>See an assessment with synthetic data: stated facts, open questions, an indicative risk category and a readiness indicator.</p><a class="btn" href="/ActReadyDemo/" target="_blank" rel="noopener">Open the demo<span class="ext" aria-hidden="true">↗</span><span class="vh"> (opens in a new tab)</span></a></div>
 </div></section>
 <section id="waitlist" class="band"><div class="wrap grid2">
 <div><p class="kick">Early access</p><h2>Get early access</h2><p class="lead">Pilots open soon. Until then, try the demo with synthetic data to see how an assessment works.</p></div>
-<div class="panel"><a class="btn" href="/ActReadyDemo/">Try the demo</a></div>
+<div class="panel"><a class="btn" href="/ActReadyDemo/" target="_blank" rel="noopener">Try the demo<span class="ext" aria-hidden="true">↗</span><span class="vh"> (opens in a new tab)</span></a></div>
 </div></section>
 </main>
-<footer><div class="wrap">ActReady is a working name. Figures in brackets are placeholders. Results are advisory, not a legal determination. Not legal advice.</div></footer>
+<footer><div class="wrap"><span>ActReady is a working name. Figures in brackets are placeholders. Results are advisory, not a legal determination. Not legal advice.</span><a href="impressum.html">Legal notice</a><a href="datenschutz.html">Privacy notice</a></div></footer>
 <script>
 (function(){
 var b=document.getElementById("burger"),m=document.getElementById("menu");

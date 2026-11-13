@@ -119,6 +119,9 @@ ul{margin:6px 0 16px;padding-left:22px}
 .vt{margin:0 0 20px}
 .row.sy{grid-template-columns:2fr 2fr 2.2fr 1.5fr 1.3fr 1fr 2fr}
 .sys{list-style:none;padding:0;margin:6px 0 16px;display:grid;gap:6px}.sys li{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}
+footer.lg{border-top:1px solid var(--line);margin-top:40px;padding:18px 0 28px;font-size:13px;color:var(--mute)}
+footer.lg .wrap{max-width:1120px;margin:0 auto;padding:0 24px;display:flex;gap:8px 18px;flex-wrap:wrap;align-items:baseline}
+footer.lg a{color:inherit}
 .rl{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:13px;color:var(--mute)}.rl i{width:120px;height:8px;border-radius:4px;background:var(--rlo);background:linear-gradient(in oklab to right,var(--rlo),var(--rhi))}
 /* Visual polish: hover and focus states, unified table card, section labels */
 .btn:hover:not(:disabled){filter:brightness(1.07)}
@@ -133,6 +136,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--ac)}
 <body>
 <header><div class="wrap"><button class="brand" data-a="back" aria-label="ActReady, back to portfolio"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="var(--lbg)"/><path d="M12 54 L32 10 L52 54" fill="none" stroke="var(--lfg)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path d="M26 43 L31 48 L40 38.5" fill="none" stroke="#e0a100" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Act<b>Ready</b></span></button><div class="hr"><span class="badge">Demo · synthetic data</span><span id="um"></span></div></div></header>
 <main><div class="wrap" id="app"></div></main>
+<footer class="lg"><div class="wrap"><span>ActReady demo · synthetic data · advisory only, not a legal determination.</span><a href="../ActReady/impressum.html">Impressum / Legal notice</a><a href="../ActReady/datenschutz.html">Datenschutz / Privacy</a><a href="../ActReady/">About ActReady</a></div></footer>
 <div id="tip" role="tooltip" hidden></div>
 <script>
 (function(){
